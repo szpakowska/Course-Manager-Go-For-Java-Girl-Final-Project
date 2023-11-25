@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AdminInitializer {
-    @Value("${application.admin.username}")
+    @Value("admin")
     private String adminUsername;
-    @Value("${application.admin.password}")
+    @Value("admin")
     private String adminPassword;
 
     private final UserJpaRepository userJpaRepository;
