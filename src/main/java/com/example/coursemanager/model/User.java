@@ -18,13 +18,13 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
 
+//nie korzystać z pola 'role' w User, tylko zrobić osobną klasę i po ID przypisujemy to użytkownika
     @Column(name = "role", columnDefinition = "ENUM('ADMIN', 'LECTURER', 'STUDENT')")
     @Enumerated(EnumType.STRING)
     private Role role;
