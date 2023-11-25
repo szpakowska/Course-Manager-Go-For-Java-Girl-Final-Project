@@ -22,7 +22,9 @@ public class ApplicationUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton( new SimpleGrantedAuthority(user.getRole().name()) );
     }
+// z tego korzysta authorizeHttpRequests
 
+    // dodać klase role - rola + id
 
     @Override
     public String getPassword() {
