@@ -6,25 +6,25 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.stream.Collectors;
 
 public class ApplicationUserDetails implements UserDetails {
 
     private final User user;
 
-    private Collection<GrantedAuthority> authorities;
+    private final Collection<GrantedAuthority> authorities;
 
     public ApplicationUserDetails(User user) {
         this.user = user;
+        this.authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton( new SimpleGrantedAuthority(user.getRole().name()) );
+        return authorities;
     }
-// z tego korzysta authorizeHttpRequests
 
-    // dodać klase role - rola + id
 
     @Override
     public String getPassword() {

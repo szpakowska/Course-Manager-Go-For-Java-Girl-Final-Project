@@ -18,7 +18,6 @@ public class ApplicationUserDetailsService implements UserDetailsService {
     public ApplicationUserDetailsService(UserJpaRepository userJpaRepository) {
         this.userJpaRepository = userJpaRepository;
     }
-// do zcheckowania czy hasło jest ok
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> userOptional = Optional.ofNullable(userJpaRepository.findByUsername(username));

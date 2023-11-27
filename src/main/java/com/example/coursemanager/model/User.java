@@ -2,11 +2,12 @@ package com.example.coursemanager.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-
-import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
+
 @Data
 @Entity(name = "user_account")
 public class User {
@@ -18,16 +19,14 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "role", columnDefinition = "ENUM('ADMIN', 'LECTURER', 'STUDENT')")
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
 
     @Override
@@ -43,8 +42,4 @@ public class User {
         return Objects.hash(username, password);
     }
 
-
-    public enum Role {
-        ADMIN, LECTURER, STUDENT
-    }
 }
