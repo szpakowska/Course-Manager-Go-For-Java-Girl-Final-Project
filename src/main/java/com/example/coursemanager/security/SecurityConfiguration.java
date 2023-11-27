@@ -23,7 +23,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/registration").permitAll()
-                        .requestMatchers("/courses").hasAuthority("ADMIN")
+                        .requestMatchers("/courses").hasAuthority("Admin")
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
