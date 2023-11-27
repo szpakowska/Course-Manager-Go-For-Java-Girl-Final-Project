@@ -2,15 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Strona główna</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .user-info span {
+            margin-right: 10px;
+        }
+        .user-icon {
+            font-size: 24px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        /* Nowe style dla przycisku */
+        .logout-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .logout-button:hover {
+            background-color: #c82333;
+        }
+    </style>
 </head>
 <body>
 
+<header>
+    <h1>Course Manager Application</h1>
 
-<h1>Witaj serdecznie panocku na naszej stronie użtkowniku - , <span th:text="${username}"></span>!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Wyloguj"/>
-</form>
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">Wyloguj</button>
+    </form>
+</header>
 
+<div class="container">
+    <h1>Witaj serdecznie na naszej stronie użytkowniku - <span th:text="${username}"></span>!</h1>
+</div>
+
+<footer>
+
+    <div class="user-info">
+        <!-- Inna ikona ludzika -->
+        <span class="user-icon">👤</span>
+        <span>Zalogowany użytkownik:</span>
+        <span th:text="${username}"></span>
+    </div>
+
+    <p>Made by Wiewiórki</p>
+</footer>
 
 </body>
 </html>
