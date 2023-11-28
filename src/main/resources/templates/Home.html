@@ -116,12 +116,15 @@
         <span class="icon">⭐</span>
         Opcja 3
     </button>
+
+    <div th:if="${role == 'STUDENT'}">
     <!-- Przycisk 4 -->
     <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">
         <!-- Inna ikona -->
         <span class="icon">🔗</span>
         Opcja 4
     </button>
+        </div>
 </div>
 
 <footer>
@@ -130,7 +133,7 @@
         <!-- Ikona ludzika -->
         <span class="user-icon">👤</span>
         <span>Zalogowany użytkownik:</span>
-        <span th:text="${username}"></span>
+        <span th:text="${username}"></span>  <span th:text="${roles}"></span>
     </div>
 
     <p>Made by Wiewiórki</p>
