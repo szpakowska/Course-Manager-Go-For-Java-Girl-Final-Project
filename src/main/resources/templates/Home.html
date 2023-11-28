@@ -54,32 +54,87 @@
         .logout-button:hover {
             background-color: #c82333;
         }
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Ułożenie przycisków w kolumnie */
+            align-items: center; /* Wyśrodkowanie przycisków w pionie */
+            margin-top: 50px; /* Odstęp od góry */
+        }
+        .button {
+            width: 200px; /* Szerokość przycisków */
+            padding: 10px; /* Wielkość i odstępy wewnątrz przycisków */
+            margin-bottom: 15px; /* Odstęp między przyciskami */
+            cursor: pointer;
+            background-color: #ccc; /* Tło przycisków */
+            color: #000; /* Kolor tekstu */
+            border: 2px solid #888; /* Obramowanie przycisków */
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center; /* Wyrównanie ikony z tekstem */
+            justify-content: center; /* Wyśrodkowanie tekstu w przycisku */
+        }
+        .button:hover {
+            background-color: #ddd; /* Zmiana tła po najechaniu myszką */
+        }
+        .icon {
+            margin-right: 10px; /* Odstęp między ikoną a tekstem */
+            font-size: 20px; /* Rozmiar ikony */
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Course Manager Application</h1>
-
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">Wyloguj</button>
     </form>
 </header>
 
 <div class="container">
-    <h1>Witaj serdecznie na naszej stronie użytkowniku - <span th:text="${username}"></span>!</h1>
+    <h1>Witaj, <span th:text="${username}"></span>!</h1>
+</div>
+
+<!-- Przyciski jako zakładki z ikonami -->
+<div class="button-container">
+    <!-- Przycisk 1 -->
+    <button onclick="location.href='MIEJSCE NA ADRES HTMLA1'" class="button">
+        <!-- Ikona ludzika -->
+        <span class="icon">👤</span>
+        Rejestracja użytkownika
+    </button>
+    <!-- Przycisk 2 -->
+    <button onclick="location.href='MIEJSCE NA ADRES HTMLA2'" class="button">
+        <!-- Ikona szkoły -->
+        <span class="icon">🏫</span>
+        Dodawanie kursu
+    </button>
+    <!-- Przycisk 3 -->
+    <button onclick="location.href='MIEJSCE NA ADRES HTMLA3'" class="button">
+        <!-- Inna ikona -->
+        <span class="icon">⭐</span>
+        Opcja 3
+    </button>
+    <!-- Przycisk 4 -->
+    <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">
+        <!-- Inna ikona -->
+        <span class="icon">🔗</span>
+        Opcja 4
+    </button>
 </div>
 
 <footer>
 
     <div class="user-info">
-        <!-- Inna ikona ludzika -->
+        <!-- Ikona ludzika -->
         <span class="user-icon">👤</span>
         <span>Zalogowany użytkownik:</span>
         <span th:text="${username}"></span>
     </div>
 
     <p>Made by Wiewiórki</p>
+
 </footer>
 
 </body>
