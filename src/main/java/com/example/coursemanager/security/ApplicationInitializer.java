@@ -31,7 +31,7 @@ public class ApplicationInitializer {
 
     @PostConstruct
     public void initApplication() {
-        if (roleJpaRepository.findByName("Admin") == null) {
+        if (roleJpaRepository.findByName("ADMIN") == null) {
             roleJpaRepository.deleteAll();
             userJpaRepository.deleteAll();
 
@@ -43,9 +43,9 @@ public class ApplicationInitializer {
 
     private void initRoles() {
         Set<Role> roles = Set.of(
-                new Role("Admin"),
-                new Role("Student"),
-                new Role("Lecturer")
+                new Role("ADMIN"),
+                new Role("STUDENT"),
+                new Role("LECTURER")
         );
         roleJpaRepository.saveAll(roles);
     }
@@ -55,7 +55,10 @@ public class ApplicationInitializer {
         admin.setUsername(adminUsername);
         admin.setPassword(passwordEncoder.encode(adminPassword));
         admin.setEmail("admin@coursemanager.com");
-        admin.setRoles(Set.of(roleJpaRepository.findByName("Admin")));
+        admin.setRoles(Set.of(roleJpaRepository.findByName("ADMIN")));
+        admin.setName("Jan");
+        admin.setSurname("Kowalski");
+        admin.setActive(true);
 
         userJpaRepository.save(admin);
 

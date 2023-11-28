@@ -2,8 +2,6 @@ package com.example.coursemanager.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 import java.util.Objects;
 import java.util.Set;
@@ -24,6 +22,15 @@ public class User {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "active")
+    private Boolean active;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;

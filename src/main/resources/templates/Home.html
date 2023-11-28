@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Strona główna</title>
     <style>
@@ -98,33 +98,159 @@
 
 <!-- Przyciski jako zakładki z ikonami -->
 <div class="button-container">
+
+    <!-- Przyciski Administratora -->
+
+    <div sec:authorize="hasRole('ADMIN')">
     <!-- Przycisk 1 -->
     <button onclick="location.href='MIEJSCE NA ADRES HTMLA1'" class="button">
         <!-- Ikona ludzika -->
         <span class="icon">👤</span>
         Rejestracja użytkownika
     </button>
-    <!-- Przycisk 2 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA2'" class="button">
-        <!-- Ikona szkoły -->
-        <span class="icon">🏫</span>
-        Dodawanie kursu
-    </button>
-    <!-- Przycisk 3 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA3'" class="button">
-        <!-- Inna ikona -->
-        <span class="icon">⭐</span>
-        Opcja 3
-    </button>
-
-    <div th:if="${role == 'STUDENT'}">
-    <!-- Przycisk 4 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">
-        <!-- Inna ikona -->
-        <span class="icon">🔗</span>
-        Opcja 4
-    </button>
         </div>
+
+    <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+
+<!--&lt;!&ndash;    <div th:unless="${role == 'Admin'}">&ndash;&gt;-->
+<!--    &lt;!&ndash; Przycisk 2 &ndash;&gt;-->
+<!--    <button onclick="location.href='MIEJSCE NA ADRES HTMLA2'" class="button">-->
+<!--        &lt;!&ndash; Ikona szkoły &ndash;&gt;-->
+<!--        <span class="icon">🏫</span>-->
+<!--        Edytuj użytkownika-->
+<!--    </button>-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div th:unless="${role == 'Admin'}">&ndash;&gt;-->
+<!--    &lt;!&ndash; Przycisk 3 &ndash;&gt;-->
+<!--    <button onclick="location.href='MIEJSCE NA ADRES HTMLA3'" class="button">-->
+<!--        &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--        <span class="icon">⭐</span>-->
+<!--        Usuń użytkownika-->
+<!--    </button>-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--    &lt;!&ndash; Przycisk 4 &ndash;&gt;-->
+<!--    <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">-->
+<!--        &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--        <span class="icon">🔗</span>-->
+<!--        Dodaj kurs-->
+<!--    </button>-->
+<!--        </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 5 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA5'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Edytuj kurs-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 6 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA6'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Usuń kurs-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 7 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA7'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Dodaj blok zajęć-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 8 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA8'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Edytuj blok zajęć-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 9 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA9'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Usuń blok zajęć-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 10 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA10'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Raport wszystkich użytkowników-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 11 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA11'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Raport wszystkich kursów-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Admin'}">-->
+<!--        &lt;!&ndash; Przycisk 12 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA12'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Raport wszystkich bloków zajęć-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Przyciski Wykładowcy &ndash;&gt;-->
+
+<!--    <div th:unless="${role == 'Lecturer'}">-->
+<!--        &lt;!&ndash; Przycisk 13 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA13'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Moje kursy-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Przyciski Studenta &ndash;&gt;-->
+
+<!--    <div th:unless="${role == 'Student'}">-->
+<!--        &lt;!&ndash; Przycisk 14 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA14'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Bloki zajęć-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Student'}">-->
+<!--        &lt;!&ndash; Przycisk 15 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA15'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Kalendarz-->
+<!--        </button>-->
+<!--    </div>-->
+
+<!--    <div th:unless="${role == 'Student'}">-->
+<!--        &lt;!&ndash; Przycisk 16 &ndash;&gt;-->
+<!--        <button onclick="location.href='MIEJSCE NA ADRES HTMLA16'" class="button">-->
+<!--            &lt;!&ndash; Inna ikona &ndash;&gt;-->
+<!--            <span class="icon">🔗</span>-->
+<!--            Powiadomienia-->
+<!--        </button>-->
+<!--    </div>-->
+
 </div>
 
 <footer>
