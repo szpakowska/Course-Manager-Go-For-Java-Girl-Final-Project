@@ -22,7 +22,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/registration").permitAll()
+                        .requestMatchers("/registration").hasAuthority("Admin")
                         .requestMatchers("/courses").hasAuthority("Admin")
                         .anyRequest().authenticated()
                 )

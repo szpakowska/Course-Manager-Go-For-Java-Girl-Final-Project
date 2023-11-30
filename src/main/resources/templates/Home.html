@@ -3,104 +3,12 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Strona główna</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+    <link rel="stylesheet" href="/css/styles.css">
 
-        header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .user-info span {
-            margin-right: 10px;
-        }
-
-        .user-icon {
-            font-size: 24px;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-
-        /* Nowe style dla przycisku */
-        .logout-button {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .logout-button:hover {
-            background-color: #c82333;
-        }
-
-        .button-container {
-            display: flex;
-            flex-direction: column; /* Ułożenie przycisków w kolumnie */
-            align-items: center; /* Wyśrodkowanie przycisków w pionie */
-            margin-top: 50px; /* Odstęp od góry */
-        }
-
-        .button {
-            width: 200px; /* Szerokość przycisków */
-            padding: 10px; /* Wielkość i odstępy wewnątrz przycisków */
-            margin-bottom: 15px; /* Odstęp między przyciskami */
-            cursor: pointer;
-            background-color: #ccc; /* Tło przycisków */
-            color: #000; /* Kolor tekstu */
-            border: 2px solid #888; /* Obramowanie przycisków */
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            display: flex;
-            align-items: center; /* Wyrównanie ikony z tekstem */
-            justify-content: center; /* Wyśrodkowanie tekstu w przycisku */
-        }
-
-        .button:hover {
-            background-color: #ddd; /* Zmiana tła po najechaniu myszką */
-        }
-
-        .icon {
-            margin-right: 10px; /* Odstęp między ikoną a tekstem */
-            font-size: 20px; /* Rozmiar ikony */
-        }
-    </style>
 </head>
-
 
 <body>
 
-<div sec:authorize="hasAuthority('Admin')">Text visible to authority admin.</div>
-<div sec:authorize="hasAuthority('BLABLA')">Text visible to blaabla.</div>
 <header>
     <h1>Course Manager Application</h1>
     <form th:action="@{/logout}" method="post">
@@ -118,11 +26,12 @@
     <!-- Przyciski Administratora -->
 
     <div sec:authorize="hasAuthority('Admin')">
+        <div class="button-group">
         <!-- Przycisk 1 -->
-        <button onclick="location.href='MIEJSCE NA ADRES HTMLA1'" class="button">
+        <button onclick="location.href='/admin/registration'" class="button">
             <!-- Ikona ludzika -->
             <span class="icon">👤</span>
-            Rejestracja użytkownika
+            Dodaj użytkownika
         </button>
 
 
@@ -141,7 +50,8 @@
             Usuń użytkownika
         </button>
 
-
+        </div>
+        <div class="button-group">
         <!-- Przycisk 4 -->
         <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">
             <!-- Inna ikona -->
@@ -164,7 +74,9 @@
             <span class="icon">🔗</span>
             Usuń kurs
         </button>
+        </div>
 
+        <div class="button-group">
 
         <!-- Przycisk 7 -->
         <button onclick="location.href='MIEJSCE NA ADRES HTMLA7'" class="button">
@@ -189,6 +101,8 @@
             Usuń blok zajęć
         </button>
 
+        </div>
+        <div class="button-group">
 
         <!-- Przycisk 10 -->
         <button onclick="location.href='MIEJSCE NA ADRES HTMLA10'" class="button">
@@ -213,7 +127,7 @@
             Raport wszystkich bloków zajęć
         </button>
     </div>
-
+    </div>
     <!-- Przyciski Wykładowcy -->
 
     <div sec:authorize="hasAuthority('Lecturer')">
