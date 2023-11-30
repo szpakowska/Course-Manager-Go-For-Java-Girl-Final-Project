@@ -55,6 +55,9 @@ public class ApplicationInitializer {
         admin.setUsername(adminUsername);
         admin.setPassword(passwordEncoder.encode(adminPassword));
         admin.setEmail("admin@coursemanager.com");
+        admin.setName("Jan");
+        admin.setSurname("Kowalski");
+        admin.setActive(true);
         admin.setRoles(Set.of(roleJpaRepository.findByName("Admin")));
 
         userJpaRepository.save(admin);

@@ -1,12 +1,23 @@
 package com.example.coursemanager.controller;
 
+import com.example.coursemanager.model.User;
+import com.example.coursemanager.service.UserService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @RequestMapping("/admin")
 @Controller
+@Slf4j
+@RequiredArgsConstructor
 public class AdminController {
+
+    private final UserService userService;
     @GetMapping("/user-addition")
     public String showUserAdditionPage() {
         return "admin/UserAddition";}
@@ -22,7 +33,9 @@ public class AdminController {
         return "admin/UserEdition";}
 
     @GetMapping("/report-of-users")
-    public String showReportOfUserPage() {
+    public String showReportOfUserPage(Model model) {
+        List<User> userList = userService.getUserList();
+        model.addAttribute("usersList", userList);
         return "admin/ReportOfUsers";}
 
     @GetMapping("/report-of-courses")

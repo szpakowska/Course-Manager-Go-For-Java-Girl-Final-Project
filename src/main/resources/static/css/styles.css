@@ -111,3 +111,30 @@ footer {
     width: 100%;
     margin: 0;
 }
+
+.custom-body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+}
+
+.header-title p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
