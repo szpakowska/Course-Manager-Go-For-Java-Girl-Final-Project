@@ -48,16 +48,11 @@ Z
 
 <footer>
 
-    <div class="user-info">
-        <!-- Ikona ludzika -->
-        <span class="user-icon">👤</span>
-        <span>Zalogowany użytkownik:</span>
-        <span th:text="${username}"></span> <span th:text="${roles}"></span>
-    </div>
+
 
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
         </button>
     </form>
     <br>
