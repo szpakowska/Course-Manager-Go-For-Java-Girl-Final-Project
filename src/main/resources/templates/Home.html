@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Strona główna</title>
     <style>
@@ -9,6 +10,7 @@
             margin: 0;
             padding: 0;
         }
+
         header {
             background-color: #007bff;
             color: #fff;
@@ -17,17 +19,21 @@
             justify-content: space-between;
             align-items: center;
         }
+
         .user-info {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
         }
+
         .user-info span {
             margin-right: 10px;
         }
+
         .user-icon {
             font-size: 24px;
         }
+
         footer {
             background-color: #333;
             color: #fff;
@@ -37,6 +43,7 @@
             bottom: 0;
             width: 100%;
         }
+
         /* Nowe style dla przycisku */
         .logout-button {
             background-color: #dc3545;
@@ -51,15 +58,18 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         .logout-button:hover {
             background-color: #c82333;
         }
+
         .button-container {
             display: flex;
             flex-direction: column; /* Ułożenie przycisków w kolumnie */
             align-items: center; /* Wyśrodkowanie przycisków w pionie */
             margin-top: 50px; /* Odstęp od góry */
         }
+
         .button {
             width: 200px; /* Szerokość przycisków */
             padding: 10px; /* Wielkość i odstępy wewnątrz przycisków */
@@ -74,17 +84,23 @@
             align-items: center; /* Wyrównanie ikony z tekstem */
             justify-content: center; /* Wyśrodkowanie tekstu w przycisku */
         }
+
         .button:hover {
             background-color: #ddd; /* Zmiana tła po najechaniu myszką */
         }
+
         .icon {
             margin-right: 10px; /* Odstęp między ikoną a tekstem */
             font-size: 20px; /* Rozmiar ikony */
         }
     </style>
 </head>
+
+
 <body>
 
+<div sec:authorize="hasAuthority('Admin')">Text visible to authority admin.</div>
+<div sec:authorize="hasAuthority('BLABLA')">Text visible to blaabla.</div>
 <header>
     <h1>Course Manager Application</h1>
     <form th:action="@{/logout}" method="post">
@@ -98,47 +114,160 @@
 
 <!-- Przyciski jako zakładki z ikonami -->
 <div class="button-container">
-    <!-- Przycisk 1 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA1'" class="button">
-        <!-- Ikona ludzika -->
-        <span class="icon">👤</span>
-        Rejestracja użytkownika
-    </button>
-    <!-- Przycisk 2 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA2'" class="button">
-        <!-- Ikona szkoły -->
-        <span class="icon">🏫</span>
-        Dodawanie kursu
-    </button>
-    <!-- Przycisk 3 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA3'" class="button">
-        <!-- Inna ikona -->
-        <span class="icon">⭐</span>
-        Opcja 3
-    </button>
 
-    <div th:if="${role == 'STUDENT'}">
-    <!-- Przycisk 4 -->
-    <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">
-        <!-- Inna ikona -->
-        <span class="icon">🔗</span>
-        Opcja 4
-    </button>
-        </div>
-</div>
+    <!-- Przyciski Administratora -->
 
-<footer>
+    <div sec:authorize="hasAuthority('Admin')">
+        <!-- Przycisk 1 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA1'" class="button">
+            <!-- Ikona ludzika -->
+            <span class="icon">👤</span>
+            Rejestracja użytkownika
+        </button>
 
-    <div class="user-info">
-        <!-- Ikona ludzika -->
-        <span class="user-icon">👤</span>
-        <span>Zalogowany użytkownik:</span>
-        <span th:text="${username}"></span>  <span th:text="${roles}"></span>
+
+        <!-- Przycisk 2 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA2'" class="button">
+            <!-- Ikona szkoły -->
+            <span class="icon">🏫</span>
+            Edytuj użytkownika
+        </button>
+
+
+        <!-- Przycisk 3 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA3'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">⭐</span>
+            Usuń użytkownika
+        </button>
+
+
+        <!-- Przycisk 4 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA4'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Dodaj kurs
+        </button>
+
+
+        <!-- Przycisk 5 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA5'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Edytuj kurs
+        </button>
+
+
+        <!-- Przycisk 6 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA6'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Usuń kurs
+        </button>
+
+
+        <!-- Przycisk 7 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA7'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Dodaj blok zajęć
+        </button>
+
+
+        <!-- Przycisk 8 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA8'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Edytuj blok zajęć
+        </button>
+
+
+        <!-- Przycisk 9 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA9'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Usuń blok zajęć
+        </button>
+
+
+        <!-- Przycisk 10 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA10'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Raport wszystkich użytkowników
+        </button>
+
+
+        <!-- Przycisk 11 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA11'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Raport wszystkich kursów
+        </button>
+
+
+        <!-- Przycisk 12 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA12'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Raport wszystkich bloków zajęć
+        </button>
     </div>
 
-    <p>Made by Wiewiórki</p>
+    <!-- Przyciski Wykładowcy -->
 
-</footer>
+    <div sec:authorize="hasAuthority('Lecturer')">
+        <!-- Przycisk 13 -->
+        <button onclick="location.href='MIEJSCE NA ADRES HTMLA13'" class="button">
+            <!-- Inna ikona -->
+            <span class="icon">🔗</span>
+            Moje kursy
+        </button>
+    </div>
+
+    <!-- Przyciski Studenta -->
+    <div sec:authorize="hasAuthority('Student')">
+        <div th:unless="${role == 'Student'}">
+            <!-- Przycisk 14 -->
+            <button onclick="location.href='MIEJSCE NA ADRES HTMLA14'" class="button">
+                <!-- Inna ikona -->
+                <span class="icon">🔗</span>
+                Bloki zajęć
+            </button>
+
+            <!-- Przycisk 15 -->
+            <button onclick="location.href='MIEJSCE NA ADRES HTMLA15'" class="button">
+                <!-- Inna ikona -->
+                <span class="icon">🔗</span>
+                Kalendarz
+            </button>
+
+            <!-- Przycisk 16 -->
+            <button onclick="location.href='MIEJSCE NA ADRES HTMLA16'" class="button">
+                <!-- Inna ikona -->
+                <span class="icon">🔗</span>
+                Powiadomienia
+            </button>
+        </div>
+
+    </div>
+
+    <footer>
+
+        <div class="user-info">
+            <!-- Ikona ludzika -->
+            <span class="user-icon">👤</span>
+            <span>Zalogowany użytkownik:</span>
+            <span th:text="${username}"></span> <span th:text="${roles}"></span>
+        </div>
+
+        <p>Made by Wiewiórki</p>
+
+    </footer>
+
+</body>
+</html>
+
 
 </body>
 </html>
