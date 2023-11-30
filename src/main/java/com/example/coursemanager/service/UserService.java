@@ -16,4 +16,8 @@ public class UserService {
     public List<User> getUserList() {
         return userJpaRepository.findAll();
     }
+
+    public void addUser(User user) {
+       userJpaRepository.save(user);
+    }
 }
