@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Rejestracja - Course Manager Application</title>
+    <title>Dodawanie użytkownika Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 
 <header>
-    <h1>Course Manager Application</h1>
+    <h1> 🐿️Course Manager Application</h1>
     <div class="header-buttons">
-        <form th:action="@{/logout}" method="post">
-            <button class="logout-button">Wyloguj</button>
-        </form>
-        <button onclick="location.href='/home'" class="logout-button">Home</button>
+        <button onclick="location.href='/home'" class="logout-button">
+            <i class="fas fa-home"></i> Home <!-- Ikona domu -->
+        </button>
+
     </div>
 </header>
 
@@ -47,14 +47,20 @@ Z
 </div>
 
 <footer>
+
     <div class="user-info">
         <!-- Ikona ludzika -->
         <span class="user-icon">👤</span>
         <span>Zalogowany użytkownik:</span>
-        <span>Username</span> <span>User Roles</span>
+        <span th:text="${username}"></span> <span th:text="${roles}"></span>
     </div>
-    <p>Made by Wiewiórki</p>
-</footer>
 
-</body>
-</html>
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
+        </button>
+    </form>
+    <br>
+    <p>Made by Wiewiórki</p>
+
+</footer>
