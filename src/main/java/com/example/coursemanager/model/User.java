@@ -25,6 +25,15 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
+
+    @Column(name = "active")
+    private Boolean active;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 

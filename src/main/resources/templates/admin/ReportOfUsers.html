@@ -4,6 +4,8 @@
     <title>Raport użytkowników Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 </head>
 <body>
 
@@ -11,43 +13,49 @@
     <h1> 🐿️Course Manager Application</h1>
     <div class="header-buttons">
         <button onclick="location.href='/home'" class="logout-button">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home"></i> Home <!-- Ikona domu -->
         </button>
 
     </div>
 </header>
 
+<br>
+<br>
 <div class="header-title">
     <p>Raport użytkowników </p>
 </div>
-<br>
-<br>
-M
-I
-E
-J
-S
-C
-E
-
-N
-A
-
-F
-O
-R
-M
-U
-L
-A
-R
-Z
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa użytkownika</th>
+            <th>Email</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Status</th>
+            <th>Rola</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${usersList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.active}"></td>
+            <td>
+                <span th:each="role : ${user.roles}" th:text="${role.name}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 
 </div>
+</body>
 
 <footer>
-
 
 
     <form th:action="@{/logout}" method="post">
