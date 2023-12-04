@@ -1,7 +1,10 @@
 package com.example.coursemanager.service;
 
+import com.example.coursemanager.dto.UserDto;
 import com.example.coursemanager.model.User;
 import com.example.coursemanager.repository.UserJpaRepository;
+import com.example.coursemanager.utils.mapper.UserMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +20,40 @@ public class UserService {
         return userJpaRepository.findAll();
     }
 
-    public void addUser(User user) {
-       userJpaRepository.save(user);
+    public User getUserById(Long id) {
+        return userJpaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+
+    public UserDto addUser(UserDto userDto) {
+        User user = UserMapper.toUserModel(userDto);
+        User addUser = userJpaRepository.save(user);
+        return UserMapper.toUserDto(addUser);
+    }
+
+    public User updateUser(User user) {
+        return userJpaRepository.save(user);
+    }
+
+    public User updateSurname(Long id, String surname) {
+        User user = userJpaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setSurname(surname);
+        return userJpaRepository.save(user);
+    }
+    public User updateEmail(Long id, String email) {
+        User user = userJpaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        user.setEmail(email);
+        return userJpaRepository.save(user);
+    }
+
+    public void deleteUser(Long id) {
+        boolean isUser = userJpaRepository.existsById(id);
+        if (!isUser) {
+            throw new EntityNotFoundException("User not found" + id);
+        }
+        userJpaRepository.deleteById(id);
     }
 }
