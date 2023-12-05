@@ -9,17 +9,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/admin")
+@RequestMapping("/user")
 @Controller
 @Slf4j
 @RequiredArgsConstructor
-public class AdminController {
+public class UserController {
 
     private final UserService userService;
     @GetMapping("/user-addition")
@@ -98,9 +97,6 @@ public class AdminController {
         model.addAttribute("usersList", userList);
         return "admin/ReportOfUsers";}
 
-    @GetMapping("/report-of-courses")
-    public String showReportOfCoursesPage() {
-        return "admin/ReportOfCourses";}
 
     @GetMapping("/report-of-blocks")
     public String showReportOfBlocksPage() {
