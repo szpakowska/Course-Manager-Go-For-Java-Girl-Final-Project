@@ -35,22 +35,16 @@ public class UserService {
         return UserMapper.toUserDto(addUser);
     }
 
-    public User updateUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userJpaRepository.save(user);
-    }
-
-    public User updateSurname(Long id, String surname) {
-        User user = userJpaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setSurname(surname);
-        return userJpaRepository.save(user);
-    }
-    public User updateEmail(Long id, String email) {
-        User user = userJpaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        user.setEmail(email);
-        return userJpaRepository.save(user);
+    public User updateUser(UserDto userDto, Long id) {
+        User dbUser = getUserById(id);
+        dbUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        dbUser.setUsername(userDto.getUsername());
+        dbUser.setEmail(userDto.getEmail());
+        dbUser.setName(userDto.getName());
+        dbUser.setSurname(userDto.getSurname());
+        dbUser.setActive(userDto.getActive());
+        dbUser.setRoles(userDto.getRoles());
+        return userJpaRepository.save(dbUser);
     }
 
     public void deleteUser(Long id) {
