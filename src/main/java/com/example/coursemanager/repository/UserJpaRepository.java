@@ -15,13 +15,4 @@ public interface UserJpaRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
 
     Optional<User> findById(Long id);
-
-//    @Modifying
-//    @Query("UPDATE User u SET u.surname = :surname WHERE u.id = :id")
-//    void updateSurname(@Param("id") Long id, @Param("surname") String surname);
-//
-//    @Modifying
-//    @Query("UPDATE User u SET u.email = :email WHERE u.id = :id")
-//    void updateEmail(@Param("id") Long id, @Param("email") String email);
-
 }

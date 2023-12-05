@@ -50,30 +50,12 @@ public class UserController {
     }
 
     @PutMapping("/user-edition/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
         try {
-            User updateUser = userService.updateUser(user);
+            User updateUser = userService.updateUser(userDto, id);
             return ResponseEntity.ok(updateUser);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-    @PatchMapping ("/user-surname-edition/{id}")
-    public ResponseEntity<User> updateSurname(@PathVariable Long id, @RequestParam String surname) {
-        try {
-            User updateSurname = userService.updateSurname(id, surname);
-            return ResponseEntity.ok(updateSurname);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-    @PatchMapping ("/user-email-edition/{id}")
-    public ResponseEntity<User> updateEmail(@PathVariable Long id, @RequestParam String email) {
-        try {
-            User updateEmail = userService.updateEmail(id, email);
-            return ResponseEntity.ok(updateEmail);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
         }
     }
 
