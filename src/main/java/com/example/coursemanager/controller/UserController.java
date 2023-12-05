@@ -2,6 +2,7 @@ package com.example.coursemanager.controller;
 
 import com.example.coursemanager.dto.UserDto;
 import com.example.coursemanager.model.User;
+import com.example.coursemanager.repository.RoleJpaRepository;
 import com.example.coursemanager.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,11 +22,15 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    @GetMapping("/user-addition")
-    public String showUserAdditionPage() {
+    private final RoleJpaRepository roleJpaRepository;
+
+    @GetMapping("/add")
+    public String showUserAdditionPage(Model model) {
+        model.addAttribute("userDto", new UserDto());
+        model.addAttribute("roleList", roleJpaRepository.findAll());
         return "admin/UserAddition";}
 
-    @PostMapping("/user-addition")
+    @PostMapping("/add")
     public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
         try {
             UserDto addUser = userService.addUser(userDto);
@@ -35,21 +40,21 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user-edition")
+    @GetMapping("/edit")
     public String showUserEditionPage() {
         return "admin/UserEdition";}
 
-    @GetMapping("/user-edition/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        try {
-            User user = userService.getUserById(id);
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
+//    @GetMapping("/user-edition/{id}")
+//    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+//        try {
+//            User user = userService.getUserById(id);
+//            return ResponseEntity.ok(user);
+//        } catch (Exception e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
-    @PutMapping("/user-edition/{id}")
+    @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
         try {
             User updateUser = userService.updateUser(userDto, id);
@@ -59,11 +64,8 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user-deletion")
-    public String showUserDeletionPage() {
-        return "admin/UserDeletion";}
 
-    @DeleteMapping("/user-deletion/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         try {
             userService.deleteUser(id);
