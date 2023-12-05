@@ -24,93 +24,85 @@
     <!-- Przyciski Administratora -->
 
     <div sec:authorize="hasAuthority('Admin')">
-        <div class="button-group">
+        <!-- ... (inne tagi HTML) ... -->
 
-        <button onclick="location.href='/admin/user-addition'" class="button">
-            <span class="icon">👤</span>
-            Dodaj użytkownika
-        </button>
+        <div class="button-container">
+            <!-- Pierwsze 6 przycisków (grupowane po 3 w jednej kolumnie) -->
+            <div class="button-column">
+                <button onclick="location.href='/admin/user-addition'" class="button">
+                    <span class="icon">👤</span>
+                    Dodaj użytkownika
+                </button>
 
+                <button onclick="location.href='/admin/user-edition'" class="button">
+                    <span class="icon">🏫</span>
+                    Edytuj użytkownika
+                </button>
 
-        <button onclick="location.href='/admin/user-edition'" class="button">
-            <span class="icon">🏫</span>
-            Edytuj użytkownika
-        </button>
+                <button onclick="location.href='/admin/user-deletion'" class="button">
+                    <span class="icon">⭐</span>
+                    Usuń użytkownika
+                </button>
+            </div>
 
+            <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
+            <div class="button-column">
+                <button onclick="location.href='/admin/course-addition'" class="button">
+                    <span class="icon">🔗</span>
+                    Dodaj kurs
+                </button>
 
-        <button onclick="location.href='/admin/user-deletion'" class="button">
-            <span class="icon">⭐</span>
-            Usuń użytkownika
-        </button>
+                <button onclick="location.href='/admin/course-edition'" class="button">
+                    <span class="icon">🔗</span>
+                    Edytuj kurs
+                </button>
 
+                <button onclick="location.href='/admin/course-deletion'" class="button">
+                    <span class="icon">🔗</span>
+                    Usuń kurs
+                </button>
+            </div>
 
+            <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
+            <div class="button-column">
+                <button onclick="location.href='/admin/block-addition'" class="button">
+                    <span class="icon">🔗</span>
+                    Dodaj blok zajęć
+                </button>
+
+                <button onclick="location.href='/admin/block-edition'" class="button">
+                    <span class="icon">🔗</span>
+                    Edytuj blok zajęć
+                </button>
+
+                <button onclick="location.href='/admin/block-deletion'" class="button">
+                    <span class="icon">🔗</span>
+                    Usuń blok zajęć
+                </button>
+            </div>
+
+            <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
+            <div class="button-column">
+                <button onclick="location.href='/admin/report-of-users'" class="button">
+                    <span class="icon">🔗</span>
+                    Raport wszystkich użytkowników
+                </button>
+
+                <button onclick="location.href='/admin/report-of-courses'" class="button">
+                    <span class="icon">🔗</span>
+                    Raport wszystkich kursów
+                </button>
+
+                <button onclick="location.href='/admin/report-of-blocks'" class="button">
+                    <span class="icon">🔗</span>
+                    Raport wszystkich bloków zajęć
+                </button>
+            </div>
         </div>
-        <div class="button-group">
 
-        <button onclick="location.href='/admin/course-addition'" class="button">
-            <span class="icon">🔗</span>
-            Dodaj kurs
-        </button>
+        <!-- ... (inne tagi HTML) ... -->
 
-
-        <button onclick="location.href='admin/course-edition'" class="button">
-            <span class="icon">🔗</span>
-            Edytuj kurs
-        </button>
-
-
-
-        <button onclick="location.href='admin/course-deletion'" class="button">
-            <span class="icon">🔗</span>
-            Usuń kurs
-        </button>
-        </div>
-
-        <div class="button-group">
-
-
-        <button onclick="location.href='admin/block-addition'" class="button">
-            <span class="icon">🔗</span>
-            Dodaj blok zajęć
-        </button>
-
-
-        <button onclick="location.href='admin/block-edition'" class="button">
-            <span class="icon">🔗</span>
-            Edytuj blok zajęć
-        </button>
-
-
-        <button onclick="location.href='admin/block-deletion'" class="button">
-            <span class="icon">🔗</span>
-            Usuń blok zajęć
-        </button>
-
-        </div>
-        <div class="button-group">
-
-
-        <button onclick="location.href='admin/report-of-users'" class="button">
-            <span class="icon">🔗</span>
-            Raport wszystkich użytkowników
-        </button>
-
-
-
-        <button onclick="location.href='admin/report-of-courses'" class="button">
-            <span class="icon">🔗</span>
-            Raport wszystkich kursów
-        </button>
-
-
-        <button onclick="location.href='admin/report-of-blocks'" class="button">
-
-            <span class="icon">🔗</span>
-            Raport wszystkich bloków zajęć
-        </button>
-    </div>
-    </div>
-    <!-- Przyciski Wykładowcy -->
+        <!-- Przyciski Wykładowcy -->
 
     <div sec:authorize="hasAuthority('Lecturer')">
         <!-- Przycisk 13 -->
@@ -144,31 +136,27 @@
                 <span class="icon">🔗</span>
                 Powiadomienia
             </button>
+            </div>
         </div>
-
     </div>
 
-    <footer>
+        <footer>
+            <div class="user-info">
+                <!-- Ikona ludzika -->
+                <span class="user-icon">👤</span>
+                <span>Zalogowany użytkownik:</span>
+                <span th:text="${username}"></span> <span th:text="${roles}"></span>
+            </div>
 
-        <div class="user-info">
-            <!-- Ikona ludzika -->
-            <span class="user-icon">👤</span>
-            <span>Zalogowany użytkownik:</span>
-            <span th:text="${username}"></span> <span th:text="${roles}"></span>
-        </div>
+            <form th:action="@{/logout}" method="post">
+                <button class="logout-button">
+                    <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
+                </button>
+            </form>
+            <br>
+            <p>Made by Wiewiórki</p>
+        </footer>
 
-        <form th:action="@{/logout}" method="post">
-            <button class="logout-button">
-                <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
-            </button>
-        </form>
-<br>
-        <p>Made by Wiewiórki</p>
-
-    </footer>
-</div>
 </body>
 
 </html>
-
-
