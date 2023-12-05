@@ -6,6 +6,7 @@ import com.example.coursemanager.repository.UserJpaRepository;
 import com.example.coursemanager.utils.mapper.UserMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class UserService {
 
     private final UserJpaRepository userJpaRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public List<User> getUserList() {
         return userJpaRepository.findAll();
@@ -28,11 +30,13 @@ public class UserService {
 
     public UserDto addUser(UserDto userDto) {
         User user = UserMapper.toUserModel(userDto);
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         User addUser = userJpaRepository.save(user);
         return UserMapper.toUserDto(addUser);
     }
 
     public User updateUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userJpaRepository.save(user);
     }
 
