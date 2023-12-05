@@ -20,10 +20,8 @@ public class Class {
 
     private LocalDateTime dateTime;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<User> students;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User lecturer;
 
 }

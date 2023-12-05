@@ -15,6 +15,13 @@ public class Course {
     private Integer id;
     private String name;
 
-    @OneToMany
+    public Course(String name) {
+        this.name = name;
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<User> students;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<Block> blocks;
 }

@@ -15,6 +15,10 @@ public class Block {
     private Integer id;
     private String name;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Class> classes;
+
+    public Block(String name) {
+        this.name = name;
+    }
 }
