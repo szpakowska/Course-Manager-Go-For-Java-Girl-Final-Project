@@ -1,3 +1,6 @@
+#### Create user
+###POST localhost:8080/user/user-addition?username=JerzyBak&password=user&email=jerzybak@wp.pl&name=Jerzy&surname=Bak&active=true&roles=Student
+
 ### Create course
 POST localhost:8080/courses?name=Test-course-1
 
