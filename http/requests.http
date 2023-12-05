@@ -1,0 +1,9 @@
+### Create course
+POST localhost:8080/courses?name=Test-course-1
+
+### Delete course by id
+DELETE localhost:8080/courses?id=8
+
+### Add block to course
+PATCH localhost:8080/courses/1?blockName=Test-block-1
+
