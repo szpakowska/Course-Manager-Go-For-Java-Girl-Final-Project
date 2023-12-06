@@ -2,10 +2,6 @@ package com.example.coursemanager.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import java.util.Objects;
 import java.util.Set;
 
 @Data
