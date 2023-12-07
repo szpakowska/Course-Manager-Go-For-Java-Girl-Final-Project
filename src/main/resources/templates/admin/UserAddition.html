@@ -2,93 +2,99 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dodaj użytkownika</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 50px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 <h2>Dodaj użytkownika</h2>
 <form th:action="@{/user/add}" method="post" th:object="${userDto}">
     <label for="username">Nazwa użytkownika:</label>
-    <input type="text" id="username" name="username" th:field="*{username}" required><br>
+    <input type="text" id="username" name="username" th:field="*{username}" required>
+
     <label for="password">Hasło:</label>
-    <input type="password" id="password" name="password" th:field="*{password}" required><br>
+    <input type="password" id="password" name="password" th:field="*{password}" required>
+
     <label for="email">Adres email:</label>
-    <input type="email" id="email" name="email" th:field="*{email}" required><br>
+    <input type="email" id="email" name="email" th:field="*{email}" required>
+
     <label for="name">Imię:</label>
-    <input type="text" id="name" name="name" th:field="*{name}"><br>
+    <input type="text" id="name" name="name" th:field="*{name}">
+
     <label for="surname">Nazwisko:</label>
-    <input type="text" id="surname" name="surname" th:field="*{surname}"><br>
+    <input type="text" id="surname" name="surname" th:field="*{surname}">
+
     <label for="active">Aktywny:</label>
-    <input type="checkbox" id="active" name="active" th:field="*{active}"><br>
-    <label for="roles">Role:</label>
-    <select id="roles" name="roles" multiple th:field="*{roles}">
-         Pętla w celu wyboru ról, np.:
-         <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
-    </select><br>
+    <input type="checkbox" id="active" name="active" th:field="*{active}">
+
+<!--    <label for="roles">Role:</label>-->
+<!--    <select id="roles" name="roles" multiple th:field="*{roles.add()}">-->
+<!--        &lt;!&ndash; Pętla w celu wyboru ról, np.: &ndash;&gt;-->
+<!--        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>-->
+<!--    </select>-->
+
     <button type="submit">Dodaj użytkownika</button>
 </form>
-</body>
+
 
 <footer>
+    <div class="user-info">
+        <!-- Ikona ludzika -->
+        <span class="user-icon">👤</span>
+        <span>Zalogowany użytkownik:</span>
+        <span th:text="${username}"></span> <span th:text="${roles}"></span>
+    </div>
+
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj
+            <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
         </button>
     </form>
     <br>
     <p>Made by Wiewiórki</p>
-
 </footer>
+</body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <title>Dodawanie użytkownika Course Manager Application</title>-->
-<!--    <link rel="stylesheet" href="/css/styles.css">-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<header>-->
-<!--    <h1> 🐿️Course Manager Application</h1>-->
-<!--    <div class="header-buttons">-->
-<!--        <button onclick="location.href='/home'" class="logout-button">-->
-<!--            <i class="fas fa-home"></i> Home &lt;!&ndash; Ikona domu &ndash;&gt;-->
-<!--        </button>-->
-
-<!--    </div>-->
-<!--</header>-->
-
-<!--<div class="header-title">-->
-<!--    <p>Dodawanie użytkownika</p>-->
-<!--</div>-->
-<!--<br>-->
-<!--<br>-->
-<!--M-->
-<!--I-->
-<!--E-->
-<!--J-->
-<!--S-->
-<!--C-->
-<!--E-->
-
-<!--N-->
-<!--A-->
-
-<!--F-->
-<!--O-->
-<!--R-->
-<!--M-->
-<!--U-->
-<!--L-->
-<!--A-->
-<!--R-->
-<!--Z-->
-
-
-<!--</div>-->
-
-<!--<footer>-->
-
-
-
 
