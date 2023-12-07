@@ -1,12 +1,44 @@
-#### Create user
-###POST localhost:8080/user/user-addition?username=JerzyBak&password=user&email=jerzybak@wp.pl&name=Jerzy&surname=Bak&active=true&roles=Student
+
+### Create user
+POST localhost:8080/user/add
+Content-Type: application/json
+
+{ "name": "Tom", "surname": "Smith", "username": "tsmith", "password": "admin", "email": "ts@onet.pl", "active": true, "roles": [{"id": 3}] }
+{ "name": "Jan", "surname": "Kowalski", "username": "jkowalski", "password": "admin", "email": "jk@onet.pl", "active": true, "roles": [{"id": 2}] }
+{ "name": "Antoni", "surname": "Nowak", "username": "anowak", "password": "admin", "email": "an@onet.pl", "active": true, "roles": [{"id": 3}] }
 
 ### Create course
-POST localhost:8080/courses?name=Test-course-1
+POST localhost:8080/courses?name=Test-course-4
 
 ### Delete course by id
-DELETE localhost:8080/courses?id=8
+DELETE localhost:8080/courses/2
 
-### Add block to course
-PATCH localhost:8080/courses/1?blockName=Test-block-1
+### Create block and add to course at the same time
+PATCH localhost:8080/courses/4/blocks?blockName=Test-block-4
 
+### Remove block from course (only from course, not from db)
+DELETE localhost:8080/courses/1/blocks/2
+
+### Add students to course
+PATCH localhost:8080/courses/1/students?studentIds=2,3
+
+### Remove student from course
+DELETE localhost:8080/courses/1/students/2
+
+### Add lecturer to block
+PATCH localhost:8080/blocks/4/lecturer/1
+
+### Remove lecturer from block
+DELETE localhost:8080/blocks/1/lecturer/1
+
+### Add lesson to block
+PATCH localhost:8080/blocks/1/lesson
+Content-Type: application/json
+
+{"subject": "Java - podstawy", "localDateTime": "2023-12-07T17:30", "durationInMinutes": 45}
+
+### Remove lesson from block
+DELETE localhost:8080/blocks/1/lesson/1
+
+### Get all courses
+GET localhost:8080/courses?userId=4

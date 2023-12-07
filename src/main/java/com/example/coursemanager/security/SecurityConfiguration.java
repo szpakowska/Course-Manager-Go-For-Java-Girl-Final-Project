@@ -26,6 +26,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/courses**").permitAll()//.hasAuthority("Admin")
                         .requestMatchers("/courses/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/blocks/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
