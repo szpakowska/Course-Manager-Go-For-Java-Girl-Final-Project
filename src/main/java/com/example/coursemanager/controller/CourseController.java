@@ -24,38 +24,33 @@ public class CourseController {
         return "Home";
     }
 
-    @DeleteMapping
-    public String deleteCourse(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public String deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
         return "Home";
     }
 // to też służy do wyswietlania przypisanych kursów - a raczej powinno XD
     // tylko trzebe tam odpowiednio we frontendie jeszcze to dopracować
-    @GetMapping("/report-of-courses")
+    @GetMapping
     public String getCourses(@RequestParam(required = false) Long userId, Model model) {
         List<Course> coursesList;
         if (userId == null) {
             coursesList = courseService.getAllCourses();
         } else {
-            coursesList = courseService.getCoursesByUserId();
+            coursesList = courseService.getCoursesByUserId(userId);
         }
         model.addAttribute("coursesList", coursesList);
 
         return "Home";
     }
 
-    @GetMapping("/{id}")
-    public String getCourseById(@PathVariable Long id, Model model) {
-        Course course = courseService.getCourseById(id);
+    @GetMapping("/{courseId}")
+    public String getCourseById(@PathVariable Long courseId, Model model) {
+        Course course = courseService.getCourseById(courseId);
         model.addAttribute("course", course);
         return "Home";
     }
 
-    @PatchMapping("/{id}")
-    public String addBlockToCourse(@PathVariable Long id, @RequestParam String blockName) {
-        courseService.addBlockToCourse(id, blockName);
-        return "Home";
-    }
 
 
 }

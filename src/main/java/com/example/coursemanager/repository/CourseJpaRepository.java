@@ -12,10 +12,10 @@ import java.util.List;
 public interface CourseJpaRepository extends JpaRepository<Course, Long> {
 
     @Query("SELECT DISTINCT c FROM Course c " +
-            "JOIN c.blocks b " +
-            "JOIN b.classes cl " +
-            "WHERE :userId MEMBER OF c.students OR cl.lecturer = :userId")
-    List<Course> findCoursesByLecturerId(@Param("userId") Long userId);
+            "LEFT JOIN c.students s " +
+            "WHERE s.id = :userId OR " +
+            "c.id IN (SELECT cr.id FROM Course cr JOIN cr.blocks b WHERE b.lecturer.id = :userId)")
+    List<Course> findCoursesByUserId(@Param("userId") Long userId);
 }
 
 

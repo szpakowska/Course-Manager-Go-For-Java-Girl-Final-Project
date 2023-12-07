@@ -12,11 +12,14 @@ import java.util.Set;
 public class Block {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Class> classes;
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Set<Lesson> lessons;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private User lecturer;
 
     public Block(String name) {
         this.name = name;
