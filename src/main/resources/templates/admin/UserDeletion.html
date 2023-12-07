@@ -1,60 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Usuwanie użytkownika | Course Manager Application</title>
+    <title>Usuń użytkownika</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .confirmation-container {
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+
+        .confirmation-message {
+            margin-bottom: 20px;
+        }
+
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .confirmation-buttons button {
+            margin: 0 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .confirmation-buttons .confirm-button {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .confirmation-buttons .cancel-button {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
-<header>
-    <h1> 🐿️Course Manager Application</h1>
-    <div class="header-buttons">
-        <button onclick="location.href='/home'" class="logout-button">
-            <i class="fas fa-home"></i> Home
-        </button>
-
+<h2>Usuń użytkownika</h2>
+<div class="confirmation-container">
+    <div class="confirmation-message">
+        <p>Czy na pewno usunąć użytkownika?</p>
     </div>
-</header>
-
-<div class="header-title">
-    <p>Usuwanie użytkownika</p>
-</div>
-<br>
-<br>
-M
-I
-E
-J
-S
-C
-E
-
-N
-A
-
-F
-O
-R
-M
-U
-L
-A
-R
-Z
-
-
+    <div class="confirmation-buttons">
+        <button class="confirm-button" onclick="confirmDeletion()">Tak</button>
+        <button class="cancel-button" onclick="cancelDeletion()">Nie</button>
+    </div>
 </div>
 
 <footer>
-
+    <div class="user-info">
+        <!-- Ikona ludzika -->
+        <span class="user-icon">👤</span>
+        <span>Zalogowany użytkownik:</span>
+        <span th:text="${username}"></span> <span th:text="${roles}"></span>
+    </div>
 
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj
+            <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
         </button>
     </form>
     <br>
     <p>Made by Wiewiórki</p>
-
 </footer>
+
+<script>
+    function confirmDeletion() {
+        // Tutaj możesz dodać logikę obsługi potwierdzenia usunięcia użytkownika
+        alert("Użytkownik został usunięty!");
+    }
+
+    function cancelDeletion() {
+        // Tutaj możesz dodać logikę obsługi anulowania usunięcia użytkownika
+        alert("Usunięcie użytkownika anulowane.");
+    }
+</script>
+</body>
+</html>
