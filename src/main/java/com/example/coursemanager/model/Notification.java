@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -23,6 +24,14 @@ public class Notification {
     @Column
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Class className;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "notification_lessons",
+            joinColumns = @JoinColumn(name = "notification_id"),
+            inverseJoinColumns = @JoinColumn(name = "lesson_id")
+    )
+    private Set<Lesson> lessons;
+
+//    @OneToMany(mappedBy = "notification")
+//    private Set<UserNotification> userNotifications;
 }

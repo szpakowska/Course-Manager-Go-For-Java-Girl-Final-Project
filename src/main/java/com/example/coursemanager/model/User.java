@@ -33,5 +33,9 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @ManyToMany(mappedBy = "users")
+    private Set<Lesson> lessons;
 
+//    @OneToMany(mappedBy = "user")
+//    private Set<UserNotification> userNotifications;
 }

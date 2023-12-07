@@ -1,9 +1,6 @@
 package com.example.coursemanager.dto;
 
 import com.example.coursemanager.model.Role;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.Setter;
 
