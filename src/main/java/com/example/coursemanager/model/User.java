@@ -33,18 +33,9 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @ManyToMany(mappedBy = "users")
+    private Set<Lesson> lessons;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return username.equals(user.username);
-    }
-
-    @Override
-    public int hashCode() {
-        return username.hashCode();
-    }
-
+//    @OneToMany(mappedBy = "user")
+//    private Set<UserNotification> userNotifications;
 }
