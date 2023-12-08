@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/edit")
     public String showUserEditionPage(Model model) {
         model.addAttribute("userDto", new UserDto());
-        model.addAttribute("roleList", roleJpaRepository.findAll());
+       // model.addAttribute("roleList", roleJpaRepository.findAll());
         return "admin/UserEdition";}
 
     @GetMapping("/edit/{id}")
@@ -66,7 +66,6 @@ public class UserController {
         }
     }
 
-
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
         try {
@@ -82,7 +81,6 @@ public class UserController {
         List<User> userList = userService.getUserList();
         model.addAttribute("usersList", userList);
         return "admin/ReportOfUsers";}
-
 
     @GetMapping("/report-of-blocks")
     public String showReportOfBlocksPage() {

@@ -2,12 +2,11 @@ package com.example.coursemanager.controller;
 
 import com.example.coursemanager.dto.NotificationDto;
 import com.example.coursemanager.model.Notification;
-import com.example.coursemanager.model.User;
 import com.example.coursemanager.service.NotificationService;
-//import com.example.coursemanager.service.UserNotificationService;
+import com.example.coursemanager.service.UserNotificationService;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,11 +17,11 @@ import java.util.List;
 
 @RequestMapping("/lesson/notification")
 @Controller
-@Slf4j
+@Data
 @RequiredArgsConstructor
 public class NotificationController {
     private NotificationService notificationService;
-  //  private UserNotificationService userNotificationService;
+    private UserNotificationService userNotificationService;
 
     @GetMapping("/add")
     public String showUserAdditionPage(Model model) {

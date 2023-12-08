@@ -32,6 +32,6 @@ public class Notification {
     )
     private Set<Lesson> lessons;
 
-//    @OneToMany(mappedBy = "notification")
-//    private Set<UserNotification> userNotifications;
+    @OneToMany(mappedBy = "notification")
+    private Set<UserNotification> userNotifications;
 }

@@ -2,6 +2,7 @@ package com.example.coursemanager.dto;
 
 import com.example.coursemanager.model.Lesson;
 //import com.example.coursemanager.model.UserNotification;
+import com.example.coursemanager.model.UserNotification;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +17,5 @@ public class NotificationDto {
     private String content;
     private LocalDateTime createdAt;
     private Set<Lesson> lessons;
-   // private Set<UserNotification> userNotifications;
+    private Set<UserNotification> userNotifications;
 }

@@ -8,7 +8,6 @@ import com.example.coursemanager.repository.NotificationJpaRepository;
 import com.example.coursemanager.utils.mapper.NotificationMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
