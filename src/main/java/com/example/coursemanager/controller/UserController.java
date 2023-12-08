@@ -43,8 +43,18 @@ public class UserController {
     @GetMapping("/edit")
     public String showUserEditionPage(Model model) {
         model.addAttribute("userDto", new UserDto());
+       // model.addAttribute("roleList", roleJpaRepository.findAll());
         return "admin/UserEdition";}
 
+    @GetMapping("/edit/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        try {
+            User user = userService.getUserById(id);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
