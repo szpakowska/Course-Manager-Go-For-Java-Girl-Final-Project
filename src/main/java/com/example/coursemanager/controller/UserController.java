@@ -41,18 +41,10 @@ public class UserController {
     }
 
     @GetMapping("/edit")
-    public String showUserEditionPage() {
+    public String showUserEditionPage(Model model) {
+        model.addAttribute("userDto", new UserDto());
         return "admin/UserEdition";}
 
-//    @GetMapping("/user-edition/{id}")
-//    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-//        try {
-//            User user = userService.getUserById(id);
-//            return ResponseEntity.ok(user);
-//        } catch (Exception e) {
-//            return ResponseEntity.notFound().build();
-//        }
-//    }
 
     @PutMapping("/edit/{id}")
     public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
@@ -63,7 +55,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
@@ -80,7 +71,6 @@ public class UserController {
         List<User> userList = userService.getUserList();
         model.addAttribute("usersList", userList);
         return "admin/ReportOfUsers";}
-
 
     @GetMapping("/report-of-blocks")
     public String showReportOfBlocksPage() {
