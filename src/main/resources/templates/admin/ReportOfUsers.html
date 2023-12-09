@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +7,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .header-title {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .actions-column {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,58 +46,96 @@
     <h1> 🐿️Course Manager Application</h1>
     <div class="header-buttons">
         <button onclick="location.href='/home'" class="logout-button">
-            <i class="fas fa-home"></i> Home <!-- Ikona domu -->
+            <i class="fas fa-home"></i> Home
         </button>
-
     </div>
 </header>
 
-<br>
-<br>
 <div class="header-title">
-    <p>Raport użytkowników </p>
+    <p>Zarządzanie użytkownikami</p>
 </div>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nazwa użytkownika</th>
-            <th>Email</th>
-            <th>Imię</th>
-            <th>Nazwisko</th>
-            <th>Status</th>
-            <th>Rola</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${usersList}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.username}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.surname}"></td>
-            <td th:text="${user.active}"></td>
-            <td>
-                <span th:each="role : ${user.roles}" th:text="${role.name}"></span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa użytkownika</th>
+        <th>Email</th>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>Status</th>
+        <th>Rola</th>
+        <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${usersList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.active}"></td>
+        <td>
+            <span th:each="role : ${user.roles}" th:text="${role.name}"></span>
+        </td>
+
+        <td class="actions-column">
+            <i class="fas fa-edit" style="color: blue;"></i>
+            <i class="fas fa-trash-alt delete-user" style="color: red;" data-user-id="${user.id}"></i>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 
-</div>
-</body>
+<!--DELETE-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let deleteButtons = document.querySelectorAll('.delete-user');
+
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                let userId = button.getAttribute('data-user-id');
+                if (confirm('Czy na pewno chcesz usunąć użytkownika o ID ' + userId + '?')) {
+                    // Use fetch API for simplicity (you can still use XMLHttpRequest)
+                    fetch('/user/delete/' + userId, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // User deleted successfully, you can update the UI or reload the page
+                                location.reload();
+                            } else {
+                                // Handle errors or display a message
+                                alert('Nie udało się usunąć użytkownika.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Wystąpił błąd podczas usuwania użytkownika.');
+                        });
+                }
+            });
+        });
+    });
+</script>
+
+<!--DELETE-->
+
+
+<form th:action="@{/logout}" method="post">
+    <button class="logout-button">
+        <i class="fas fa-sign-out-alt"></i> Wyloguj
+    </button>
+</form>
 
 <footer>
-
-
-    <form th:action="@{/logout}" method="post">
-        <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj
-        </button>
-    </form>
     <br>
     <p>Made by Wiewiórki</p>
-
 </footer>
+</body>
 </html>
