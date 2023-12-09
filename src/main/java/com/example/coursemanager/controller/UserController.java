@@ -94,10 +94,18 @@ public class UserController {
         model.addAttribute("usersList", userList);
         return "admin/ReportOfUsers";
     }
-
+    @GetMapping("/report-of-courses")
+    public String showReportOfCoursesPage() {
+        return "admin/ReportOfCourses";
+    }
     @GetMapping("/report-of-blocks")
     public String showReportOfBlocksPage() {
         return "admin/ReportOfBlocks";
+    }
+
+    @GetMapping("/list-of-lessons")
+    public String showReportOfLessonsPage() {
+        return "admin/ReportOfLessons";
     }
 
     @GetMapping("/course-edition")

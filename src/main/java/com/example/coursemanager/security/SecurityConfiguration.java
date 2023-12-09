@@ -21,12 +21,14 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests((authz) -> authz
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/home").permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/registration").hasAuthority("Admin")
                         .requestMatchers("/courses**").permitAll()//.hasAuthority("Admin")
                         .requestMatchers("/courses/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
                         .requestMatchers("/blocks/**").permitAll()
+                        .requestMatchers("/lessons/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
