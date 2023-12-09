@@ -31,7 +31,7 @@ public class UserController {
         return "admin/UserAddition";}
 
     @PostMapping("/add")
-    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto){
+    public ResponseEntity<UserDto> addUser(@ModelAttribute UserDto userDto){
         try {
             UserDto addUser = userService.addUser(userDto);
             return ResponseEntity.ok(addUser);

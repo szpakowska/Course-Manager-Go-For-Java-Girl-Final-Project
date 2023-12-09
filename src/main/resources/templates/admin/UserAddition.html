@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -69,11 +72,8 @@
     <label for="active">Aktywny:</label>
     <input type="checkbox" id="active" name="active" th:field="*{active}">
 
-<!--    <label for="roles">Role:</label>-->
-<!--    <select id="roles" name="roles" multiple th:field="*{roles.add()}">-->
-<!--        &lt;!&ndash; Pętla w celu wyboru ról, np.: &ndash;&gt;-->
-<!--        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>-->
-<!--    </select>-->
+    <label for="roles">Role:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}" class="form-control">
+    <!-- Pętla w celu wyboru ról, np.: --> <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option> </select>
 
     <button type="submit">Dodaj użytkownika</button>
 </form>
