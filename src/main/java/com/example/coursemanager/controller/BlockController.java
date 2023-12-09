@@ -3,10 +3,11 @@ package com.example.coursemanager.controller;
 import com.example.coursemanager.service.BlockService;
 import com.example.coursemanager.service.LessonService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-@Service
+@Controller
 @RequiredArgsConstructor
 public class BlockController {
 
