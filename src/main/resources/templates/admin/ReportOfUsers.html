@@ -82,7 +82,7 @@
 
         <td class="actions-column">
             <i class="fas fa-edit" style="color: blue;"></i>
-            <i class="fas fa-trash-alt delete-user" style="color: red;" data-user-id="${user.id}"></i>
+            <i class="fas fa-trash-alt delete-user" style="color: red;" th:attr="data-user-id=${user.id}"></i>
         </td>
     </tr>
     </tbody>
