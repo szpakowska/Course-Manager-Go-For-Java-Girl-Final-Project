@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Dodawanie kursu | Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
@@ -13,7 +13,6 @@
         <button onclick="location.href='/home'" class="logout-button">
             <i class="fas fa-home"></i> Home <!-- Ikona domu -->
         </button>
-
     </div>
 </header>
 
@@ -22,39 +21,26 @@
 </div>
 <br>
 <br>
-M
-I
-E
-J
-S
-C
-E
 
-N
-A
-
-F
-O
-R
-M
-U
-L
-A
-R
-Z
+<h2>Dodaj kurs</h2>
 
 
-</div>
+<form th:action="@{/courses/add}" method="post">
+    <label for="courseName">Nazwa kursu:</label>
+    <input type="text" id="courseName" name="name" required>
+
+    <button type="submit">Dodaj kurs</button>
+</form>
 
 <footer>
-
-
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
         </button>
     </form>
     <br>
     <p>Made by Wiewiórki</p>
-
 </footer>
+
+</body>
+</html>

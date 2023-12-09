@@ -18,7 +18,7 @@ public class CourseController {
 
     private final CourseService courseService;
 
-    @PostMapping
+    @PostMapping("/add")
     public String addCourse(@RequestParam String name) {
         courseService.addCourse(name);
         return "Home";
@@ -50,7 +50,11 @@ public class CourseController {
         return "Home";
     }
 
-
+    @GetMapping("/add")
+    public String showCourseAdditionPage(Model model) {
+        model.addAttribute("course", new Course());
+        return "admin/CourseAddition";
+    }
 
 }
 
