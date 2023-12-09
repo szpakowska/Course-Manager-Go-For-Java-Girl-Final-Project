@@ -24,23 +24,22 @@
     <!-- Przyciski Administratora -->
 
     <div sec:authorize="hasAuthority('Admin')">
-        <!-- ... (inne tagi HTML) ... -->
 
         <div class="button-container">
             <!-- Pierwsze 6 przycisków (grupowane po 3 w jednej kolumnie) -->
             <div class="button-column">
                 <button onclick="location.href='/user/add'" class="button">
-                    <span class="icon">👤</span>
+                    <span class="icon">🧑‍💼</span>
                     Dodaj użytkownika
                 </button>
 
                 <button onclick="location.href='/user/edit'" class="button">
-                    <span class="icon">🏫</span>
+                    <span class="icon">✏️</span>
                     Edytuj użytkownika
                 </button>
 
                 <button onclick="location.href='/user/delete'" class="button">
-                    <span class="icon">⭐</span>
+                    <span class="icon">🗑️</span>
                     Usuń użytkownika
                 </button>
             </div>
@@ -48,17 +47,17 @@
             <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
             <div class="button-column">
                 <button onclick="location.href='/user/course-addition'" class="button">
-                    <span class="icon">🔗</span>
+                    <span class="icon">➕</span>
                     Dodaj kurs
                 </button>
 
                 <button onclick="location.href='/user/course-edition'" class="button">
-                    <span class="icon">🔗</span>
+                    <span class="icon">✏️</span>
                     Edytuj kurs
                 </button>
 
                 <button onclick="location.href='/user/course-deletion'" class="button">
-                    <span class="icon">🔗</span>
+                    <span class="icon">🗑️</span>
                     Usuń kurs
                 </button>
             </div>
@@ -66,17 +65,17 @@
             <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
             <div class="button-column">
                 <button onclick="location.href='/admin/block-addition'" class="button">
-                    <span class="icon">🔗</span>
+                    <span class="icon">➕</span>
                     Dodaj blok zajęć
                 </button>
 
                 <button onclick="location.href='/admin/block-edition'" class="button">
-                    <span class="icon">🔗</span>
+                    <span class="icon">✏️</span>
                     Edytuj blok zajęć
                 </button>
 
                 <button onclick="location.href='/admin/block-deletion'" class="button">
-                    <span class="icon">🔗</span>
+                    <span class="icon">🗑️</span>
                     Usuń blok zajęć
                 </button>
             </div>
@@ -84,60 +83,58 @@
             <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
             <div class="button-column">
                 <button onclick="location.href='/user/report-of-users'" class="button">
-                    <span class="icon">🔗</span>
-                    Raport wszystkich użytkowników
+                    <span class="icon">👥</span>
+                    Zarządzanie użytkownikami
                 </button>
 
-                <button onclick="location.href='/course/report-of-courses'" class="button">
-                    <span class="icon">🔗</span>
-                    Raport wszystkich kursów
+                <button onclick="location.href='/user/report-of-courses'" class="button">
+                    <span class="icon">🎓</span>
+                    Zarządzanie kursami
                 </button>
 
-                <button onclick="location.href='/block/report-of-blocks'" class="button">
-                    <span class="icon">🔗</span>
-                    Raport wszystkich bloków zajęć
+                <button onclick="location.href='/user/report-of-blocks'" class="button">
+                    <span class="icon">📚</span>
+                    Zarządzanie blokami zajęć
+                </button>
+
+                <button onclick="location.href='/user/list-of-lessons'" class="button">
+                    <span class="icon">📖</span>
+                    Zarządzanie lekcjami
                 </button>
             </div>
         </div>
+    </div>
 
-        <!-- ... (inne tagi HTML) ... -->
 
         <!-- Przyciski Wykładowcy -->
-
     <div sec:authorize="hasAuthority('Lecturer')">
         <!-- Przycisk 13 -->
-        <button onclick="location.href='MIEJSCE NA ADRES HTMLA13'" class="button">
+        <button onclick="location.href='/courses'" class="button">
             <!-- Inna ikona -->
-            <span class="icon">🔗</span>
+            <span class="icon">🎓</span>
             Moje kursy
         </button>
     </div>
 
     <!-- Przyciski Studenta -->
-    <div sec:authorize="hasAuthority('Student')">
-        <div th:unless="${role == 'Student'}">
-            <!-- Przycisk 14 -->
-            <button onclick="location.href='MIEJSCE NA ADRES HTMLA14'" class="button">
-                <!-- Inna ikona -->
-                <span class="icon">🔗</span>
-                Bloki zajęć
-            </button>
+    <div sec:authorize="hasAuthority('Student')" class="button-container">
+        <!-- Przycisk 14 -->
+        <button onclick="location.href='HTML'" class="button">
+            <span class="icon">📘</span> <!-- Ikona odpowiadająca "Moje zajęcia" -->
+            Moje zajęcia
+        </button>
 
-            <!-- Przycisk 15 -->
-            <button onclick="location.href='MIEJSCE NA ADRES HTMLA15'" class="button">
-                <!-- Inna ikona -->
-                <span class="icon">🔗</span>
-                Kalendarz
-            </button>
+        <!-- Przycisk 16 -->
+        <button onclick="location.href='/lesson/notification'" class="button">
+            <span class="icon">🔔</span> <!-- Ikona odpowiadająca "Powiadomienia" -->
+            Powiadomienia
+        </button>
 
-            <!-- Przycisk 16 -->
-            <button onclick="location.href='MIEJSCE NA ADRES HTMLA16'" class="button">
-                <!-- Inna ikona -->
-                <span class="icon">🔗</span>
-                Powiadomienia
-            </button>
-            </div>
-        </div>
+        <!-- Przycisk 15 -->
+        <button onclick="location.href='/calendar'" class="button">
+            <span class="icon">📅</span> <!-- Ikona odpowiadająca "Kalendarz" -->
+            Kalendarz zajęć
+        </button>
     </div>
 
         <footer>
@@ -156,6 +153,8 @@
             <br>
             <p>Made by Wiewiórki</p>
         </footer>
+
+</div>
 
 </body>
 
