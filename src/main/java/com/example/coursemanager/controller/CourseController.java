@@ -29,8 +29,7 @@ public class CourseController {
         courseService.deleteCourse(id);
         return "Home";
     }
-// to też służy do wyswietlania przypisanych kursów - a raczej powinno XD
-    // tylko trzebe tam odpowiednio we frontendie jeszcze to dopracować
+
     @GetMapping
     public String getCourses(@RequestParam(required = false) Long userId, Model model) {
         List<Course> coursesList;

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -28,23 +29,34 @@ public class UserController {
     public String showUserAdditionPage(Model model) {
         model.addAttribute("userDto", new UserDto());
         model.addAttribute("roleList", roleJpaRepository.findAll());
-        return "admin/UserAddition";}
+        return "admin/UserAddition";
+    }
+
+//    @PostMapping("/add")
+//    public ResponseEntity<UserDto> addUser(@ModelAttribute UserDto userDto){
+//        try {
+//            UserDto addUser = userService.addUser(userDto);
+//            return ResponseEntity.ok(addUser);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
 
     @PostMapping("/add")
-    public ResponseEntity<UserDto> addUser(@ModelAttribute UserDto userDto){
-        try {
-            UserDto addUser = userService.addUser(userDto);
-            return ResponseEntity.ok(addUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    public String addUser(@ModelAttribute UserDto userDto) {
+
+        userService.addUser(userDto);
+        return "/Home";
+
     }
+
 
     @GetMapping("/edit")
     public String showUserEditionPage(Model model) {
         model.addAttribute("userDto", new UserDto());
-       // model.addAttribute("roleList", roleJpaRepository.findAll());
-        return "admin/UserEdition";}
+        model.addAttribute("roleList", roleJpaRepository.findAll());
+        return "admin/UserEdition";
+    }
 
     @GetMapping("/edit/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
@@ -67,7 +79,7 @@ public class UserController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         try {
             userService.deleteUser(id);
             return ResponseEntity.noContent().build();
@@ -80,37 +92,45 @@ public class UserController {
     public String showReportOfUserPage(Model model) {
         List<User> userList = userService.getUserList();
         model.addAttribute("usersList", userList);
-        return "admin/ReportOfUsers";}
+        return "admin/ReportOfUsers";
+    }
 
     @GetMapping("/report-of-blocks")
     public String showReportOfBlocksPage() {
-        return "admin/ReportOfBlocks";}
+        return "admin/ReportOfBlocks";
+    }
 
     @GetMapping("/course-edition")
     public String showCourseEditionPage() {
-        return "admin/CourseEdition";}
+        return "admin/CourseEdition";
+    }
 
     @GetMapping("/course-deletion")
     public String showCourseDeletionPage() {
-        return "admin/CourseDeletion";}
+        return "admin/CourseDeletion";
+    }
 
     @GetMapping("/course-addition")
     public String showCourseAdditionPage() {
-        return "admin/CourseAddition";}
+        return "admin/CourseAddition";
+    }
 
     @GetMapping("/block-edition")
     public String showBlockEditionPage() {
-        return "admin/BlockEdition";}
+        return "admin/BlockEdition";
+    }
 
     @GetMapping("/block-deletion")
     public String showBlockDeletionPage() {
-        return "admin/BlockDeletion";}
+        return "admin/BlockDeletion";
+    }
 
     @GetMapping("/block-addition")
     public String showBlockAdditionPage() {
-        return "admin/BlockAddition";}
-
+        return "admin/BlockAddition";
     }
+
+}
 
 
 

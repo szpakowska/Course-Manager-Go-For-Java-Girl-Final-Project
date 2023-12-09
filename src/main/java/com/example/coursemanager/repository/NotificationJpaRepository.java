@@ -13,4 +13,8 @@ public interface NotificationJpaRepository extends JpaRepository<Notification, L
     List<Notification> findByLessons(Lesson lesson);
 
     Optional<Notification> findById(Long id);
+
+
+    //TODO napisać query + uwzględnić sortowanie
+    List<Notification> findByUserId(Long userId);
 }

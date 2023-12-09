@@ -2,6 +2,7 @@ package com.example.coursemanager.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 import java.util.Set;
 
 @Data
@@ -36,6 +37,7 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Set<Lesson> lessons;
 
+
     @OneToMany(mappedBy = "user")
-    private Set<UserNotification> userNotifications;
+    private Set<Notification> notifications;
 }
