@@ -1,9 +1,9 @@
 package com.example.coursemanager.service;
 
+import com.example.coursemanager.model.Notification;
 import com.example.coursemanager.model.User;
-import com.example.coursemanager.model.UserNotification;
+import com.example.coursemanager.repository.NotificationJpaRepository;
 import com.example.coursemanager.repository.UserJpaRepository;
-import com.example.coursemanager.repository.UserNotificationJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +14,22 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserNotificationService {
-    private final UserNotificationJpaRepository userNotificationJpaRepository;
+    private final NotificationJpaRepository notificationJpaRepository;
     private final UserJpaRepository userJpaRepository;
 
-    public void markNotificationAsRead(Long id) {
-        Optional<UserNotification> userNotification = userNotificationJpaRepository.findById(id);
-        userNotification.ifPresent(notification -> {
-            notification.setRead(true);
-            userNotificationJpaRepository.save(notification);
-        });
-    }
+//    public void markNotificationAsRead(Long id) {
+//        Optional<Notification> userNotification = notificationJpaRepository.findById(id);
+//        userNotification.ifPresent(notification -> {
+//            notification.setRead(true);
+//            notificationJpaRepository.save(notification);
+//        });
+//    }
 
-    public List<UserNotification> getNotificationsForUser(Long userId) {
+    public List<Notification> getNotificationsForUser(Long userId) {
         Optional<User> user = userJpaRepository.findById(userId);
 
         if (user.isPresent()) {
-            return userNotificationJpaRepository.findByUserId(userId);
+            return notificationJpaRepository.findByUserId(userId);
         } else {
             return Collections.emptyList();
         }

@@ -1,6 +1,7 @@
 package com.example.coursemanager.controller;
 
 import com.example.coursemanager.dto.NotificationDto;
+import com.example.coursemanager.model.Course;
 import com.example.coursemanager.model.Notification;
 import com.example.coursemanager.service.NotificationService;
 import com.example.coursemanager.service.UserNotificationService;
@@ -71,4 +72,27 @@ public class NotificationController {
         List<Notification> notificationList = notificationService.getNotificationsForLesson(lessonId);
         model.addAttribute("notificationList", notificationList);
         return "user/Notification";}
+
+
+
+//
+//    @GetMapping("/{userId}")
+//    public ResponseEntity<List<UserNotification>> getNotificationsForUser(@PathVariable Long userId) {
+//        List<UserNotification> unreadNotifications = userNotificationService.getNotificationsForUser(userId);
+//        return new ResponseEntity<>(unreadNotifications, HttpStatus.OK);
+//    }
+
+
+    @GetMapping
+    public String getNotifications(@RequestParam(required = false) Long userId, Model model) {
+        List<Notification> notificationList;
+        if (userId == null) {
+            notificationList = notificationService.getAllNotications();
+        } else {
+            notificationList = notificationService.getNotificationByUserId(userId);
+        }
+        model.addAttribute("notificationList", notificationList);
+
+        return "Home";
+    }
 }

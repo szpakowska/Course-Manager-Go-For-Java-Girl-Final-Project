@@ -58,4 +58,12 @@ public class NotificationService {
         }
         notificationJpaRepository.deleteById(id);
     }
+
+    public List<Notification> getAllNotications() {
+        return notificationJpaRepository.findAll();
+    }
+
+    public List<Notification> getNotificationByUserId(Long userId) {
+        return notificationJpaRepository.findByUserId(userId);
+    }
 }

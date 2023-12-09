@@ -31,7 +31,16 @@ public class Notification {
             inverseJoinColumns = @JoinColumn(name = "lesson_id")
     )
     private Set<Lesson> lessons;
+//
+//    @OneToMany(mappedBy = "notification")
+//    private Set<UserNotification> userNotifications;
 
-    @OneToMany(mappedBy = "notification")
-    private Set<UserNotification> userNotifications;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+//
+//    @Column
+//    private Boolean read;
+
 }
