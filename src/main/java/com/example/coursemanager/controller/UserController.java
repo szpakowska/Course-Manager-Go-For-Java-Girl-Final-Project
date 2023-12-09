@@ -88,6 +88,7 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/report-of-users")
     public String showReportOfUserPage(Model model) {
         List<User> userList = userService.getUserList();
