@@ -19,35 +19,62 @@
 
 <br>
 <br>
-<div class="header-title">
-    <p>Raport kursów</p>
+
+<button onclick="openModal()"
+        style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+    Dodaj kurs
+</button>
+
+<div id="myModal" class="modal">
+    <div class="modal-content" style="max-width: 400px;">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form th:action="@{/courses/add}" method="post">
+            <label for="courseName">Nazwa kursu:</label>
+            <input type="text" id="courseName" name="name" required>
+
+            <button type="submit"
+                    style="margin-top: 10px; padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+                Dodaj
+            </button>
+        </form>
+    </div>
 </div>
 
-<div class="button-column">
-    <button onclick="location.href='/courses/add'" class="button">
-        <span class="icon">➕</span>
-        Dodaj kurs
-    </button>
-</div>
 
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Nazwa</th>
+        <th>#Studenci</th>
+        <th>#Bloki</th>
         <th>Akcje</th>
     </tr>
     </thead>
+    <!-- ... -->
     <tbody>
+    <!-- Tutaj dodaj fragment z listą kursów, studentów i bloków -->
     <tr th:each="course : ${coursesList}">
         <td th:text="${course.id}"></td>
         <td th:text="${course.name}"></td>
+        <td th:utext="${course.students.size()}"></td>
+        <td th:utext="${course.blocks.size()}"></td>
         <td class="actions-column">
-            <i class="fas fa-edit" style="color: blue;"></i>
-            <i class="fas fa-trash-alt delete-course" style="color: red;"
-               th:attr="data-course-id=${course.id}"></i>
+            <a th:href="@{'/courses/manage/' + ${course.id}}">
+                <button type="button" style="background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
+                    Zarządzaj kursem
+                </button>
+            </a>
+            <i class="fas fa-trash-alt delete-course" style="color: red;" th:attr="data-course-id=${course.id}"></i>
         </td>
+
+
     </tr>
+    <!-- Tutaj koniec fragmentu -->
+    </tbody>
+    <!-- ... -->
+
+    <!-- Tutaj koniec fragmentu -->
     </tbody>
 </table>
 
@@ -91,6 +118,15 @@
             });
         });
     });
+
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
 </script>
 
 </body>

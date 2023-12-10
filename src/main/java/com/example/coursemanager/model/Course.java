@@ -19,7 +19,12 @@ public class Course {
         this.name = name;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "course_students",
+            joinColumns = { @JoinColumn(name = "course_id") },
+            inverseJoinColumns = { @JoinColumn(name = "students_id") }
+    )
     private Set<User> students;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
