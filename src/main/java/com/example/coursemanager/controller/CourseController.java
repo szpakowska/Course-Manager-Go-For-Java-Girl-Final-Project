@@ -21,13 +21,13 @@ public class CourseController {
     @PostMapping("/add")
     public String addCourse(@RequestParam String name) {
         courseService.addCourse(name);
-        return "Home";
+        return "redirect:/courses/management";
     }
 
     @DeleteMapping("/{id}")
     public String deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
-        return "Home";
+        return "redirect:/courses/management";
     }
 
     //    @GetMapping
