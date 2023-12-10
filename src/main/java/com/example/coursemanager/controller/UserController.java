@@ -32,15 +32,7 @@ public class UserController {
         return "admin/UserAddition";
     }
 
-//    @PostMapping("/add")
-//    public ResponseEntity<UserDto> addUser(@ModelAttribute UserDto userDto){
-//        try {
-//            UserDto addUser = userService.addUser(userDto);
-//            return ResponseEntity.ok(addUser);
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+
 
     @PostMapping("/add")
     public String addUser(@ModelAttribute UserDto userDto) {
@@ -95,49 +87,7 @@ public class UserController {
         model.addAttribute("usersList", userList);
         return "admin/ReportOfUsers";
     }
-    @GetMapping("/report-of-courses")
-    public String showReportOfCoursesPage() {
-        return "admin/ReportOfCourses";
-    }
-    @GetMapping("/report-of-blocks")
-    public String showReportOfBlocksPage() {
-        return "admin/ReportOfBlocks";
-    }
 
-    @GetMapping("/list-of-lessons")
-    public String showReportOfLessonsPage() {
-        return "admin/ReportOfLessons";
-    }
-
-    @GetMapping("/course-edition")
-    public String showCourseEditionPage() {
-        return "admin/CourseEdition";
-    }
-
-    @GetMapping("/course-deletion")
-    public String showCourseDeletionPage() {
-        return "admin/CourseDeletion";
-    }
-
-    @GetMapping("/course-addition")
-    public String showCourseAdditionPage() {
-        return "admin/CourseAddition";
-    }
-
-    @GetMapping("/block-edition")
-    public String showBlockEditionPage() {
-        return "admin/BlockEdition";
-    }
-
-    @GetMapping("/block-deletion")
-    public String showBlockDeletionPage() {
-        return "admin/BlockDeletion";
-    }
-
-    @GetMapping("/block-addition")
-    public String showBlockAdditionPage() {
-        return "admin/BlockAddition";
-    }
 
 }
 
