@@ -23,8 +23,28 @@
 <br>
 <br>
 
+<script>
+    function validateClassBlockForm() {
+        // Przykład sprawdzania czy pole zajęć jest wypełnione
+        var className = document.getElementById('className').value;
 
+        // Sprawdzanie, czy pole jest wypełnione
+        if (className === '') {
+            alert('Proszę podać nazwę bloku zajęć.');
+            return false;
+        }
+        return true; // Formularz jest poprawny
+    }
+</script>
 
+<form th:action="@{/classblocks/add}" method="post" th:object="${block}" onsubmit="return validateClassBlockForm()">
+    <label for="className">Nazwa bloku zajęć:</label>
+    <input type="text" id="className" name="name" required>
+
+    <!-- Tutaj dodać pola do wypełnienia-->
+
+    <button type="submit">Dodaj blok zajęć</button>
+</form>
 
 
 
@@ -53,3 +73,5 @@
     <p>Made by Wiewiórki</p>
 
 </footer>
+</body>
+</html>

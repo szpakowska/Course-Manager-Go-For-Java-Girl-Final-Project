@@ -25,10 +25,25 @@
 
 <h2>Dodaj kurs</h2>
 
+<script>
+    function validateCourseForm() {
+        var courseName = document.getElementById('courseName').value;
 
-<form th:action="@{/courses/add}" method="post">
+        // Sprawdzanie, czy pole jest wypełnione
+        if (courseName === '') {
+            alert('Proszę podać nazwę kursu.');
+            return false;
+        }
+
+        return true; // Formularz jest poprawny
+    }
+</script>
+
+<form th:action="@{/courses/add}" method="post" th:object="${course}" onsubmit="return validateCourseForm()">
     <label for="courseName">Nazwa kursu:</label>
     <input type="text" id="courseName" name="name" required>
+
+    <!-- Tutaj dodać pola do wypełnienia-->
 
     <button type="submit">Dodaj kurs</button>
 </form>
