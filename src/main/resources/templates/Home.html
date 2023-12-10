@@ -11,7 +11,10 @@
 <body>
 
 <header>
-    <h1>🐿️ Course Manager Application</h1>
+    <h1> 🐿️Course Manager Application</h1>
+    <div class="header-buttons">
+
+    </div>
 </header>
 
 <div class="container">
@@ -26,59 +29,7 @@
     <div sec:authorize="hasAuthority('Admin')">
 
         <div class="button-container">
-            <!-- Pierwsze 6 przycisków (grupowane po 3 w jednej kolumnie) -->
-            <div class="button-column">
-                <button onclick="location.href='/user/add'" class="button">
-                    <span class="icon">🧑‍💼</span>
-                    Dodaj użytkownika
-                </button>
 
-                <button onclick="location.href='/user/edit'" class="button">
-                    <span class="icon">✏️</span>
-                    Edytuj użytkownika
-                </button>
-
-                <button onclick="location.href='/user/delete'" class="button">
-                    <span class="icon">🗑️</span>
-                    Usuń użytkownika
-                </button>
-            </div>
-
-            <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
-            <div class="button-column">
-                <button onclick="location.href='/user/course-addition'" class="button">
-                    <span class="icon">➕</span>
-                    Dodaj kurs
-                </button>
-
-                <button onclick="location.href='/user/course-edition'" class="button">
-                    <span class="icon">✏️</span>
-                    Edytuj kurs
-                </button>
-
-                <button onclick="location.href='/user/course-deletion'" class="button">
-                    <span class="icon">🗑️</span>
-                    Usuń kurs
-                </button>
-            </div>
-
-            <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
-            <div class="button-column">
-                <button onclick="location.href='/admin/block-addition'" class="button">
-                    <span class="icon">➕</span>
-                    Dodaj blok zajęć
-                </button>
-
-                <button onclick="location.href='/admin/block-edition'" class="button">
-                    <span class="icon">✏️</span>
-                    Edytuj blok zajęć
-                </button>
-
-                <button onclick="location.href='/admin/block-deletion'" class="button">
-                    <span class="icon">🗑️</span>
-                    Usuń blok zajęć
-                </button>
-            </div>
 
             <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
             <div class="button-column">
@@ -87,7 +38,7 @@
                     Zarządzanie użytkownikami
                 </button>
 
-                <button onclick="location.href='/user/report-of-courses'" class="button">
+                <button onclick="location.href='/courses/report-of-courses'" class="button">
                     <span class="icon">🎓</span>
                     Zarządzanie kursami
                 </button>
@@ -106,7 +57,7 @@
     </div>
 
 
-        <!-- Przyciski Wykładowcy -->
+    <!-- Przyciski Wykładowcy -->
     <div sec:authorize="hasAuthority('Lecturer')">
         <!-- Przycisk 13 -->
         <button onclick="location.href='/courses'" class="button">
@@ -137,22 +88,22 @@
         </button>
     </div>
 
-        <footer>
-            <div class="user-info">
-                <!-- Ikona ludzika -->
-                <span class="user-icon">👤</span>
-                <span>Zalogowany użytkownik:</span>
-                <span th:text="${username}"></span> <span th:text="${roles}"></span>
-            </div>
+    <footer>
+        <div class="user-info">
+            <!-- Ikona ludzika -->
+            <span class="user-icon">👤</span>
+            <span>Zalogowany użytkownik:</span>
+            <span th:text="${username}"></span> <span th:text="${roles}"></span>
+        </div>
 
-            <form th:action="@{/logout}" method="post">
-                <button class="logout-button">
-                    <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
-                </button>
-            </form>
-            <br>
-            <p>Made by Wiewiórki</p>
-        </footer>
+        <form th:action="@{/logout}" method="post">
+            <button class="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
+            </button>
+        </form>
+        <br>
+        <p>Made by Wiewiórki</p>
+    </footer>
 
 </div>
 
