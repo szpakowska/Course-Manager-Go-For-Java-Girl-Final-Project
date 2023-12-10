@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -29,16 +28,22 @@ public class UserController {
     public String showUserAdditionPage(Model model) {
         model.addAttribute("userDto", new UserDto());
         model.addAttribute("roleList", roleJpaRepository.findAll());
-        return "admin/UserAddition";
+        return "admin/user/UserAddition";
     }
 
+    @GetMapping("/management")
+    public String showReportOfUserPage(Model model) {
+        List<User> userList = userService.getUserList();
+        model.addAttribute("usersList", userList);
+        return "admin/user/UserManagement";
+    }
 
 
     @PostMapping("/add")
     public String addUser(@ModelAttribute UserDto userDto) {
 
         userService.addUser(userDto);
-        return "/Home";
+        return "redirect:/user/management";
 
     }
 
@@ -78,14 +83,6 @@ public class UserController {
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-    }
-
-
-    @GetMapping("/report-of-users")
-    public String showReportOfUserPage(Model model) {
-        List<User> userList = userService.getUserList();
-        model.addAttribute("usersList", userList);
-        return "admin/ReportOfUsers";
     }
 
 

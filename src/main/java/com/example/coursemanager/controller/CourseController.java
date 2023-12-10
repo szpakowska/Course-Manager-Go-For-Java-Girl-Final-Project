@@ -42,14 +42,14 @@ public class CourseController {
 //
 //        return "ReportOfCourses";
 //    }
-    @GetMapping("/report-of-courses")
+    @GetMapping("/management")
     public String getAllCourses(Model model) {
         List<Course> coursesList;
 
         coursesList = courseService.getAllCourses();
         model.addAttribute("coursesList", coursesList);
 
-        return "admin/ReportOfCourses";
+        return "admin/course/CourseManagement";
     }
 
 
@@ -63,7 +63,7 @@ public class CourseController {
     @GetMapping("/add")
     public String showCourseAdditionPage(Model model) {
         model.addAttribute("course", new Course());
-        return "admin/CourseAddition";
+        return "admin/course/CourseAddition";
     }
 
 }
