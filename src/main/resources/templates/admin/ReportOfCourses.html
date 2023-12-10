@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Raport kursów | Course Manager Application</title>
+    <title>Raport kursów Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -13,42 +14,38 @@
         <button onclick="location.href='/home'" class="logout-button">
             <i class="fas fa-home"></i> Home
         </button>
-
     </div>
 </header>
 
+<br>
+<br>
 <div class="header-title">
     <p>Raport kursów</p>
 </div>
-<br>
-<br>
-M
-I
-E
-J
-S
-C
-E
 
-N
-A
-
-F
-O
-R
-M
-U
-L
-A
-R
-Z
-
-
+<div class="button-column">
+    <button onclick="location.href='/user/course-addition'" class="button">
+        <span class="icon">➕</span>
+        Dodaj kurs
+    </button>
 </div>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${coursesList}">
+        <td th:text="${course.id}"></td>
+        <td th:text="${course.name}"></td>
+    </tr>
+    </tbody>
+</table>
 
+</body>
 <footer>
-
-
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
             <i class="fas fa-sign-out-alt"></i> Wyloguj
@@ -56,5 +53,5 @@ Z
     </form>
     <br>
     <p>Made by Wiewiórki</p>
-
 </footer>
+</html>

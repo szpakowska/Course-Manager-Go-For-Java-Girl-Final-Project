@@ -30,18 +30,28 @@ public class CourseController {
         return "Home";
     }
 
-    @GetMapping
-    public String getCourses(@RequestParam(required = false) Long userId, Model model) {
+    //    @GetMapping
+//    public String getCourses(@RequestParam(required = false) Long userId, Model model) {
+//        List<Course> coursesList;
+//        if (userId == null) {
+//            coursesList = courseService.getAllCourses();
+//        } else {
+//            coursesList = courseService.getCoursesByUserId(userId);
+//        }
+//        model.addAttribute("coursesList", coursesList);
+//
+//        return "ReportOfCourses";
+//    }
+    @GetMapping("/report-of-courses")
+    public String getAllCourses(Model model) {
         List<Course> coursesList;
-        if (userId == null) {
-            coursesList = courseService.getAllCourses();
-        } else {
-            coursesList = courseService.getCoursesByUserId(userId);
-        }
+
+        coursesList = courseService.getAllCourses();
         model.addAttribute("coursesList", coursesList);
 
-        return "Home";
+        return "admin/ReportOfCourses";
     }
+
 
     @GetMapping("/{courseId}")
     public String getCourseById(@PathVariable Long courseId, Model model) {
