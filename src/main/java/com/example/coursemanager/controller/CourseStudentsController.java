@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-
 @RequestMapping("/courses")
 @Controller
 @Slf4j
@@ -20,7 +18,7 @@ public class CourseStudentsController {
     @PostMapping("/{courseId}/students")
     public String addStudentsToCourse(@PathVariable Long courseId, @RequestParam Long studentId) {
         courseStudentsService.addStudentsToCourse(courseId, studentId);
-        return "Home";
+        return "redirect:/courses/manage/" + courseId;
     }
 
     @DeleteMapping("/{courseId}/students/{studentId}")
