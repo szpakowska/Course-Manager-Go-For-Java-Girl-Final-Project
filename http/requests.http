@@ -14,13 +14,13 @@ POST localhost:8080/courses?name=Test-course-4
 DELETE localhost:8080/courses/2
 
 ### Create block and add to course at the same time
-PATCH localhost:8080/courses/4/blocks?blockName=Test-block-4
+PATCH localhost:8080/courses/1/blocks?blockName=Test-block-1
 
 ### Remove block from course (only from course, not from db)
 DELETE localhost:8080/courses/1/blocks/2
 
 ### Add students to course
-PATCH localhost:8080/courses/1/students?studentIds=2,3
+PATCH localhost:8080/courses/1/students?studentIds=14
 
 ### Remove student from course
 DELETE localhost:8080/courses/1/students/2

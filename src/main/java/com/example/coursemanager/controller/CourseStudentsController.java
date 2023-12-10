@@ -17,9 +17,9 @@ public class CourseStudentsController {
     private final CourseStudentsService courseStudentsService;
 
 
-    @PatchMapping("/{courseId}/students")
-    public String addStudentsToCourse(@PathVariable Long courseId, @RequestParam Set<Long> studentIds) {
-        courseStudentsService.addStudentsToCourse(courseId, studentIds);
+    @PostMapping("/{courseId}/students")
+    public String addStudentsToCourse(@PathVariable Long courseId, @RequestParam Long studentId) {
+        courseStudentsService.addStudentsToCourse(courseId, studentId);
         return "Home";
     }
 

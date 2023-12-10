@@ -59,11 +59,11 @@ public class CourseController {
     }
 
 
-    @GetMapping("/{courseId}")
+    @GetMapping("manage/{courseId}")
     public String getCourseById(@PathVariable Long courseId, Model model) {
         Course course = courseService.getCourseById(courseId);
         model.addAttribute("course", course);
-        return "Home";
+        return "admin/course/CourseInformation";
     }
 
     @GetMapping("/add")
