@@ -2,8 +2,10 @@ package com.example.coursemanager.controller;
 
 import com.example.coursemanager.model.Course;
 import com.example.coursemanager.service.CourseService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,14 @@ public class CourseController {
         return "redirect:/courses/management";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteCourse(@PathVariable Long id) {
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+        try {
         courseService.deleteCourse(id);
-        return "redirect:/courses/management";
+            return ResponseEntity.noContent().build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //    @GetMapping

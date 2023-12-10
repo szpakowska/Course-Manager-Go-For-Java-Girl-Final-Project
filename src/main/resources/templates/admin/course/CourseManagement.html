@@ -29,22 +29,28 @@
         Dodaj kurs
     </button>
 </div>
+
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Nazwa</th>
+        <th>Akcje</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="course : ${coursesList}">
         <td th:text="${course.id}"></td>
         <td th:text="${course.name}"></td>
+        <td class="actions-column">
+            <i class="fas fa-edit" style="color: blue;"></i>
+            <i class="fas fa-trash-alt delete-course" style="color: red;"
+               th:attr="data-course-id=${course.id}"></i>
+        </td>
     </tr>
     </tbody>
 </table>
 
-</body>
 <footer>
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
@@ -54,4 +60,38 @@
     <br>
     <p>Made by Wiewiórki</p>
 </footer>
+
+<!--DELETE-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let deleteButtons = document.querySelectorAll('.delete-course');
+
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                let courseId = button.getAttribute('data-course-id');
+                if (confirm('Czy na pewno chcesz usunąć kurs o ID ' + courseId + '?')) {
+                    fetch('/courses/delete/' + courseId, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                location.reload();
+                            } else {
+                                alert('Nie udało się usunąć kursu.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Wystąpił błąd podczas usuwania kursu.');
+                        });
+                }
+            });
+        });
+    });
+</script>
+
+</body>
 </html>
