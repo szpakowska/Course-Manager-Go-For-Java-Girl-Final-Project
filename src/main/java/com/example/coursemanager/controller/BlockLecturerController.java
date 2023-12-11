@@ -14,16 +14,16 @@ public class BlockLecturerController {
 
     private final BlockLecturerService blockLecturerService;
 
-    @PostMapping("/{blockId}/lecturer/{lecturerId}")
-    public String addLecturerToBlock(@PathVariable Long blockId, @PathVariable Long lecturerId) {
+    @PostMapping("/{blockId}/lecturer")
+    public String addLecturerToBlock(@PathVariable Long blockId, @RequestParam Long lecturerId) {
         blockLecturerService.addLecturerToBlock(blockId, lecturerId);
-        return "Home";
+        return "redirect:/blocks/manage/" + blockId;
     }
 
     @PostMapping("remove/{blockId}/lecturer/{lecturerId}")
     public String removeLecturerFromBlock(@PathVariable Long blockId, @PathVariable Long lecturerId) {
         blockLecturerService.removeLecturerFromBlock(blockId, lecturerId);
-        return "Home";
+        return "redirect:/blocks/manage/" + blockId;
     }
 
 }

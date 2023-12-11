@@ -1,11 +1,16 @@
 package com.example.coursemanager.controller;
 
 import com.example.coursemanager.dto.LessonDto;
+import com.example.coursemanager.model.Block;
+import com.example.coursemanager.model.Lesson;
 import com.example.coursemanager.service.BlockLessonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/blocks")
 @Controller
@@ -15,16 +20,16 @@ public class BlockLessonController {
 
     private final BlockLessonService blockLessonService;
 
-    @PatchMapping("/{blockId}/lesson")
-    public String addLecturerToBlock(@PathVariable Long blockId, @RequestBody LessonDto lessonDto) {
+    @PostMapping("/{blockId}/lesson")
+    public String addLecturerToBlock(@PathVariable Long blockId, @ModelAttribute LessonDto lessonDto) {
         blockLessonService.addLessonToBlock(blockId, lessonDto);
-        return "Home";
+        return "redirect:/blocks/manage/" + blockId;
     }
 
-    @DeleteMapping("/{blockId}/lesson/{lessonId}")
+    @PostMapping("/{blockId}/lesson/{lessonId}")
     public String removeLessonFromBlock(@PathVariable Long blockId, @PathVariable Long lessonId) {
         blockLessonService.removeLessonFromBlock(blockId, lessonId);
-        return "Home";
+        return "redirect:/blocks/manage/" + blockId;
     }
 
 

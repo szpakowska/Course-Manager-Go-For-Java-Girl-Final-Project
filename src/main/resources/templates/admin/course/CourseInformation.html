@@ -108,7 +108,7 @@
 
 
 <section class="full-width"> <!-- Sekcja z ogólnymi informacjami na pełną szerokość -->
-    <h2 style="text-align: center"><span th:text="${course.name}"></span></p> </h2>
+    <h2 style="text-align: center">Kurs : <span th:text="${course.name}"></span></p> </h2>
 
 </section>
 
@@ -120,8 +120,7 @@
 
             <label for="studentId">Student ID:</label>
             <input type="text" id="studentId" name="studentId"/>
-
-            <input type="submit" value="Add Student to Course"/>
+            <input type="submit" value="Dodaj studenta do kursu"/>
         </form>
         <table>
             <thead>
