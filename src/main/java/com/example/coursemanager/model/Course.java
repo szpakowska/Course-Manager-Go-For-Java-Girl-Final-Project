@@ -29,5 +29,5 @@ public class Course {
     private List<User> students;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<Block> blocks;
+    private List<Block> blocks;
 }
