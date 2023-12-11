@@ -37,7 +37,6 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Set<Lesson> lessons;
 
-
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications;
 }

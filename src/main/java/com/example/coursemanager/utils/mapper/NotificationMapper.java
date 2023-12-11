@@ -11,7 +11,7 @@ public class NotificationMapper {
         notification.setCreatedAt(notificationDto.getCreatedAt());
         notification.setLessons(notificationDto.getLessons());
         notification.setUser(notificationDto.getUser());
-//        notification.setRead(notificationDto.getRead());
+        notification.setIsRead(notificationDto.getRead());
 
         return notification;
     }
@@ -23,7 +23,7 @@ public class NotificationMapper {
         notificationDto.setCreatedAt(notification.getCreatedAt());
         notificationDto.setLessons(notification.getLessons());
         notificationDto.setUser(notification.getUser());
-//        notificationDto.setRead(notification.getRead());
+        notificationDto.setRead(notification.getIsRead());
         return notificationDto;
     }
 }

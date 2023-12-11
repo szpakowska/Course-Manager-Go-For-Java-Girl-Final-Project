@@ -75,12 +75,12 @@ public class NotificationController {
 
 
 
-//
-//    @GetMapping("/{userId}")
-//    public ResponseEntity<List<UserNotification>> getNotificationsForUser(@PathVariable Long userId) {
-//        List<UserNotification> unreadNotifications = userNotificationService.getNotificationsForUser(userId);
-//        return new ResponseEntity<>(unreadNotifications, HttpStatus.OK);
-//    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<Notification>> getNotificationsForUser(@PathVariable Long userId) {
+        List<Notification> unreadNotifications = userNotificationService.getNotificationsForUser(userId);
+        return new ResponseEntity<>(unreadNotifications, HttpStatus.OK);
+    }
 
 
     @GetMapping
