@@ -17,19 +17,19 @@ public class UserNotificationService {
     private final NotificationJpaRepository notificationJpaRepository;
     private final UserJpaRepository userJpaRepository;
 
-//    public void markNotificationAsRead(Long id) {
-//        Optional<Notification> userNotification = notificationJpaRepository.findById(id);
-//        userNotification.ifPresent(notification -> {
-//            notification.setRead(true);
-//            notificationJpaRepository.save(notification);
-//        });
-//    }
+    public void markNotificationAsRead(Long id) {
+        Optional<Notification> userNotification = notificationJpaRepository.findById(id);
+        userNotification.ifPresent(notification -> {
+            notification.setIsRead(true);
+            notificationJpaRepository.save(notification);
+        });
+    }
 
     public List<Notification> getNotificationsForUser(Long userId) {
         Optional<User> user = userJpaRepository.findById(userId);
 
         if (user.isPresent()) {
-            return notificationJpaRepository.findByUserId(userId);
+            return notificationJpaRepository.findNotificationsByUserIdAndSortByRead(userId);
         } else {
             return Collections.emptyList();
         }

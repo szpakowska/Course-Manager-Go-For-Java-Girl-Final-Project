@@ -2,13 +2,11 @@ package com.example.coursemanager.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @Entity
 public class Notification {
     @Id
@@ -31,16 +29,12 @@ public class Notification {
             inverseJoinColumns = @JoinColumn(name = "lesson_id")
     )
     private Set<Lesson> lessons;
-//
-//    @OneToMany(mappedBy = "notification")
-//    private Set<UserNotification> userNotifications;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-//
-//    @Column
-//    private Boolean read;
+    @Column(name = "is_read")
+    private Boolean isRead;
 
 }

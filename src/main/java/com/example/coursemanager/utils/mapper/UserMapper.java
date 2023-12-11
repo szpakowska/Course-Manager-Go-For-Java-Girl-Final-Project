@@ -13,6 +13,8 @@ public class UserMapper {
         user.setSurname(userDto.getSurname());
         user.setActive(userDto.getActive());
         user.setRoles(userDto.getRoles());
+        user.setLessons(userDto.getLessons());
+        user.setNotifications(userDto.getNotifications());
         return user;
     }
 
@@ -25,6 +27,8 @@ public class UserMapper {
         userDto.setSurname(user.getSurname());
         userDto.setActive(user.getActive());
         userDto.setRoles(user.getRoles());
+        userDto.setLessons(user.getLessons());
+        userDto.setNotifications(user.getNotifications());
         return userDto;
     }
 

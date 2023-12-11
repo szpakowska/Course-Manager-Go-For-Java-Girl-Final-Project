@@ -64,6 +64,6 @@ public class NotificationService {
     }
 
     public List<Notification> getNotificationByUserId(Long userId) {
-        return notificationJpaRepository.findByUserId(userId);
+        return notificationJpaRepository.findNotificationsByUserIdAndSortByRead(userId);
     }
 }
