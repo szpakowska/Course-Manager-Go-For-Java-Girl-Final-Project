@@ -21,10 +21,10 @@ public class CourseStudentsController {
         return "redirect:/courses/manage/" + courseId;
     }
 
-    @DeleteMapping("/{courseId}/students/{studentId}")
+    @PostMapping("/{courseId}/students/{studentId}")
     public String removeStudentsFromCourse(@PathVariable Long courseId, @PathVariable Long studentId) {
         courseStudentsService.deleteStudentFromCourse(courseId, studentId);
-        return "Home";
+        return "redirect:/courses/manage/" + courseId;
     }
 
 
