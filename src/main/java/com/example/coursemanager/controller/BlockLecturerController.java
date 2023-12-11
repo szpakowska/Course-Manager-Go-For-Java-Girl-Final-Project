@@ -20,7 +20,7 @@ public class BlockLecturerController {
         return "Home";
     }
 
-    @PostMapping("/{blockId}/lecturer/{lecturerId}")
+    @PostMapping("remove/{blockId}/lecturer/{lecturerId}")
     public String removeLecturerFromBlock(@PathVariable Long blockId, @PathVariable Long lecturerId) {
         blockLecturerService.removeLecturerFromBlock(blockId, lecturerId);
         return "Home";
