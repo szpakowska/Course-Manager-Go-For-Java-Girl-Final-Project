@@ -45,6 +45,31 @@
 <h2>Dodaj użytkownika</h2>
 
 
+<form th:action="@{/user/add}" method="post" th:object="${userDto}" onsubmit="return validateForm()">
+    <label for="username">Nazwa użytkownika:</label>
+    <input type="text" id="username" name="username" th:field="*{username}" required>
+
+    <label for="password">Hasło:</label>
+    <input type="password" id="password" name="password" th:field="*{password}" required>
+
+    <label for="email">Adres email:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required>
+
+    <label for="name">Imię:</label>
+    <input type="text" id="name" name="name" th:field="*{name}">
+
+    <label for="surname">Nazwisko:</label>
+    <input type="text" id="surname" name="surname" th:field="*{surname}">
+
+    <label for="active">Aktywny:</label>
+    <input type="checkbox" id="active" name="active" th:field="*{active}">
+
+    <label for="roles">Role:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}" class="form-control">
+    <!-- Pętla w celu wyboru ról, np.: --> <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option> </select>
+
+    <button type="submit">Dodaj użytkownika</button>
+</form>
+
 <script>
     function validateForm() {
         var username = document.getElementById('username').value;
@@ -84,31 +109,6 @@
         return true; // Formularz jest poprawny
     }
 </script>
-
-<form th:action="@{/user/add}" method="post" th:object="${userDto}" onsubmit="return validateForm()">
-    <label for="username">Nazwa użytkownika:</label>
-    <input type="text" id="username" name="username" th:field="*{username}" required>
-
-    <label for="password">Hasło:</label>
-    <input type="password" id="password" name="password" th:field="*{password}" required>
-
-    <label for="email">Adres email:</label>
-    <input type="email" id="email" name="email" th:field="*{email}" required>
-
-    <label for="name">Imię:</label>
-    <input type="text" id="name" name="name" th:field="*{name}">
-
-    <label for="surname">Nazwisko:</label>
-    <input type="text" id="surname" name="surname" th:field="*{surname}">
-
-    <label for="active">Aktywny:</label>
-    <input type="checkbox" id="active" name="active" th:field="*{active}">
-
-    <label for="roles">Role:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}" class="form-control">
-    <!-- Pętla w celu wyboru ról, np.: --> <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option> </select>
-
-    <button type="submit">Dodaj użytkownika</button>
-</form>
 
 <footer>
     <form th:action="@{/logout}" method="post">
