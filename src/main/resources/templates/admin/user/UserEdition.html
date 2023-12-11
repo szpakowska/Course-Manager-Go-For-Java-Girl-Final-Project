@@ -1,102 +1,102 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Edytuj użytkownika</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Edytuj użytkownika</title>-->
+<!--    <link rel="stylesheet" href="/css/styles.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            margin: 50px;-->
+<!--        }-->
 
-        h2 {
-            color: #333;
-        }
+<!--        h2 {-->
+<!--            color: #333;-->
+<!--        }-->
 
-        form {
-            max-width: 400px;
-            margin: 50px 0;
-        }
+<!--        form {-->
+<!--            max-width: 400px;-->
+<!--            margin: 50px 0;-->
+<!--        }-->
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
+<!--        label {-->
+<!--            display: block;-->
+<!--            margin-bottom: 5px;-->
+<!--            color: #555;-->
+<!--        }-->
 
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
+<!--        input, select {-->
+<!--            width: 100%;-->
+<!--            padding: 8px;-->
+<!--            margin-bottom: 10px;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+<!--        button {-->
+<!--            background-color: #4CAF50;-->
+<!--            color: white;-->
+<!--            padding: 10px 15px;-->
+<!--            border: none;-->
+<!--            border-radius: 5px;-->
+<!--            cursor: pointer;-->
+<!--        }-->
 
-        footer {
-            margin-top: 20px;
-            text-align: center;
-        }
+<!--        footer {-->
+<!--            margin-top: 20px;-->
+<!--            text-align: center;-->
+<!--        }-->
 
-    </style>
-</head>
-<body>
-<h2>Edytuj użytkownika</h2>
-<form th:action="@{/user/edit}" method="post" th:object="${userDto}">
-    <label for="username">Nazwa użytkownika:</label>
-    <input type="text" id="username" name="username" th:field="*{username}" required>
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h2>Edytuj użytkownika</h2>-->
+<!--<form th:action="@{/user/edit}" method="post" th:object="${userDto}">-->
+<!--    <label for="username">Nazwa użytkownika:</label>-->
+<!--    <input type="text" id="username" name="username" th:field="*{username}" required>-->
 
-    <label for="password">Hasło:</label>
-    <input type="password" id="password" name="password" th:field="*{password}" required>
+<!--    <label for="password">Hasło:</label>-->
+<!--    <input type="password" id="password" name="password" th:field="*{password}" required>-->
 
-    <label for="email">Adres email:</label>
-    <input type="email" id="email" name="email" th:field="*{email}" required>
+<!--    <label for="email">Adres email:</label>-->
+<!--    <input type="email" id="email" name="email" th:field="*{email}" required>-->
 
-    <label for="name">Imię:</label>
-    <input type="text" id="name" name="name" th:field="*{name}">
+<!--    <label for="name">Imię:</label>-->
+<!--    <input type="text" id="name" name="name" th:field="*{name}">-->
 
-    <label for="surname">Nazwisko:</label>
-    <input type="text" id="surname" name="surname" th:field="*{surname}">
+<!--    <label for="surname">Nazwisko:</label>-->
+<!--    <input type="text" id="surname" name="surname" th:field="*{surname}">-->
 
-    <label for="active">Aktywny:</label>
-    <input type="checkbox" id="active" name="active" th:field="*{active}">
+<!--    <label for="active">Aktywny:</label>-->
+<!--    <input type="checkbox" id="active" name="active" th:field="*{active}">-->
 
-    <label for="roles">Role:</label>
-    <select id="roles" name="roles" multiple th:field="*{roles}">
-        <!-- Pętla w celu wyboru ról, np.: -->
-        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
-    </select>
+<!--    <label for="roles">Role:</label>-->
+<!--    <select id="roles" name="roles" multiple th:field="*{roles}">-->
+<!--        &lt;!&ndash; Pętla w celu wyboru ról, np.: &ndash;&gt;-->
+<!--        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>-->
+<!--    </select>-->
 
-    <button type="submit">Zapisz</button>
-</form>
+<!--    <button type="submit">Zapisz</button>-->
+<!--</form>-->
 
 
-<footer>
-    <div class="user-info">
-        <!-- Ikona ludzika -->
-        <span class="user-icon">👤</span>
-        <span>Zalogowany użytkownik:</span>
-        <span th:text="${username}"></span> <span th:text="${roles}"></span>
-    </div>
+<!--<footer>-->
+<!--    <div class="user-info">-->
+<!--        &lt;!&ndash; Ikona ludzika &ndash;&gt;-->
+<!--        <span class="user-icon">👤</span>-->
+<!--        <span>Zalogowany użytkownik:</span>-->
+<!--        <span th:text="${username}"></span> <span th:text="${roles}"></span>-->
+<!--    </div>-->
 
-    <form th:action="@{/logout}" method="post">
-        <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
-        </button>
-    </form>
-    <br>
-    <p>Made by Wiewiórki</p>
-</footer>
-</body>
-</html>
+<!--    <form th:action="@{/logout}" method="post">-->
+<!--        <button class="logout-button">-->
+<!--            <i class="fas fa-sign-out-alt"></i> Wyloguj &lt;!&ndash; Ikona wylogowania &ndash;&gt;-->
+<!--        </button>-->
+<!--    </form>-->
+<!--    <br>-->
+<!--    <p>Made by Wiewiórki</p>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
 
 
 

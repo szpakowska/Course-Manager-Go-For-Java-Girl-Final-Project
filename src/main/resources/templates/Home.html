@@ -1,27 +1,113 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <title>Strona główna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-</head>
+    <style>
+        body {
+            background-color: #f8f9fa; /* jasne tło */
+            color: #343a40; /* kolor tekstu */
+            margin: 0;
+        }
 
+        header {
+            background-color: #0000FF; /* górny panel */
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 30px;
+            font-weight: bold;
+            font-size: 36px;
+            color: #fff; /* kolor tekstu w nagłówku */
+            text-align: center;
+            flex: 1; /* Dodałem, aby tekstu w nagłówku zajmował dostępną przestrzeń */
+        }
+
+        .squirrel-image {
+            height: 170px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            color: #000;
+            font-size: 28px;
+            margin-bottom: 10px;
+            margin-left: 780px;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: darkgray;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            background-color: #0000FF;
+            padding: 10px;
+        }
+
+        .user-icon {
+            font-size: 24px;
+            margin-right: 5px;
+        }
+
+        .logout-button {
+            background-color: #dc3545; /* kolor przycisku wylogowania */
+            color: #fff; /* kolor tekstu na przycisku wylogowania */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
 
 <body>
 
 <header>
-    <h1> 🐿️Course Manager Application</h1>
-    <div class="header-buttons">
-
-    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Squirrel_posing.jpg" alt="Wiewiórka" class="squirrel-image">
+    <h1>Course Manager Application</h1>
 </header>
 
 <div class="container">
-    <h1>Witaj, <span th:text="${username}"></span>!</h1>
+    <h1 class="welcome-text">Witaj, <span th:text="${username}"></span>!</h1>
 </div>
 
-<!-- Przyciski jako zakładki z ikonami -->
 <div class="button-container">
 
     <!-- Przyciski Administratora -->
@@ -30,8 +116,6 @@
 
         <div class="button-container">
 
-
-            <!-- Kolejne 6 przycisków (grupowane po 3 w jednej kolumnie) -->
             <div class="button-column">
                 <button onclick="location.href='/user/management'" class="button">
                     <span class="icon">👥</span>
@@ -56,12 +140,9 @@
         </div>
     </div>
 
-
     <!-- Przyciski Wykładowcy -->
     <div sec:authorize="hasAuthority('Lecturer')">
-        <!-- Przycisk 13 -->
         <button onclick="location.href='/courses'" class="button">
-            <!-- Inna ikona -->
             <span class="icon">🎓</span>
             Moje kursy
         </button>
@@ -69,28 +150,24 @@
 
     <!-- Przyciski Studenta -->
     <div sec:authorize="hasAuthority('Student')" class="button-container">
-        <!-- Przycisk 14 -->
         <button onclick="location.href='HTML'" class="button">
-            <span class="icon">📘</span> <!-- Ikona odpowiadająca "Moje zajęcia" -->
+            <span class="icon">📘</span>
             Moje zajęcia
         </button>
 
-        <!-- Przycisk 16 -->
         <button onclick="location.href='/lesson/notification'" class="button">
-            <span class="icon">🔔</span> <!-- Ikona odpowiadająca "Powiadomienia" -->
+            <span class="icon">🔔</span>
             Powiadomienia
         </button>
 
-        <!-- Przycisk 15 -->
         <button onclick="location.href='/calendar'" class="button">
-            <span class="icon">📅</span> <!-- Ikona odpowiadająca "Kalendarz" -->
+            <span class="icon">📅</span>
             Kalendarz zajęć
         </button>
     </div>
 
     <footer>
         <div class="user-info">
-            <!-- Ikona ludzika -->
             <span class="user-icon">👤</span>
             <span>Zalogowany użytkownik:</span>
             <span th:text="${username}"></span> <span th:text="${roles}"></span>
@@ -98,7 +175,7 @@
 
         <form th:action="@{/logout}" method="post">
             <button class="logout-button">
-                <i class="fas fa-sign-out-alt"></i> Wyloguj <!-- Ikona wylogowania -->
+                <i class="fas fa-sign-out-alt"></i> Wyloguj
             </button>
         </form>
         <br>
@@ -110,3 +187,7 @@
 </body>
 
 </html>
+
+
+
+
