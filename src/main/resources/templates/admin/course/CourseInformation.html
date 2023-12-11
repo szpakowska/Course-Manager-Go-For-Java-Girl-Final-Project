@@ -135,6 +135,14 @@
 
     <section class="right-column">
         <h2>Bloki zajęć</h2>
+        <form th:action="@{/courses/{courseId}/blocks(courseId=${courseId})}" method="post">
+            <input type="hidden" th:name="_method" th:value="PATCH" />
+
+            <label for="blockName">Nazwa bloku:</label>
+            <input type="text" id="blockName" name="blockName" />
+
+            <input type="submit" value="Dodaj blok do kursu" />
+        </form>
         <table>
             <thead>
             <tr>

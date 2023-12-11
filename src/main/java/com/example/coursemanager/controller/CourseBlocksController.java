@@ -14,10 +14,10 @@ public class CourseBlocksController {
 
     private final CourseBlocksService courseBlocksService;
 
-    @PatchMapping("/{courseId}/blocks")
+    @PostMapping("/{courseId}/blocks")
     public String addBlockToCourse(@PathVariable Long courseId, @RequestParam String blockName) {
         courseBlocksService.addBlockToCourse(courseId, blockName);
-        return "Home";
+        return "redirect:/courses/manage/" + courseId;
     }
 
     @DeleteMapping("/{courseId}/blocks/{blockId}")

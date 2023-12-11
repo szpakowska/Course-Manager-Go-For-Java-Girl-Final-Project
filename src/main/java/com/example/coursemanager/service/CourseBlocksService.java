@@ -6,6 +6,7 @@ import com.example.coursemanager.repository.CourseJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -17,15 +18,34 @@ public class CourseBlocksService {
     private final CourseJpaRepository courseJpaRepository;
 
 
+//    public void addBlockToCourse(Long courseId, String blockName) {
+//        Block block = new Block(blockName);
+//        Course course = courseJpaRepository.findById(courseId).orElseThrow(RuntimeException::new);
+//        if (course.getBlocks() == null) {
+//            course.setBlocks(new HashSet<>(List.of(block)));
+//        } else {
+//            course.getBlocks().add(block);
+//        }
+//
+//        courseJpaRepository.save(course);
+//    }
+
     public void addBlockToCourse(Long courseId, String blockName) {
         Block block = new Block(blockName);
-        Course course = courseJpaRepository.findById(courseId).orElseThrow(RuntimeException::new);
-        if (course.getBlocks() == null) {
-            course.setBlocks(new HashSet<>(List.of(block)));
+        Course course = courseJpaRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        List<Block> blocks = course.getBlocks();
+        if (blocks == null) {
+            blocks = new ArrayList<>(List.of(block));
         } else {
-            course.getBlocks().add(block);
+            if (blocks.stream().anyMatch(b -> b.getName().equals(blockName))) {
+                throw new RuntimeException("Block with this name already exists in the course");
+            }
+            blocks.add(block);
         }
 
+        course.setBlocks(blocks);
         courseJpaRepository.save(course);
     }
 
