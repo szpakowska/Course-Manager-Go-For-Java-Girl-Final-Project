@@ -1,5 +1,6 @@
 package com.example.coursemanager.service;
 
+import com.example.coursemanager.model.Block;
 import com.example.coursemanager.repository.BlockJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,5 +12,9 @@ public class BlockService {
 
     public void deleteBlock(Long id) {
         blockJpaRepository.deleteById(id);
+    }
+
+    public Block getBlockById(Long id) {
+        return blockJpaRepository.findById(id).orElseThrow(RuntimeException::new);
     }
 }

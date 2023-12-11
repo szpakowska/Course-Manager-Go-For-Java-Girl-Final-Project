@@ -14,13 +14,13 @@ public class BlockLecturerController {
 
     private final BlockLecturerService blockLecturerService;
 
-    @PatchMapping("/{blockId}/lecturer/{lecturerId}")
+    @PostMapping("/{blockId}/lecturer/{lecturerId}")
     public String addLecturerToBlock(@PathVariable Long blockId, @PathVariable Long lecturerId) {
         blockLecturerService.addLecturerToBlock(blockId, lecturerId);
         return "Home";
     }
 
-    @DeleteMapping("/{blockId}/lecturer/{lecturerId}")
+    @PostMapping("remove/{blockId}/lecturer/{lecturerId}")
     public String removeLecturerFromBlock(@PathVariable Long blockId, @PathVariable Long lecturerId) {
         blockLecturerService.removeLecturerFromBlock(blockId, lecturerId);
         return "Home";

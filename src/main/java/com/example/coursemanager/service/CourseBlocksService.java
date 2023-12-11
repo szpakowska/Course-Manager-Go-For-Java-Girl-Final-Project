@@ -18,17 +18,6 @@ public class CourseBlocksService {
     private final CourseJpaRepository courseJpaRepository;
 
 
-//    public void addBlockToCourse(Long courseId, String blockName) {
-//        Block block = new Block(blockName);
-//        Course course = courseJpaRepository.findById(courseId).orElseThrow(RuntimeException::new);
-//        if (course.getBlocks() == null) {
-//            course.setBlocks(new HashSet<>(List.of(block)));
-//        } else {
-//            course.getBlocks().add(block);
-//        }
-//
-//        courseJpaRepository.save(course);
-//    }
 
     public void addBlockToCourse(Long courseId, String blockName) {
         Block block = new Block(blockName);

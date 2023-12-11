@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Raport kursów Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
@@ -71,6 +71,25 @@
             justify-content: space-between;
             margin-bottom: 10px;
         }
+        .manage-link {
+    text-decoration: none;
+}
+
+.manage-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.manage-button:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
 <body>
@@ -89,7 +108,7 @@
 
 
 <section class="full-width"> <!-- Sekcja z ogólnymi informacjami na pełną szerokość -->
-    <h2 style="text-align: center"> <span th:text="${course.name}"></span></p> </h2>
+    <h2 style="text-align: center"><span th:text="${course.name}"></span></p> </h2>
 
 </section>
 
@@ -97,12 +116,12 @@
     <section class="left-column">
         <h2>Studenci</h2>
         <form th:action="@{/courses/{courseId}/students(courseId=${courseId})}" method="post">
-            <input type="hidden" th:name="_method" th:value="POST" />
+            <input type="hidden" th:name="_method" th:value="POST"/>
 
             <label for="studentId">Student ID:</label>
-            <input type="text" id="studentId" name="studentId" />
+            <input type="text" id="studentId" name="studentId"/>
 
-            <input type="submit" value="Add Student to Course" />
+            <input type="submit" value="Add Student to Course"/>
         </form>
         <table>
             <thead>
@@ -122,7 +141,7 @@
                 <td th:text="${student.email}"></td>
                 <td>
                     <form th:action="@{'/courses/' + ${course.id} + '/students/' + ${student.id}}" method="post">
-                        <input type="hidden" name="_method" value="delete" />
+                        <input type="hidden" name="_method" value="delete"/>
                         <button type="submit" class="delete-button">
                             <i class="fas fa-trash-alt delete-user" style="color: red;"></i>
                         </button>
@@ -136,24 +155,47 @@
     <section class="right-column">
         <h2>Bloki zajęć</h2>
         <form th:action="@{/courses/{courseId}/blocks(courseId=${courseId})}" method="post">
-            <input type="hidden" th:name="_method" th:value="PATCH" />
-
+            <input type="hidden" th:name="_method" th:value="PATCH"/>
             <label for="blockName">Nazwa bloku:</label>
-            <input type="text" id="blockName" name="blockName" />
-
-            <input type="submit" value="Dodaj blok do kursu" />
+            <input type="text" id="blockName" name="blockName"/>
+            <input type="submit" value="Dodaj blok do kursu"/>
         </form>
         <table>
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Nazwa</th>
-            </tr>
+                <th>Prowadzący</th>
+                <th>Liczba lekcji</th>
+                <th>Akcje</th>
             </thead>
             <tbody>
             <tr th:each="block : ${course.blocks}">
                 <td th:text="${block.id}"></td>
                 <td th:text="${block.name}"></td>
+                <!--                <td th:text="${block.lecturer != null ? block.lecturer.name : 'Prowadzący nie został jeszcze zapisany'}"></td>-->
+                <td>
+            <span th:if="${block.lecturer != null}">
+                <span th:text="${block.lecturer.name}"></span>
+            </span>
+                    <span th:if="${block.lecturer == null}">
+                <span>Nie dodano</span>
+            </span>
+                </td>
+                <td th:text="${block.lessons.size()}"></td>
+                <td>
+                    <form th:action="@{'/courses/' + ${course.id} + '/blocks/' + ${block.id}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="delete-button">
+                            <i class="fas fa-trash-alt delete-user" style="color: red;"></i>
+                        </button>
+                    </form>
+                    <a th:href="@{'/blocks/manage/' + ${block.id}}" class="manage-link">
+                        <button type="button" class="manage-button">
+                            Zarządzaj blokiem
+                        </button>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -171,27 +213,6 @@
 </footer>
 <!-- ... -->
 <script>
-    const currentCourseId = [[${course.id}]];
-    document.getElementById('courseId').value = currentCourseId;
-
-    function submitPatchForm() {
-        var form = document.getElementById("addStudentForm");
-        fetch("/courses/" + currentCourseId + "/students", {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: new FormData(form)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                // Obsługa błędu - np. wyświetlenie komunikatu o błędzie
-            });
-    }
 
 </script>
 <!-- ... -->

@@ -20,10 +20,10 @@ public class CourseBlocksController {
         return "redirect:/courses/manage/" + courseId;
     }
 
-    @DeleteMapping("/{courseId}/blocks/{blockId}")
+    @PostMapping("/{courseId}/blocks/{blockId}")
     public String removeBlockFromCourse(@PathVariable Long courseId, @PathVariable Long blockId) {
         courseBlocksService.removeBlockFromCourse(courseId, blockId);
-        return "Home";
+        return "redirect:/courses/manage/" + courseId;
     }
 
 }

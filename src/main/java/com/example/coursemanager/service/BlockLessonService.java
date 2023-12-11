@@ -7,9 +7,7 @@ import com.example.coursemanager.repository.BlockJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +20,7 @@ public class BlockLessonService {
         Lesson lesson = lessonDto.toLesson();
 
         if (block.getLessons() == null) {
-            block.setLessons(new HashSet<>(Set.of(lesson)));
+            block.setLessons(new ArrayList<>(List.of(lesson)));
         }
         else {
             block.getLessons().add(lesson);

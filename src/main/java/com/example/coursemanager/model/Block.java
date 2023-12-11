@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -16,7 +17,7 @@ public class Block {
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<Lesson> lessons;
+    private List<Lesson> lessons;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private User lecturer;
