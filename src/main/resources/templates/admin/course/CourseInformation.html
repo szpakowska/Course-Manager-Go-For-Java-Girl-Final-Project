@@ -137,10 +137,8 @@
         <h2>Bloki zajęć</h2>
         <form th:action="@{/courses/{courseId}/blocks(courseId=${courseId})}" method="post">
             <input type="hidden" th:name="_method" th:value="PATCH" />
-
             <label for="blockName">Nazwa bloku:</label>
             <input type="text" id="blockName" name="blockName" />
-
             <input type="submit" value="Dodaj blok do kursu" />
         </form>
         <table>
@@ -148,12 +146,24 @@
             <tr>
                 <th>ID</th>
                 <th>Nazwa</th>
-            </tr>
+                <th>Prowadzący</th>
+                <th>Liczba lekcji</th>
+                <th>Akcje</th>
             </thead>
             <tbody>
             <tr th:each="block : ${course.blocks}">
                 <td th:text="${block.id}"></td>
                 <td th:text="${block.name}"></td>
+                <td th:text="${block.lecturer != null ? block.lecturer.name : 'Prowadzący nie został jeszcze zapisany'}"></td>
+                <td th:text="${block.lessons.size()}"></td>
+                <td>
+                    <form th:action="@{'/courses/' + ${course.id} + '/blocks/' + ${block.id}}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="delete-button">
+                            <i class="fas fa-trash-alt delete-user" style="color: red;"></i>
+                        </button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -175,7 +185,7 @@
     document.getElementById('courseId').value = currentCourseId;
 
     function submitPatchForm() {
-        var form = document.getElementById("addStudentForm");
+        const form = document.getElementById("addStudentForm");
         fetch("/courses/" + currentCourseId + "/students", {
             method: 'PATCH',
             headers: {
