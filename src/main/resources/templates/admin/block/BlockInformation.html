@@ -1,10 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Course Manager Application</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Two-column layout */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* Dodaje przestrzeń między kolumnami */
+        }
+
+        .left-column,
+        .right-column {
+            width: calc(50% - 10px); /* Szerokość kolumny z odstępem między nimi */
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        /* Pełna szerokość dla sekcji ogólnych informacji */
+        section.full-width {
+            width: 100%;
+        }
+
+        /* Pozostałe style */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+        .info-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .manage-link {
+            text-decoration: none;
+        }
+
+        .manage-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 8px 16px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .manage-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
+<header>
+    <h1>🐿️ Course Manager Application</h1>
+    <div class="header-buttons">
+        <button onclick="location.href='/home'" class="logout-button">
+            <i class="fas fa-home"></i> Home
+        </button>
+    </div>
+</header>
+
+<br>
+<br>
+
+<section class="full-width">
+    <h2 style="text-align: center"> <span th:text="${block.name}"></span></h2>
+</section>
+
+<div class="container">
+    <section class="left-column">
+        <h2>Prowadzący</h2>
+        <form th:action="@{/blocks/{blockId}/lecturer(blockId=${block.id})}" method="post">
+            <input type="hidden" th:name="_method" th:value="POST"/>
+            <label>ID Prowadzącego:</label>
+            <input type="text" id="lecturerId" name="lecturerId"/>
+            <input type="submit"
+                   th:value="${block.lecturer == null ? 'Dodaj' : 'Zaktualizuj'}"/>
+        </form>
+
+
+        <h2>Informacje o prowadzącym</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody th:if="${block.lecturer != null}">
+            <tr>
+                <td th:text="${block.lecturer.id}"></td>
+                <td th:text="${block.lecturer.name}"></td>
+                <td th:text="${block.lecturer.surname}"></td>
+                <td th:text="${block.lecturer.email}"></td>
+            </tr>
+            </tbody>
+            <tbody th:unless="${block.lecturer != null}">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="right-column">
+        <h2>Lekcje</h2>
+        <button onclick="openModal()"
+                style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+            Dodaj lekcję
+        </button>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content" style="max-width: 400px;">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <form th:action="@{'/blocks/' + ${block.id} + '/lesson'}" method="post">
+                    <label for="subject">Temat:</label>
+                    <input type="text" id="subject" name="subject" required><br>
+
+                    <label for="localDateTime">Data i godzina:</label>
+                    <input type="datetime-local" id="localDateTime" name="localDateTime" required><br>
+
+                    <label for="durationInMinutes">Czas trwania (w minutach):</label>
+                    <input type="number" id="durationInMinutes" name="durationInMinutes" required><br>
+
+                    <button type="submit"
+                            style="margin-top: 10px; padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+                        Dodaj
+                    </button>
+                </form>
+            </div>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Temat</th>
+                <th>Data i godzina</th>
+                <th>Czas trwania</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Tutaj pętla wyświetlająca lekcje -->
+            <tr th:each="lesson : ${block.lessons}">
+                <td th:text="${lesson.id}"></td>
+                <td th:text="${lesson.subject}"></td>
+                <td th:text="${lesson.localDateTime}"></td>
+                <td th:text="${lesson.duration}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<footer>
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
+        </button>
+    </form>
+    <br>
+    <p>Made by Wiewiórki</p>
+</footer>
+<script>
+
+    function openModal() {
+        document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+</script>
+<!-- ... -->
 </body>
 </html>
