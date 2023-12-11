@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/lesson/notification")
+@RequestMapping("/notification")
 @Controller
 @Data
 @RequiredArgsConstructor
@@ -25,9 +25,9 @@ public class NotificationController {
     private UserNotificationService userNotificationService;
 
     @GetMapping("/add")
-    public String showUserAdditionPage(Model model) {
+    public String showNotificationAdditionPage(Model model) {
         model.addAttribute("notificationDto", new NotificationDto());
-        return "user/Notification";
+        return "lecturer/NotificationAddition";
     }
 
     @PostMapping("/add")
@@ -71,7 +71,7 @@ public class NotificationController {
     public String showNotificationsForLesson(Model model, Long lessonId) {
         List<Notification> notificationList = notificationService.getNotificationsForLesson(lessonId);
         model.addAttribute("notificationList", notificationList);
-        return "user/Notification";}
+        return "user/Notifications";}
 
 
 
