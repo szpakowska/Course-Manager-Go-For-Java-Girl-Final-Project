@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Pobierz element ikony ołówka
+            var editIcon = document.querySelector('.user-icon');
+
+            // Dodaj obsługę zdarzenia kliknięcia na ikonę ołówka
+            editIcon.addEventListener('click', function () {
+                // Pobierz element formularza
+                var form = document.querySelector('form');
+
+                // Pobierz pola formularza
+                var usernameField = document.getElementById('username');
+                var passwordField = document.getElementById('password');
+                var nameField = document.getElementById('name');
+                var surnameField = document.getElementById('surname');
+                var activeField = document.getElementById('active');
+
+                // Pobierz dane użytkownika (zmień to na odpowiedni sposób pobierania danych użytkownika)
+                var userData = {
+                    username: 'exampleUsername',
+                    password: 'examplePassword',
+                    name: 'exampleName',
+                    surname: 'exampleSurname',
+                    active: true
+                };
+
+                // Wypełnij pola formularza danymi użytkownika
+                usernameField.value = userData.username;
+                passwordField.value = userData.password;
+                nameField.value = userData.name;
+                surnameField.value = userData.surname;
+                activeField.checked = userData.active;
+
+                // Wyświetl formularz
+                form.style.display = 'block';
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -24,12 +61,6 @@
     <p>Zarządzanie użytkownikami</p>
 </div>
 
-<div class="button-column">
-    <button onclick="location.href='/user/add'" class="button">
-        <span class="icon">🧑‍💼</span>
-        Dodaj użytkownika
-    </button>
-</div>
 
 <table>
     <thead>
@@ -57,6 +88,7 @@
         </td>
 
         <td class="actions-column">
+            <i class="fas fa-plus" style="color: green;" onclick="location.href='/user/add'"></i>
             <i class="fas fa-edit" style="color: blue;"></i>
             <i class="fas fa-trash-alt delete-user" style="color: red;" th:attr="data-user-id=${user.id}"></i>
         </td>
