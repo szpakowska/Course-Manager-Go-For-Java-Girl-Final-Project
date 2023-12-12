@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edytuj użytkownika</title>
+<!--    <title>Edytuj użytkownika</title>-->
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -47,51 +47,9 @@
         }
     </style>
 
-<!--    <script th:inline="javascript">-->
-<!--        <![CDATA[-->
-<!--        function updateUser() {-->
-<!--            const updateForm = document.getElementById('updateForm');-->
-
-<!--            // Serialize form data into JSON-->
-<!--            const formData = {};-->
-<!--            for (const field of updateForm.elements) {-->
-<!--                if (field.name && field.value !== undefined) {-->
-<!--                    formData[field.name] = field.value;-->
-<!--                }-->
-<!--            }-->
-
-<!--            const userId = [[${user.id}]];-->
-
-<!--            // Make a PUT request using the Fetch API-->
-<!--            fetch(`/user/edit/${userId}`, {-->
-<!--                method: 'PUT',-->
-<!--                headers: {-->
-<!--                    'Content-Type': 'application/json',-->
-<!--                },-->
-<!--                body: JSON.stringify(formData),-->
-<!--            })-->
-<!--                .then(response => {-->
-<!--                    if (!response.ok) {-->
-<!--                        throw new Error('Network response was not ok');-->
-<!--                    }-->
-<!--                    return response.json();-->
-<!--                })-->
-<!--                .then(data => {-->
-<!--                    // Handle the successful response-->
-<!--                    console.log('Update successful:', data);-->
-<!--                    // Optionally, you can redirect or update the UI here-->
-<!--                })-->
-<!--                .catch(error => {-->
-<!--                    // Handle errors-->
-<!--                    console.error('Error updating user:', error);-->
-<!--                });-->
-<!--        }-->
-<!--       ]]>-->
-<!--    </script>-->
-
 </head>
 <body>
-<h2>Edytuj użytkownika</h2>
+<!--<h2>Edytuj użytkownika</h2>-->
 <form id="updateForm" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}">
     <label for="username">Nazwa użytkownika:</label>
     <input type="text" id="username" name="username" th:field="*{username}" required>
