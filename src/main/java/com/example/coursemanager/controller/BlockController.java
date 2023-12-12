@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/blocks")
 @RequiredArgsConstructor
@@ -38,4 +40,20 @@ public class BlockController {
         model.addAttribute("block", block);
         return "admin/block/BlockInformation";
     }
+
+
+    @GetMapping("/management")
+    public String getAllBlocks(Model model) {
+        List<Block> blocksList;
+
+        blocksList = blockService.getAllBlocks();
+        model.addAttribute("blocksList", blocksList);
+
+        return "admin/block/BlockManagement";
+
+    }
+
+
 }
+
+

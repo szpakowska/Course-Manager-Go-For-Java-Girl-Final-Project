@@ -5,6 +5,8 @@ import com.example.coursemanager.repository.BlockJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BlockService {
@@ -16,5 +18,10 @@ public class BlockService {
 
     public Block getBlockById(Long id) {
         return blockJpaRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public List<Block> getAllBlocks() {return blockJpaRepository.findAll();
+
+
     }
 }
