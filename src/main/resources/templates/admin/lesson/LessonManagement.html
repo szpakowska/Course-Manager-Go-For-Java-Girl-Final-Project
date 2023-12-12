@@ -44,10 +44,12 @@
                     Zarządzaj lekcją
                 </button>
             </a>
-            <button onclick="deleteLesson(${lesson.id})"
-                    style="background-color: #dc3545; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
-                <i class="fas fa-trash-alt"></i> Usuń lekcję
-            </button>
+            <form th:action="@{'/lessons/delete/' + ${lesson.id}}" method="post">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="delete-button">
+                    <i class="fas fa-trash-alt delete-lesson" style="color: red;"></i>
+                </button>
+            </form>
         </td>
     </tr>
     </tbody>

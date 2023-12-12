@@ -184,6 +184,7 @@
                 <th>Temat</th>
                 <th>Data i godzina</th>
                 <th>Czas trwania</th>
+                <th>Akcja</th>
             </tr>
             </thead>
             <tbody>
@@ -193,6 +194,14 @@
                 <td th:text="${lesson.subject}"></td>
                 <td th:text="${lesson.localDateTime}"></td>
                 <td th:text="${lesson.duration}"></td>
+                <td class="actions-column">
+                    <form th:action="@{'/blocks/' + ${block.id} + '/lesson/' + ${lesson.id}}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="delete-button">
+                            <i class="fas fa-trash-alt delete-block" style="color: red;"></i>
+                        </button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
