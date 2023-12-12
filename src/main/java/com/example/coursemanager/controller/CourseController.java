@@ -36,18 +36,18 @@ public class CourseController {
         }
     }
 
-    //    @GetMapping
-//    public String getCourses(@RequestParam(required = false) Long userId, Model model) {
-//        List<Course> coursesList;
-//        if (userId == null) {
-//            coursesList = courseService.getAllCourses();
-//        } else {
-//            coursesList = courseService.getCoursesByUserId(userId);
-//        }
-//        model.addAttribute("coursesList", coursesList);
-//
-//        return "ReportOfCourses";
-//    }
+        @GetMapping
+    public String getCourses(@RequestParam(required = false) Long userId, Model model) {
+        List<Course> coursesList;
+        if (userId == null) {
+            coursesList = courseService.getAllCourses();
+        } else {
+            coursesList = courseService.getCoursesByUserId(userId);
+        }
+        model.addAttribute("coursesList", coursesList);
+
+        return "ReportOfCourses";
+    }
     @GetMapping("/management")
     public String getAllCourses(Model model) {
         List<Course> coursesList;

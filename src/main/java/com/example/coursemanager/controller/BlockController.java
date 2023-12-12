@@ -21,13 +21,9 @@ public class BlockController {
 
     private final BlockService blockService;
     @PostMapping("delete/{id}")
-    public ResponseEntity<Void> deleteBlock(@PathVariable Long id) {
-        try {
+    public String deleteBlock(@PathVariable Long id) {
             blockService.deleteBlock(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+            return "redirect:/blocks/management";
     }
 
 
