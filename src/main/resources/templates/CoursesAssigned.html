@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Kursy użytkownika - Course Manager Application</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <h1>🐿️ Course Manager Application</h1>
+    <div class="header-buttons">
+        <button onclick="location.href='/home'" class="logout-button">
+            <i class="fas fa-home"></i> Home
+        </button>
+    </div>
+</header>
+
+<div class="header-title">
+    <p>Kursy użytkownika</p>
+</div>
+<br>
+<div class="courses-list">
+    <table>
+        <thead>
+        <tr>
+            <th>Nazwa kursu</th>
+            <th>Studenci</th>
+            <th>Bloki</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iteracja po liście kursów i wyświetlenie ich -->
+        <tr th:each="course : ${coursesList}">
+            <td th:text="${course.name}"></td>
+            <td>
+                <ul>
+                    <!-- Iteracja po liście studentów kursu i wyświetlenie ich -->
+                    <li th:each="student : ${course.students}" th:text="${student.name}"></li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <!-- Iteracja po liście bloków i wyświetlenie ich -->
+                    <li th:each="block : ${course.blocks}" th:text="${block.name}"></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>
+
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
+        </button>
+    </form>
+    <br>
+    <p>Made by Wiewiórki</p>
+</footer>
+
+</body>
+</html>
