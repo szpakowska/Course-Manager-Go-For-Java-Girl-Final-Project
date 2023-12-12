@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Raport bloków | Course Manager Application</title>
+    <title>Raport kursów Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    >
 </head>
 <body>
 
@@ -13,42 +15,44 @@
         <button onclick="location.href='/home'" class="logout-button">
             <i class="fas fa-home"></i> Home
         </button>
-
     </div>
 </header>
 
-<div class="header-title">
-    <p>Raport bloków</p>
-</div>
 <br>
 <br>
-M
-I
-E
-J
-S
-C
-E
 
-N
-A
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nazwa</th>
+        <th>#Lekcje</th>
+<!--        <th>Prowadzący</th>-->
+        <th>Akcje</th>
+    </tr>
+    </thead>
 
-F
-O
-R
-M
-U
-L
-A
-R
-Z
+    <tbody>
+    <tr th:each="block : ${blocksList}">
+        <td th:text="${block.id}"></td>
+        <td th:text="${block.name}"></td>
+        <td th:text="${block.lessons.size()}"></td>
+<!--        <td th:text="${block.lecturer.name}"></td>-->
+        <td class="actions-column">
+            <a th:href="@{'/blocks/manage/' + ${block.id}}">
+                <button type="button" style="background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
+                    Zarządzaj blokiem
+                </button>
+            </a>
+            <button onclick="deleteBlock(${block.id})" style="background-color: #dc3545; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
+                <i class="fas fa-trash-alt"></i> Usuń blok
+            </button>
 
-
-</div>
-
+        </td>
+    </tr>
+    </tbody>
+</table>
 <footer>
-
-
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
             <i class="fas fa-sign-out-alt"></i> Wyloguj
@@ -56,7 +60,29 @@ Z
     </form>
     <br>
     <p>Made by Wiewiórki</p>
-
 </footer>
+<script>
+    function deleteBlock(blockId) {
+        if (confirm('Czy na pewno chcesz usunąć ten blok?')) {
+            fetch('/blocks/delete/' + blockId, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); // Odśwież stronę po pomyślnym usunięciu
+                } else {
+                    alert('Nie udało się usunąć bloku.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Wystąpił błąd podczas usuwania bloku.');
+            });
+        }
+    }
+</script>
 </body>
 </html>

@@ -44,7 +44,7 @@ public class LessonController {
         return "admin/lesson/LessonManagement";
     }
 
-    @GetMapping("manage/{blockId}")
+    @GetMapping("manage/{lessonId}")
     public String getLessonById(@PathVariable Long lessonId, Model model) {
         Lesson lesson = lessonService.getLessonById(lessonId);
         model.addAttribute("lesson", lesson);
