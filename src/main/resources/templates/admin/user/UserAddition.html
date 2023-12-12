@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
     <title>Dodaj użytkownika</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -64,7 +65,7 @@
     <label for="active">Aktywny:</label>
     <input type="checkbox" id="active" name="active" th:field="*{active}">
 
-    <label for="roles">Role:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}" class="form-control">
+    <label for="roles">Rola:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}" class="form-control">
     <!-- Pętla w celu wyboru ról, np.: --> <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option> </select>
 
     <button type="submit">Dodaj użytkownika</button>
