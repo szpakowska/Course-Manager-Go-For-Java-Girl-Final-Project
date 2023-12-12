@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.thymeleaf.extras.springsecurity6.dialect.SpringSecurityDialect;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -35,6 +37,13 @@ public class SecurityConfiguration {
                         .defaultSuccessUrl("/home",true)
                         .permitAll()
                 )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login") // Ustaw stronę logowania
+                        .defaultSuccessUrl("/home", true)
+                        .permitAll()
+                )
+//                .csrf(AbstractHttpConfigurer::csrfTokenRepository) // Dodaj obsługę CSRF
+
                 .httpBasic(withDefaults())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -56,6 +65,14 @@ public class SecurityConfiguration {
     @Bean
     public SpringSecurityDialect springSecurityDialect(){
         return new SpringSecurityDialect();
+    }
+    @Controller
+    public class LoginController {
+
+        @GetMapping("/login")
+        public String login() {
+            return "LogonPage"; // Zwróć nazwę pliku HTML
+        }
     }
 
 }
