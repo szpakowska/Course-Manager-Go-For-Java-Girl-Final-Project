@@ -4,8 +4,8 @@ POST localhost:8080/user/add
 Content-Type: application/json
 
 { "name": "Tom", "surname": "Smith", "username": "tsmith", "password": "admin", "email": "ts@onet.pl", "active": true, "roles": [{"id": 3}] }
-{ "name": "Jan", "surname": "Kowalski", "username": "jkowalski", "password": "admin", "email": "jk@onet.pl", "active": true, "roles": [{"id": 2}] }
-{ "name": "Antoni", "surname": "Nowak", "username": "anowak", "password": "admin", "email": "an@onet.pl", "active": true, "roles": [{"id": 3}] }
+//{ "name": "Jan", "surname": "Kowalski", "username": "jkowalski", "password": "admin", "email": "jk@onet.pl", "active": true, "roles": [{"id": 2}] }
+//{ "name": "Antoni", "surname": "Nowak", "username": "anowak", "password": "admin", "email": "an@onet.pl", "active": true, "roles": [{"id": 3}] }
 
 ### Create course
 POST localhost:8080/courses?name=Test-course-4

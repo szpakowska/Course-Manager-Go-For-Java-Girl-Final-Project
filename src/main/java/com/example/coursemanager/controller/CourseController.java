@@ -1,11 +1,13 @@
 package com.example.coursemanager.controller;
 
 import com.example.coursemanager.model.Course;
+import com.example.coursemanager.security.model.ApplicationUserDetails;
 import com.example.coursemanager.service.CourseService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,18 +38,19 @@ public class CourseController {
         }
     }
 
-        @GetMapping
-    public String getCourses(@RequestParam(required = false) Long userId, Model model) {
+    @GetMapping()
+    public String getCourses(@AuthenticationPrincipal ApplicationUserDetails userDetails, @RequestParam(required = false) Long userId, Model model) {
         List<Course> coursesList;
         if (userId == null) {
-            coursesList = courseService.getAllCourses();
+            coursesList = courseService.getCoursesByUserId(userDetails.getUserId());
         } else {
             coursesList = courseService.getCoursesByUserId(userId);
         }
         model.addAttribute("coursesList", coursesList);
 
-        return "ReportOfCourses";
+        return "CoursesAssigned";
     }
+
     @GetMapping("/management")
     public String getAllCourses(Model model) {
         List<Course> coursesList;
@@ -71,7 +74,6 @@ public class CourseController {
         model.addAttribute("course", new Course());
         return "admin/course/CourseAddition";
     }
-
 }
 
 
