@@ -6,44 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-<!--    <script>-->
-<!--        document.addEventListener('DOMContentLoaded', function () {-->
-<!--            // Pobierz element ikony ołówka-->
-<!--            var editIcon = document.querySelector('.user-icon');-->
-
-<!--            // Dodaj obsługę zdarzenia kliknięcia na ikonę ołówka-->
-<!--            editIcon.addEventListener('click', function () {-->
-<!--                // Pobierz element formularza-->
-<!--                var form = document.querySelector('form');-->
-
-<!--                // Pobierz pola formularza-->
-<!--                var usernameField = document.getElementById('username');-->
-<!--                var passwordField = document.getElementById('password');-->
-<!--                var nameField = document.getElementById('name');-->
-<!--                var surnameField = document.getElementById('surname');-->
-<!--                var activeField = document.getElementById('active');-->
-
-<!--                // Pobierz dane użytkownika (zmień to na odpowiedni sposób pobierania danych użytkownika)-->
-<!--                var userData = {-->
-<!--                    username: 'exampleUsername',-->
-<!--                    password: 'examplePassword',-->
-<!--                    name: 'exampleName',-->
-<!--                    surname: 'exampleSurname',-->
-<!--                    active: true-->
-<!--                };-->
-
-<!--                // Wypełnij pola formularza danymi użytkownika-->
-<!--                usernameField.value = userData.username;-->
-<!--                passwordField.value = userData.password;-->
-<!--                nameField.value = userData.name;-->
-<!--                surnameField.value = userData.surname;-->
-<!--                activeField.checked = userData.active;-->
-
-<!--                // Wyświetl formularz-->
-<!--                form.style.display = 'block';-->
-<!--            });-->
-<!--        });-->
-<!--    </script>-->
 
 </head>
 <header>
@@ -98,8 +60,9 @@
     </tr>
     </tbody>
 </table>
-
-<i class="fas fa-plus" style="color: green;" onclick="location.href='/user/add'"></i>
+<button type="button" style="color: #fff; background-color: green; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px; margin-top: 10px;" onclick="location.href='/user/add'">
+    <i class="fas fa-plus"></i> Dodaj
+</button>
 
 <footer>
     <form th:action="@{/logout}" method="post">
@@ -145,9 +108,8 @@
         });
     });
 </script>
-
 <!--DELETE-->
 
 </body>
-</html>
 
+</html>

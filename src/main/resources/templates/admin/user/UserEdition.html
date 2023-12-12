@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<!--    <title>Edytuj użytkownika</title>-->
+    <title>Edytuj użytkownika</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -49,7 +49,7 @@
 
 </head>
 <body>
-<!--<h2>Edytuj użytkownika</h2>-->
+<h2>Edytuj użytkownika</h2>
 <form id="updateForm" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}">
     <label for="username">Nazwa użytkownika:</label>
     <input type="text" id="username" name="username" th:field="*{username}" required>
@@ -69,7 +69,7 @@
     <label for="active">Aktywny:</label>
     <input type="checkbox" id="active" name="active" th:field="*{active}">
 
-    <label for="roles">Role:</label>
+    <label for="roles">Rola:</label>
     <select id="roles" name="roles" multiple th:field="*{roles}">
         <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
     </select>

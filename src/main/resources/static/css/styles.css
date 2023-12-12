@@ -20,6 +20,7 @@ header {
     align-items: center;
     width: 100%; /* Add this line */
     box-sizing: border-box; /* Add this line to account for padding and border */
+    margin-bottom: 10px;
 }
 
 .user-info {
@@ -39,7 +40,7 @@ header {
 
 
 footer {
-    background-color: #333;
+    background-color: #0000FF;
     color: #fff;
     text-align: center;
     padding: 10px;
@@ -141,6 +142,7 @@ th {
     text-align: center;
     margin-top: 50px;
     font-weight: bold;
+    font-size: 28px;
 }
 
 .actions-column {
