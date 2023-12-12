@@ -46,8 +46,6 @@
     </script>
 
 </head>
-<body>
-
 <header>
     <h1> 🐿️Course Manager Application</h1>
     <div class="header-buttons">
@@ -60,7 +58,36 @@
 <div class="header-title">
     <p>Zarządzanie użytkownikami</p>
 </div>
+<body>
 
+<h2>Edytuj użytkownika</h2>
+<!--<form th:action="@{/user/edit}" method="post" th:object="${user}">-->
+<!--    <label for="username">Nazwa użytkownika:</label>-->
+<!--    <input type="text" id="username" name="username" th:field="*{username}" required>-->
+
+<!--    <label for="password">Hasło:</label>-->
+<!--    <input type="password" id="password" name="password" th:field="*{password}" required>-->
+
+<!--    <label for="email">Adres email:</label>-->
+<!--    <input type="email" id="email" name="email" th:field="*{email}" required>-->
+
+<!--    <label for="name">Imię:</label>-->
+<!--    <input type="text" id="name" name="name" th:field="*{name}">-->
+
+<!--    <label for="surname">Nazwisko:</label>-->
+<!--    <input type="text" id="surname" name="surname" th:field="*{surname}">-->
+
+<!--    <label for="active">Aktywny:</label>-->
+<!--    <input type="checkbox" id="active" name="active" th:field="*{active}">-->
+
+<!--    <label for="roles">Role:</label>-->
+<!--    <select id="roles" name="roles" multiple th:field="*{roles}">-->
+<!--        &lt;!&ndash; Pętla w celu wyboru ról, np.: &ndash;&gt;-->
+<!--        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>-->
+<!--    </select>-->
+
+<!--    <button type="submit">Zapisz</button>-->
+<!--</form>-->
 
 <table>
     <thead>
@@ -88,9 +115,14 @@
         </td>
 
         <td class="actions-column">
-            <i class="fas fa-plus" style="color: green;" onclick="location.href='/user/add'"></i>
-            <i class="fas fa-edit" style="color: blue;"></i>
+<!--            <i class="fas fa-plus" style="color: green;" onclick="location.href='/user/add'"></i>-->
+<!--            <i class="fas fa-edit" style="color: blue;"></i>-->
             <i class="fas fa-trash-alt delete-user" style="color: red;" th:attr="data-user-id=${user.id}"></i>
+            <a th:href="@{'/user/edit/' + ${user.id}}">
+                <button type="button" style="background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
+                    Zarządzaj użytkownikiem
+                </button>
+            </a>
         </td>
     </tr>
     </tbody>

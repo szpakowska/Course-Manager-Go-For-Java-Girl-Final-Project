@@ -1,103 +1,138 @@
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>Edytuj użytkownika</title>-->
-<!--    <link rel="stylesheet" href="/css/styles.css">-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">-->
-<!--    <style>-->
-<!--        body {-->
-<!--            font-family: Arial, sans-serif;-->
-<!--            margin: 50px;-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edytuj użytkownika</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 50px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+
+<!--    <script th:inline="javascript">-->
+<!--        <![CDATA[-->
+<!--        function updateUser() {-->
+<!--            const updateForm = document.getElementById('updateForm');-->
+
+<!--            // Serialize form data into JSON-->
+<!--            const formData = {};-->
+<!--            for (const field of updateForm.elements) {-->
+<!--                if (field.name && field.value !== undefined) {-->
+<!--                    formData[field.name] = field.value;-->
+<!--                }-->
+<!--            }-->
+
+<!--            const userId = [[${user.id}]];-->
+
+<!--            // Make a PUT request using the Fetch API-->
+<!--            fetch(`/user/edit/${userId}`, {-->
+<!--                method: 'PUT',-->
+<!--                headers: {-->
+<!--                    'Content-Type': 'application/json',-->
+<!--                },-->
+<!--                body: JSON.stringify(formData),-->
+<!--            })-->
+<!--                .then(response => {-->
+<!--                    if (!response.ok) {-->
+<!--                        throw new Error('Network response was not ok');-->
+<!--                    }-->
+<!--                    return response.json();-->
+<!--                })-->
+<!--                .then(data => {-->
+<!--                    // Handle the successful response-->
+<!--                    console.log('Update successful:', data);-->
+<!--                    // Optionally, you can redirect or update the UI here-->
+<!--                })-->
+<!--                .catch(error => {-->
+<!--                    // Handle errors-->
+<!--                    console.error('Error updating user:', error);-->
+<!--                });-->
 <!--        }-->
+<!--       ]]>-->
+<!--    </script>-->
 
-<!--        h2 {-->
-<!--            color: #333;-->
-<!--        }-->
+</head>
+<body>
+<h2>Edytuj użytkownika</h2>
+<form id="updateForm" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}">
+    <label for="username">Nazwa użytkownika:</label>
+    <input type="text" id="username" name="username" th:field="*{username}" required>
 
-<!--        form {-->
-<!--            max-width: 400px;-->
-<!--            margin: 50px 0;-->
-<!--        }-->
+    <label for="password">Hasło:</label>
+    <input type="password" id="password" name="password" th:field="*{password}" required>
 
-<!--        label {-->
-<!--            display: block;-->
-<!--            margin-bottom: 5px;-->
-<!--            color: #555;-->
-<!--        }-->
+    <label for="email">Adres email:</label>
+    <input type="email" id="email" name="email" th:field="*{email}" required>
 
-<!--        input, select {-->
-<!--            width: 100%;-->
-<!--            padding: 8px;-->
-<!--            margin-bottom: 10px;-->
-<!--            box-sizing: border-box;-->
-<!--        }-->
+    <label for="name">Imię:</label>
+    <input type="text" id="name" name="name" th:field="*{name}">
 
-<!--        button {-->
-<!--            background-color: #4CAF50;-->
-<!--            color: white;-->
-<!--            padding: 10px 15px;-->
-<!--            border: none;-->
-<!--            border-radius: 5px;-->
-<!--            cursor: pointer;-->
-<!--        }-->
+    <label for="surname">Nazwisko:</label>
+    <input type="text" id="surname" name="surname" th:field="*{surname}">
 
-<!--        footer {-->
-<!--            margin-top: 20px;-->
-<!--            text-align: center;-->
-<!--        }-->
+    <label for="active">Aktywny:</label>
+    <input type="checkbox" id="active" name="active" th:field="*{active}">
 
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h2>Edytuj użytkownika</h2>-->
-<!--<form th:action="@{/user/edit}" method="post" th:object="${userDto}">-->
-<!--    <label for="username">Nazwa użytkownika:</label>-->
-<!--    <input type="text" id="username" name="username" th:field="*{username}" required>-->
+    <label for="roles">Role:</label>
+    <select id="roles" name="roles" multiple th:field="*{roles}">
+        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
+    </select>
 
-<!--    <label for="password">Hasło:</label>-->
-<!--    <input type="password" id="password" name="password" th:field="*{password}" required>-->
+    <button type="submit">Zapisz</button>
+</form>
 
-<!--    <label for="email">Adres email:</label>-->
-<!--    <input type="email" id="email" name="email" th:field="*{email}" required>-->
+<footer>
+    <div class="user-info">
+        <span class="user-icon">👤</span>
+        <span>Zalogowany użytkownik:</span>
+        <span th:text="${username}"></span> <span th:text="${roles}"></span>
+    </div>
 
-<!--    <label for="name">Imię:</label>-->
-<!--    <input type="text" id="name" name="name" th:field="*{name}">-->
-
-<!--    <label for="surname">Nazwisko:</label>-->
-<!--    <input type="text" id="surname" name="surname" th:field="*{surname}">-->
-
-<!--    <label for="active">Aktywny:</label>-->
-<!--    <input type="checkbox" id="active" name="active" th:field="*{active}">-->
-
-<!--    <label for="roles">Role:</label>-->
-<!--    <select id="roles" name="roles" multiple th:field="*{roles}">-->
-<!--        &lt;!&ndash; Pętla w celu wyboru ról, np.: &ndash;&gt;-->
-<!--        <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>-->
-<!--    </select>-->
-
-<!--    <button type="submit">Zapisz</button>-->
-<!--</form>-->
-
-
-<!--<footer>-->
-<!--    <div class="user-info">-->
-<!--        &lt;!&ndash; Ikona ludzika &ndash;&gt;-->
-<!--        <span class="user-icon">👤</span>-->
-<!--        <span>Zalogowany użytkownik:</span>-->
-<!--        <span th:text="${username}"></span> <span th:text="${roles}"></span>-->
-<!--    </div>-->
-
-<!--    <form th:action="@{/logout}" method="post">-->
-<!--        <button class="logout-button">-->
-<!--            <i class="fas fa-sign-out-alt"></i> Wyloguj &lt;!&ndash; Ikona wylogowania &ndash;&gt;-->
-<!--        </button>-->
-<!--    </form>-->
-<!--    <br>-->
-<!--    <p>Made by Wiewiórki</p>-->
-<!--</footer>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
+        </button>
+    </form>
+    <br>
+    <p>Made by Wiewiórki</p>
+</footer>
+</body>
+</html>

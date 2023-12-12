@@ -56,17 +56,14 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        try {
-            User user = userService.getUserById(id);
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+    public String getUserById(@PathVariable Long id, Model model) {
+       User user = userService.getUserById(id);
+        model.addAttribute("user",user);
+        return "admin/user/UserEdition";
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody UserDto userDto, @PathVariable Long id) {
+    @PostMapping("/edit/{id}")
+    public ResponseEntity<User> updateUser(@ModelAttribute UserDto userDto, @PathVariable Long id) {
         try {
             User updateUser = userService.updateUser(userDto, id);
             return ResponseEntity.ok(updateUser);
