@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Logowanie - Course Manager Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: black;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #0000FF; /* górny panel */
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 30px;
+            font-weight: bold;
+            font-size: 36px;
+            color: #fff;
+            text-align: center;
+            flex: 1;
+        }
+
+        .squirrel-image {
+            height: 170px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 100px;
+            flex: 1;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: darkgray;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: auto; /* stopka na dole */
+            text-align: center;
+            background-color: #0000FF;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Squirrel_posing.jpg" alt="Wiewiórka" class="squirrel-image">
+    <h1>Course Manager Application</h1>
+</header>
+
+<div class="container">
+    <h2>Logowanie</h2>
+    <br>
+    <br>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="username">Nazwa użytkownika</label>
+            <input type="text" id="username" name="username" class="form-control" required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Hasło</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+<footer>
+    Made by Wiewiórki
+</footer>
+
+</body>
+
+</html>
