@@ -49,6 +49,17 @@
 
 </head>
 <body>
+<nav>
+    <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzaj blokiem</span>
+    <br>
+    <br>
+    <a href="/home" class="move-right">Strona główna </a>
+    <a href="/user/management" class="move-right">Zarządzanie użytkownikami</a>
+    <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
+    <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
+    <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
+
+</nav>
 <h2>Edytuj użytkownika</h2>
 <form id="updateForm" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}">
     <label for="username">Nazwa użytkownika:</label>

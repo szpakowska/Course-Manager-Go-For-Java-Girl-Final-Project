@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Raport bloków zajęć | Course Manager Application</title>
+    <title>Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+
+
+
+    </style>
 </head>
 <body>
 
-<header>
-    <h1>🐿️ Course Manager Application</h1>
-    <div class="header-buttons">
-        <button onclick="location.href='/home'" class="logout-button">
-            <i class="fas fa-home"></i> Home
-        </button>
-    </div>
-</header>
+<!-- Navbar -->
+<nav>
+    <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzanie blokami zajęć</span>
+    <br>
+    <br>
+    <a href="/home" class="move-right">Strona główna </a>
+    <a href="/user/management" class="move-right">Zarządzanie użytkownikami</a>
+    <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
+    <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
+    <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
 
-<br>
-<br>
+</nav>
+
 
 <table>
     <thead>

@@ -6,109 +6,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        /* Two-column layout */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px; /* Dodaje przestrzeń między kolumnami */
-        }
 
-        .left-column,
-        .right-column {
-            width: calc(50% - 10px); /* Szerokość kolumny z odstępem między nimi */
-            box-sizing: border-box;
-            padding: 10px;
-        }
 
-        /* Pełna szerokość dla sekcji ogólnych informacji */
-        section.full-width {
-            width: 100%;
-        }
 
-        /* Pozostałe style */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-        }
-
-        section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-
-        h2 {
-            margin-top: 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-        .info-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .manage-link {
-    text-decoration: none;
-}
-
-.manage-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    padding: 8px 16px;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.manage-button:hover {
-    background-color: #0056b3;
-}
-
-    </style>
+      </style>
 </head>
 <body>
 
-<header>
-    <h1> 🐿️Course Manager Application</h1>
-    <div class="header-buttons">
-        <button onclick="location.href='/home'" class="logout-button">
-            <i class="fas fa-home"></i> Home
-        </button>
-    </div>
-</header>
+<!-- Navbar -->
+<nav>
+    <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzaj kursem</span>
+    <br>
+    <br>
+    <a href="/home" class="move-right">Strona główna </a>
+    <a href="/user/management" class="move-right">Zarządzanie użytkownikami</a>
+    <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
+    <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
+    <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
 
-<br>
-<br>
+</nav>
+
 
 
 <section class="full-width"> <!-- Sekcja z ogólnymi informacjami na pełną szerokość -->
-    <h2 style="text-align: center">Kurs : <span th:text="${course.name}"></span></p> </h2>
+    <h2 style="text-align: center"> Kurs : <span th:text="${course.name}"></span></p> </h2>
 
 </section>
 
@@ -120,7 +41,7 @@
 
             <label for="studentId">Student ID:</label>
             <input type="text" id="studentId" name="studentId"/>
-            <input type="submit" value="Dodaj studenta do kursu"/>
+            <input type="submit" value="Dodaj studenta do kursu" class="manage-button"/>
         </form>
         <table>
             <thead>
@@ -157,7 +78,7 @@
             <input type="hidden" th:name="_method" th:value="PATCH"/>
             <label for="blockName">Nazwa bloku:</label>
             <input type="text" id="blockName" name="blockName"/>
-            <input type="submit" value="Dodaj blok do kursu"/>
+            <input type="submit" value="Dodaj blok do kursu" class="manage-button"/>
         </form>
         <table>
             <thead>

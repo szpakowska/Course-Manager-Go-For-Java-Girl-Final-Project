@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+
         body {
             background-color: #f8f9fa;
             color: black;
@@ -16,9 +17,8 @@
             display: flex;
             flex-direction: column;
         }
-
         header {
-            background-color: #0000FF; /* górny panel */
+            background-color: #808080; /* Szary panel */
             padding: 10px;
             text-align: center;
             position: relative;
@@ -26,6 +26,8 @@
             justify-content: space-between;
             align-items: center;
         }
+
+
 
         h1 {
             margin: 30px;
@@ -58,44 +60,26 @@
             margin-bottom: 10px;
         }
 
-        .button-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .button {
-            padding: 15px 30px;
-            margin: 10px;
-            font-size: 16px;
-            font-weight: bold;
-            background-color: darkgray;
-            color: #000;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
 
         footer {
             margin-top: auto; /* stopka na dole */
             text-align: center;
-            background-color: #0000FF;
+            background-color: #808080; /* Szary kolor tła */
             color: white;
             padding: 10px;
         }
+
     </style>
 </head>
 
 <body>
 
 <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Squirrel_posing.jpg" alt="Wiewiórka" class="squirrel-image">
-    <h1>Course Manager Application</h1>
+    <img src="logo.png" alt="Logooo">
 </header>
 
 <div class="container">
-    <h2>Logowanie</h2>
+
     <br>
     <br>
     <form th:action="@{/login}" method="post">

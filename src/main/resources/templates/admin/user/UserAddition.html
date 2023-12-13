@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-
-    <title>Dodaj użytkownika</title>
+    <title>Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
+
 
 
         form {
@@ -31,17 +32,25 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
+
     </style>
 </head>
 <body>
-<header>
-    <h1> 🐿️Course Manager Application</h1>
-    <div class="header-buttons">
-        <button onclick="location.href='/home'" class="logout-button">
-            <i class="fas fa-home"></i> Home
-        </button>
-    </div>
-</header>
+
+<!-- Navbar -->
+<nav>
+    <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzaj blokiem</span>
+    <br>
+    <br>
+    <a href="/home" class="move-right">Strona główna </a>
+    <a href="/user/management" class="move-right">Zarządzanie użytkownikami</a>
+    <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
+    <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
+    <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
+
+</nav>
+
 
 <h2>Dodaj użytkownika</h2>
 
@@ -65,8 +74,11 @@
     <label for="active">Aktywny:</label>
     <input type="checkbox" id="active" name="active" th:field="*{active}">
 
-    <label for="roles">Rola:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}" class="form-control">
-    <!-- Pętla w celu wyboru ról, np.: --> <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option> </select>
+    <label for="roles">Rola:</label> <select id="roles" name="roles" multiple="multiple" th:field="*{roles}"
+                                             class="form-control">
+    <!-- Pętla w celu wyboru ról, np.: -->
+    <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
+</select>
 
     <button type="submit">Dodaj użytkownika</button>
 </form>
