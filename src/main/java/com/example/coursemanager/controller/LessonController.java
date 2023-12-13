@@ -1,15 +1,14 @@
 package com.example.coursemanager.controller;
 
-import com.example.coursemanager.model.Block;
-import com.example.coursemanager.model.Course;
+import com.example.coursemanager.dto.LessonDto;
+import com.example.coursemanager.dto.UserDto;
 import com.example.coursemanager.model.Lesson;
-import com.example.coursemanager.service.CourseService;
+import com.example.coursemanager.model.User;
 import com.example.coursemanager.service.LessonService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,8 +39,24 @@ public class LessonController {
     @GetMapping("manage/{lessonId}")
     public String getLessonById(@PathVariable Long lessonId, Model model) {
         Lesson lesson = lessonService.getLessonById(lessonId);
-        model.addAttribute("lesson", lesson);
-        return "admin/lesson/LessonInformation";
+        LessonDto lessonDto = new LessonDto(
+                lesson.getSubject(),
+                lesson.getLocalDateTime(),
+                (int) lesson.getDuration().toMinutes()
+        );
+        model.addAttribute("lessonDto", lessonDto);
+        return "admin/lesson/LessonEdition";
     }
+    @PostMapping("/edit/{id}")
+    public String updateLesson(@ModelAttribute("lessonDto") LessonDto lessonDto, @PathVariable Long id) {
+        try {
+            lessonService.updateLesson(lessonDto, id);
+            return "redirect:/lessons/management";
+        } catch (RuntimeException e) {
+            // Obsługa błędu
+            return "redirect:/lessons/management"; // lub inna obsługa błędu
+        }
+    }
+
 
 }

@@ -48,9 +48,9 @@
         <td th:text="${lesson.localDateTime}"></td>
         <td th:text="${lesson.duration}"></td>
         <td class="actions-column">
-<!--            <a th:href="@{'/lessons/manage/' + ${lesson.id}}">-->
-                <button type="button" style="background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
-                    Zarządzaj lekcją
+            <a th:href="@{'/lessons/manage/' + ${lesson.id}}">
+                <button type="button" style="color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
+                    <i class="fas fa-edit" style="color: blue;"></i>
                 </button>
             </a>
             <form th:action="@{'/lessons/delete/' + ${lesson.id}}" method="post">
