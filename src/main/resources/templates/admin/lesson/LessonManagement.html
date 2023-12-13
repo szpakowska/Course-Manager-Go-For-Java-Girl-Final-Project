@@ -48,11 +48,31 @@
         <td th:text="${lesson.localDateTime}"></td>
         <td th:text="${lesson.duration}"></td>
         <td class="actions-column">
-            <a th:href="@{'/lessons/manage/' + ${lesson.id}}">
-                <button type="button" style="color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
-                    <i class="fas fa-edit" style="color: blue;"></i>
-                </button>
-            </a>
+            <button onclick="openModal('myModal1')"
+                    style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+                Edytuj
+            </button>
+
+            <div id="myModal1" class="modal">
+                <div class="modal-content" style="max-width: 400px;">
+                    <span class="close" onclick="closeModal('myModal1')">&times;</span>
+                    <form th:action="@{'/lessons/edit/' + ${lesson.id}}" method="post">
+                        <label for="subject">Temat:</label>
+                        <input type="text" id="subject" name="subject" th:value="${lesson.subject}" required><br>
+
+                        <label for="localDateTime">Data i godzina:</label>
+                        <input type="datetime-local" id="localDateTime" name="localDateTime"  th:value="${lesson.localDateTime}" required><br>
+
+                        <label for="durationInMinutes">Czas trwania (w minutach):</label>
+                        <input type="number" id="durationInMinutes" name="durationInMinutes" th:value="${lesson.duration}" required><br>
+
+                        <button type="submit"
+                                style="margin-top: 10px; padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+                            Zapisz
+                        </button>
+                    </form>
+                </div>
+                </div>
             <form th:action="@{'/lessons/delete/' + ${lesson.id}}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
                 <button type="submit" class="delete-button">
@@ -82,19 +102,30 @@
                     'Content-Type': 'application/json',
                 }
             })
-            .then(response => {
-                if (response.ok) {
-                    location.reload(); // Odśwież stronę po pomyślnym usunięciu
-                } else {
-                    alert('Nie udało się usunąć bloku.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Wystąpił błąd podczas usuwania bloku.');
-            });
+                .then(response => {
+                    if (response.ok) {
+                        location.reload(); // Odśwież stronę po pomyślnym usunięciu
+                    } else {
+                        alert('Nie udało się usunąć bloku.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Wystąpił błąd podczas usuwania bloku.');
+                });
         }
     }
+
+
+
+        function openModal(modal) {
+        document.getElementById(modal).style.display = 'block';
+    }
+
+        function closeModal(modal) {
+        document.getElementById(modal).style.display = 'none';
+    }
+
 </script>
 </body>
 </html>

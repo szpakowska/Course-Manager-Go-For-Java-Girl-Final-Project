@@ -74,14 +74,14 @@
 
     <section class="right-column">
         <h2>Lekcje</h2>
-        <button onclick="openModal()"
+        <button onclick="openModal('myModal')"
                 style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
             Dodaj lekcję
         </button>
 
         <div id="myModal" class="modal">
             <div class="modal-content" style="max-width: 400px;">
-                <span class="close" onclick="closeModal()">&times;</span>
+                <span class="close" onclick="closeModal('myModal')">&times;</span>
                 <form th:action="@{'/blocks/' + ${block.id} + '/lesson'}" method="post">
                     <label for="subject">Temat:</label>
                     <input type="text" id="subject" name="subject" required><br>
@@ -123,11 +123,14 @@
                             <i class="fas fa-trash-alt delete-block" style="color: red;"></i>
                         </button>
                     </form>
-                    <a th:href="@{'/lessons/manage/' + ${lesson.id}}">
-                        <button type="button" style="color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
-                            <i class="fas fa-edit" style="color: blue;"></i>
-                        </button>
-                    </a>
+<!--                    <a th:href="@{'/lessons/manage/' + ${lesson.id}}">-->
+<!--                        -->
+<!--                        <button type="button" style="color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">-->
+<!--                            <i class="fas fa-edit" style="color: blue;"></i>-->
+<!--                        </button>-->
+<!--                    </a>-->
+
+
                 </td>
             </tr>
             </tbody>
@@ -147,12 +150,12 @@
 </footer>
 <script>
 
-    function openModal() {
-        document.getElementById('myModal').style.display = 'block';
+    function openModal(modal) {
+        document.getElementById(modal).style.display = 'block';
     }
 
-    function closeModal() {
-        document.getElementById('myModal').style.display = 'none';
+    function closeModal(modal) {
+        document.getElementById(modal).style.display = 'none';
     }
 
 </script>
