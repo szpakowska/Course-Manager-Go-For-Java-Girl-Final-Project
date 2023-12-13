@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edytuj lekcję</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+    </style>
+
+</head>
+<body>
+<nav>
+    <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzaj lekcją</span>
+    <a href="/home" class="move-right">Strona główna </a>
+    <a href="/user/management" class="move-right">Zarządzanie użytkownikami</a>
+    <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
+    <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
+    <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
+
+</nav>
+
+<h2>Edytuj lekcję</h2>
+<!--<form id="updateForm" th:action="@{/lessons/edit/{id}(id=${lesson.id})}" method="post" th:object="${lessonDto}">-->
+<!--    <label for="subject">Temat lekcji:</label>-->
+<!--    <input type="text" id="subject" name="subject" th:field="*{subject}" required>-->
+
+<!--    <label for="localDateTime">Data i godzina:</label>-->
+<!--    <input type="datetime-local" id="localDateTime" name="localDateTime" th:field="*{localDateTime}" required>-->
+
+<!--    <label for="durationInMinutes">Czas trwania (w minutach):</label>-->
+<!--    <input type="number" id="durationInMinutes" name="durationInMinutes" th:field="*{durationInMinutes}" required>-->
+
+<!--    <button type="submit">Zapisz</button>-->
+</form>
+
+<footer>
+    <div class="user-info">
+        <span class="user-icon">👤</span>
+        <span>Zalogowany użytkownik:</span>
+        <span th:text="${username}"></span> <span th:text="${roles}"></span>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
+        </button>
+    </form>
+    <br>
+    <p>Made by Wiewiórki</p>
+</footer>
+</body>
+</html>
