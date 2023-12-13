@@ -42,7 +42,6 @@ public class SecurityConfiguration {
                         .defaultSuccessUrl("/home", true)
                         .permitAll()
                 )
-//                .csrf(AbstractHttpConfigurer::csrfTokenRepository) // Dodaj obsługę CSRF
 
                 .httpBasic(withDefaults())
                 .logout(logout -> logout
@@ -71,7 +70,7 @@ public class SecurityConfiguration {
 
         @GetMapping("/login")
         public String login() {
-            return "LogonPage"; // Zwróć nazwę pliku HTML
+            return "LogonPage";
         }
     }
 
