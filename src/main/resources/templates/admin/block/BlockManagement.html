@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
     <style>
 
 
@@ -25,9 +27,10 @@
     <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
 
 </nav>
+<br>
+<br>
 
-
-<table>
+<table id="courseTable">
     <thead>
     <tr>
         <th>ID</th>
@@ -69,6 +72,36 @@
     <br>
     <p>Made by Wiewiórki</p>
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $('#courseTable').DataTable({
+            "language": {
+                "sEmptyTable": "Brak danych",
+                "sInfo": "Wyświetlono _START_ do _END_ z _TOTAL_ wpisów",
+                "sInfoEmpty": "Wyświetlono 0 do 0 z 0 wpisów",
+                "sInfoFiltered": "(filtrowano z _MAX_ wszystkich wpisów)",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Pokaż _MENU_ wpisów",
+                "sLoadingRecords": "Ładowanie...",
+                "sProcessing": "Przetwarzanie...",
+                "sSearch": "Szukaj:",
+                "sZeroRecords": "Brak pasujących wyników",
+                "oPaginate": {
+                    "sFirst": "Pierwsza",
+                    "sLast": "Ostatnia",
+                    "sNext": "Następna",
+                    "sPrevious": "Poprzednia"
+                },
+                "oAria": {
+                    "sSortAscending": ": aktywuj, by posortować kolumnę rosnąco",
+                    "sSortDescending": ": aktywuj, by posortować kolumnę malejąco"
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>
