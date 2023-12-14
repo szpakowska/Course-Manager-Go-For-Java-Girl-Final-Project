@@ -7,69 +7,34 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            background-color: #f8f9fa; /* jasne tło */
-            color: #343a40; /* kolor tekstu */
-            margin: 0;
-        }
-
-
-        h1 {
-            margin: 30px;
-            font-weight: bold;
-            font-size: 36px;
-            color: #fff; /* kolor tekstu w nagłówku */
+        .tile {
             text-align: center;
-            flex: 1; /* Dodałem, aby tekstu w nagłówku zajmował dostępną przestrzeń */
-        }
-
-        .squirrel-image {
-            height: 170px;
-            margin-right: 20px;
-            margin-left: 20px;
-        }
-
-        .welcome-text {
-            text-align: center;
-            color: #000;
-            font-size: 28px;
-            margin-bottom: 10px;
-            margin-left: 780px;
-        }
-
-        .container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .button {
-            padding: 15px 30px;
+            padding: 20px;
             margin: 10px;
-            font-size: 16px;
-            font-weight: bold;
             background-color: darkgray;
-            color: #000;
-            border: none;
             border-radius: 5px;
+            display: inline-block;
             cursor: pointer;
         }
 
-        .icon {
-            margin-right: 10px;
+        .tile i {
+            font-size: 80px;
+            margin-bottom: 10px;
         }
 
+        .tile h2 {
+            margin-bottom: 10px;
+        }
+
+        .tile a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
-
 <header>
     <img src="logo.png" alt="Logo">
 </header>
@@ -79,85 +44,71 @@
 </div>
 
 <div class="button-container">
-
     <!-- Przyciski Administratora -->
-
     <div sec:authorize="hasAuthority('Admin')">
+        <div class="tile" onclick="location.href='/user/management'">
+            <i class="fas fa-users"></i>
+            <h2>Zarządzanie użytkownikami</h2>
+        </div>
 
-        <div class="button-container">
+        <div class="tile" onclick="location.href='/courses/management'">
+            <i class="fas fa-graduation-cap"></i>
+            <h2>Zarządzanie kursami</h2>
+        </div>
 
-            <div class="button-column">
-                <button onclick="location.href='/user/management'" class="button">
-                    <span class="icon">👥</span>
-                    Zarządzanie użytkownikami
-                </button>
+        <div class="tile" onclick="location.href='/blocks/management'">
+            <i class="fas fa-book"></i>
+            <h2>Zarządzanie blokami zajęć</h2>
+        </div>
 
-                <button onclick="location.href='/courses/management'" class="button">
-                    <span class="icon">🎓</span>
-                    Zarządzanie kursami
-                </button>
-
-                <button onclick="location.href='/blocks/management'" class="button">
-                    <span class="icon">📚</span>
-                    Zarządzanie blokami zajęć
-                </button>
-
-                <button onclick="location.href='/lessons/management'" class="button">
-                    <span class="icon">📖</span>
-                    Zarządzanie lekcjami
-                </button>
-            </div>
+        <div class="tile" onclick="location.href='/lessons/management'">
+            <i class="fas fa-book-open"></i>
+            <h2>Zarządzanie lekcjami</h2>
         </div>
     </div>
 
     <!-- Przyciski Wykładowcy -->
     <div sec:authorize="hasAuthority('Lecturer')">
-        <button onclick="location.href='/courses'" class="button">
-            <span class="icon">🎓</span>
-            Moje kursy
-        </button>
+        <div class="tile" onclick="location.href='/courses'">
+            <i class="fas fa-graduation-cap"></i>
+            <h2>Moje kursy</h2>
+        </div>
     </div>
 
     <!-- Przyciski Studenta -->
-    <div sec:authorize="hasAuthority('Student')" class="button-container">
-        <button onclick="location.href='/courses'" class="button">
-            <span class="icon">📘</span>
-            Moje zajęcia
-        </button>
-
-        <button onclick="location.href='/lesson/notification'" class="button">
-            <span class="icon">🔔</span>
-            Powiadomienia
-        </button>
-
-        <button onclick="location.href='/calendar'" class="button">
-            <span class="icon">📅</span>
-            Kalendarz zajęć
-        </button>
-    </div>
-
-    <footer>
-        <div class="user-info">
-            <span class="user-icon">👤</span>
-            <span>Zalogowany użytkownik:</span>
-            <span th:text="${username}"></span> <span th:text="${roles}"></span>
+    <div sec:authorize="hasAuthority('Student')">
+        <div class="tile" onclick="location.href='/courses'">
+            <i class="fas fa-book"></i>
+            <h2>Moje zajęcia</h2>
         </div>
 
-        <form th:action="@{/logout}" method="post">
-            <button class="logout-button">
-                <i class="fas fa-sign-out-alt"></i> Wyloguj
-            </button>
-        </form>
-        <br>
-        <p>Made by Wiewiórki</p>
-    </footer>
+        <div class="tile" onclick="location.href='/lesson/notification'">
+            <i class="fas fa-bell"></i>
+            <h2>Powiadomienia</h2>
+        </div>
 
+        <div class="tile" onclick="location.href='/calendar'">
+            <i class="fas fa-calendar-alt"></i>
+            <h2>Kalendarz zajęć</h2>
+        </div>
+    </div>
 </div>
 
+<footer>
+    <div class="user-info">
+        <span class="user-icon">👤</span>
+        <span>Zalogowany użytkownik:</span>
+        <span th:text="${username}"></span> <span th:text="${roles}"></span>
+    </div>
+
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-button">
+            <i class="fas fa-sign-out-alt"></i> Wyloguj
+        </button>
+    </form>
+    <br>
+    <p>Made by Wiewiórki</p>
+</footer>
 </body>
 
 </html>
-
-
-
-
