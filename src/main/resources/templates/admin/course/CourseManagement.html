@@ -90,7 +90,10 @@
     <!-- Tutaj koniec fragmentu -->
     </tbody>
 </table>
-
+<br> <br>
+<button onclick="downloadCSV()" style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+    <i class="fas fa-download" style="margin-right: 5px;"></i> Pobierz dane jako CSV
+</button>
 <footer>
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
@@ -168,6 +171,31 @@
 
     function closeModal() {
         document.getElementById('myModal').style.display = 'none';
+    }
+
+    function downloadCSV() {
+        const table = document.getElementById('courseTable');
+        const rows = table.querySelectorAll('tr');
+
+        let csv = '';
+
+        for (const row of rows) {
+            const cells = row.querySelectorAll('td');
+            for (let i = 0; i < cells.length; i++) {
+                csv += cells[i].innerText + (i < cells.length - 1 ? ',' : '');
+            }
+            csv += '\n';
+        }
+
+        const csvFile = new Blob([csv], { type: 'text/csv' });
+        const downloadLink = document.createElement('a');
+        const url = URL.createObjectURL(csvFile);
+
+        downloadLink.href = url;
+        downloadLink.download = 'dane_tabeli.csv';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
     }
 
 </script>

@@ -9,7 +9,9 @@ body {
     font-family: Verdana, sans-serif;
     background-color: #f4f4f4;
     overflow-y: auto;
+    display: none; /* Dodane: Ukryj stronę do czasu załadowania */
 }
+
 .manage-button {
     background-color: #007bff;
     color: #fff;

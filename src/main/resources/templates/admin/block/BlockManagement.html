@@ -6,12 +6,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-
-    <style>
-
-
-
-    </style>
 </head>
 <body>
 
@@ -25,10 +19,11 @@
     <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
     <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
     <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
-
 </nav>
 <br>
 <br>
+
+
 
 <table id="courseTable">
     <thead>
@@ -36,7 +31,6 @@
         <th>ID</th>
         <th>Nazwa</th>
         <th>#Lekcje</th>
-        <!--        <th>Prowadzący</th>-->
         <th>Akcje</th>
     </tr>
     </thead>
@@ -46,7 +40,6 @@
         <td th:text="${block.id}"></td>
         <td th:text="${block.name}"></td>
         <td th:text="${block.lessons.size()}"></td>
-        <!--        <td th:text="${block.lecturer.name}"></td>-->
         <td class="actions-column">
             <a th:href="@{'/blocks/manage/' + ${block.id}}">
                 <button type="button" style="background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px;">
@@ -63,6 +56,10 @@
     </tr>
     </tbody>
 </table>
+<br>
+<button onclick="downloadCSV()" style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 10px;">
+    <i class="fas fa-download" style="margin-right: 5px;"></i> Pobierz dane jako CSV
+</button>
 <footer>
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
@@ -72,6 +69,7 @@
     <br>
     <p>Made by Wiewiórki</p>
 </footer>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
@@ -102,6 +100,31 @@
             }
         });
     });
+
+    function downloadCSV() {
+        const table = document.getElementById('courseTable');
+        const rows = table.querySelectorAll('tr');
+
+        let csv = '';
+
+        for (const row of rows) {
+            const cells = row.querySelectorAll('td');
+            for (let i = 0; i < cells.length; i++) {
+                csv += cells[i].innerText + (i < cells.length - 1 ? ',' : '');
+            }
+            csv += '\n';
+        }
+
+        const csvFile = new Blob([csv], { type: 'text/csv' });
+        const downloadLink = document.createElement('a');
+        const url = URL.createObjectURL(csvFile);
+
+        downloadLink.href = url;
+        downloadLink.download = 'dane_tabeli.csv';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
 </script>
 </body>
 </html>

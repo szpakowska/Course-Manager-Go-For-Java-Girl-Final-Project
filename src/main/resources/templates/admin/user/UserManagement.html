@@ -27,8 +27,12 @@
 <div th:if="${errorMessage}">
     <div class="alert alert-danger" th:text="${errorMessage}"></div>
 </div>
+<br>
+<button type="button" style="color: #fff; background-color: green; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px; margin-top: 10px;" onclick="location.href='/user/add'">
+    <i class="fas fa-plus"></i> Dodaj
+</button>
 
-<br><br>
+<br>
 <table id="courseTable">
     <thead>
     <tr>
@@ -66,10 +70,10 @@
     </tr>
     </tbody>
 </table>
-<button type="button" style="color: #fff; background-color: green; border: none; border-radius: 3px; cursor: pointer; padding: 5px 10px; margin-top: 10px;" onclick="location.href='/user/add'">
-    <i class="fas fa-plus"></i> Dodaj
+<br>
+<button onclick="downloadCSV()" style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+    <i class="fas fa-download" style="margin-right: 5px;"></i> Pobierz dane jako CSV
 </button>
-
 <footer>
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
@@ -143,6 +147,33 @@
             });
         });
     });
+
+
+    function downloadCSV() {
+        const table = document.getElementById('courseTable');
+        const rows = table.querySelectorAll('tr');
+
+        let csv = '';
+
+        for (const row of rows) {
+            const cells = row.querySelectorAll('td');
+            for (let i = 0; i < cells.length; i++) {
+                csv += cells[i].innerText + (i < cells.length - 1 ? ',' : '');
+            }
+            csv += '\n';
+        }
+
+        // Tworzenie pliku CSV i pobranie go
+        const csvFile = new Blob([csv], { type: 'text/csv' });
+        const downloadLink = document.createElement('a');
+        const url = URL.createObjectURL(csvFile);
+
+        downloadLink.href = url;
+        downloadLink.download = 'dane_tabeli.csv';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
 </script>
 <!--DELETE-->
 

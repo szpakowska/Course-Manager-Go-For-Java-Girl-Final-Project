@@ -10,7 +10,6 @@
     <style>
 
 
-
     </style>
 </head>
 <body>
@@ -25,7 +24,6 @@
     <a href="/courses/management" class="move-right">Zarządzanie kursami</a>
     <a href="/blocks/management" class="move-right">Zarządzanie blokami zajęć</a>
     <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
-
 </nav>
 
 
@@ -50,42 +48,48 @@
         <td th:text="${lesson.localDateTime}"></td>
         <td th:text="${lesson.duration}"></td>
         <td class="actions-column">
-            <button onclick="openModal('myModal1')"
-                    style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
-                Edytuj
-            </button>
-
-            <div id="myModal1" class="modal">
-                <div class="modal-content" style="max-width: 400px;">
-                    <span class="close" onclick="closeModal('myModal1')">&times;</span>
-                    <form th:action="@{'/lessons/edit/' + ${lesson.id}}" method="post">
-                        <label for="subject">Temat:</label>
-                        <input type="text" id="subject" name="subject" th:value="${lesson.subject}" required><br>
-
-                        <label for="localDateTime">Data i godzina:</label>
-                        <input type="datetime-local" id="localDateTime" name="localDateTime"  th:value="${lesson.localDateTime}" required><br>
-
-                        <label for="durationInMinutes">Czas trwania (w minutach):</label>
-                        <input type="number" id="durationInMinutes" name="durationInMinutes" th:value="${lesson.duration}" required><br>
-
-                        <button type="submit"
-                                style="margin-top: 10px; padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
-                            Zapisz
-                        </button>
-                    </form>
-                </div>
-                </div>
-            <form th:action="@{'/lessons/delete/' + ${lesson.id}}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
-                <button type="submit" class="delete-button">
-                    <i class="fas fa-trash-alt delete-lesson" style="color: red;"></i>
+            <div>
+                <button onclick="openModal('myModal1')"
+                        style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+                    <i class="fas fa-pencil-alt"></i> <!-- Ikona ołówka z Font Awesome -->
                 </button>
-            </form>
+
+
+                <div id="myModal1" class="modal">
+                    <div class="modal-content" style="max-width: 400px;">
+                        <span class="close" onclick="closeModal('myModal1')">&times;</span>
+                        <form th:action="@{'/lessons/edit/' + ${lesson.id}}" method="post">
+                            <label for="subject">Temat:</label>
+                            <input type="text" id="subject" name="subject" th:value="${lesson.subject}" required><br>
+
+                            <label for="localDateTime">Data i godzina:</label>
+                            <input type="datetime-local" id="localDateTime" name="localDateTime"  th:value="${lesson.localDateTime}" required><br>
+
+                            <label for="durationInMinutes">Czas trwania (w minutach):</label>
+                            <input type="number" id="durationInMinutes" name="durationInMinutes" th:value="${lesson.duration}" required><br>
+
+                            <button type="submit"
+                                    style="margin-top: 10px; padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+                                Zapisz
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <form th:action="@{'/lessons/delete/' + ${lesson.id}}" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="delete-button">
+                        <i class="fas fa-trash-alt delete-lesson" style="color: red;"></i>
+                    </button>
+                </form>
+            </div>
         </td>
     </tr>
     </tbody>
 
 </table>
+<button onclick="downloadCSV()" style="padding: 8px 15px; background-color: #007bff; color: #fff; border: none; border-radius: 3px; cursor: pointer;">
+    <i class="fas fa-download" style="margin-right: 5px;"></i> Pobierz dane jako CSV
+</button>
 <footer>
     <form th:action="@{/logout}" method="post">
         <button class="logout-button">
@@ -100,6 +104,28 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <script>
+    // Animacja po załadowaniu strony
+    $(window).on("load", function () {
+        $("body").fadeIn("slow");
+    });
+
+    // Wyświetlanie interaktywnych podpowiedzi
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    // Dodatkowy efekt hover na przyciskach
+    $("button").hover(function () {
+        $(this).css({
+            "background-color": "#0056b3",
+            "transform": "scale(1.05)"
+        });
+    }, function () {
+        $(this).css({
+            "background-color": "#007bff",
+            "transform": "scale(1)"
+        });
+    });
     $(document).ready(function () {
         $('#courseTable').DataTable({
             "language": {
@@ -152,12 +178,38 @@
 
 
 
-        function openModal(modal) {
+    function openModal(modal) {
         document.getElementById(modal).style.display = 'block';
     }
 
-        function closeModal(modal) {
+    function closeModal(modal) {
         document.getElementById(modal).style.display = 'none';
+    }
+
+    function downloadCSV() {
+        const table = document.getElementById('courseTable');
+        const rows = table.querySelectorAll('tr');
+
+        let csv = '';
+
+        for (const row of rows) {
+            const cells = row.querySelectorAll('td');
+            for (let i = 0; i < cells.length; i++) {
+                csv += cells[i].innerText + (i < cells.length - 1 ? ',' : '');
+            }
+            csv += '\n';
+        }
+
+        // Tworzenie pliku CSV i pobranie go
+        const csvFile = new Blob([csv], { type: 'text/csv' });
+        const downloadLink = document.createElement('a');
+        const url = URL.createObjectURL(csvFile);
+
+        downloadLink.href = url;
+        downloadLink.download = 'dane_tabeli.csv';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
     }
 
 </script>
