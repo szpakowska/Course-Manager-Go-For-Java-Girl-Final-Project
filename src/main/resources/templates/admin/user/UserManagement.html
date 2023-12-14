@@ -20,6 +20,13 @@
     <a href="/lessons/management" class="move-right">Zarządzanie lekcjami</a>
 
 </nav>
+<div th:if="${successMessage}">
+    <div class="alert alert-success" th:text="${successMessage}"></div>
+</div>
+<div th:if="${errorMessage}">
+    <div class="alert alert-danger" th:text="${errorMessage}"></div>
+</div>
+
 <br><br>
 <table>
     <thead>

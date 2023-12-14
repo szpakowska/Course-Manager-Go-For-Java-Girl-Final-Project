@@ -21,7 +21,7 @@ public class BlockLessonController {
     private final BlockLessonService blockLessonService;
 
     @PostMapping("/{blockId}/lesson")
-    public String addLecturerToBlock(@PathVariable Long blockId, @ModelAttribute LessonDto lessonDto) {
+    public String addLessonToBlock(@PathVariable Long blockId, @ModelAttribute LessonDto lessonDto) {
         blockLessonService.addLessonToBlock(blockId, lessonDto);
         return "redirect:/blocks/manage/" + blockId;
     }

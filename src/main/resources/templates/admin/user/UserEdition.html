@@ -51,7 +51,7 @@
 <body>
 
 <h2>Edytuj użytkownika</h2>
-<form id="updateForm" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}">
+<form id="updateForm" th:action="@{/user/edit/{id}(id=${user.id})}" method="post" th:object="${user}" onsubmit="return validateForm()">
 
     <label for="username">Nazwa użytkownika:</label>
     <input type="text" id="username" name="username" th:field="*{username}" required>
@@ -76,8 +76,49 @@
         <option th:each="role : ${roleList}" th:value="${role.id}" th:text="${role.name}"></option>
     </select>
 
+
     <button type="submit">Zapisz</button>
 </form>
+
+<script>
+    function validateForm() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        var email = document.getElementById('email').value;
+        var name = document.getElementById('name').value;
+        var surname = document.getElementById('surname').value;
+        var roles = document.getElementById('roles').value;
+
+        // Sprawdzanie, czy pola są wypełnione
+        if (username === '' || password === '' || email === '' || name === '' || surname === '' || roles === '') {
+            alert('Proszę wypełnić wszystkie wymagane pola.');
+            return false;
+        }
+
+        // Sprawdzanie poprawności adresu email
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Proszę podać poprawny adres email.');
+            return false;
+        }
+
+        // Sprawdzanie, czy imię i nazwisko zawierają tylko litery
+        var nameRegex = /^[a-zA-Z]+$/;
+        if (!nameRegex.test(name) || !nameRegex.test(surname)) {
+            alert('Imię i nazwisko mogą zawierać tylko litery.');
+            return false;
+        }
+
+        // Sprawdzanie, czy nazwa użytkownika zawiera tylko litery i cyfry
+        var usernameRegex = /^[a-zA-Z0-9]+$/;
+        if (!usernameRegex.test(username)) {
+            alert('Nazwa użytkownika może zawierać tylko litery i cyfry.');
+            return false;
+        }
+
+        return true; // Formularz jest poprawny
+    }
+</script>
 
 <footer>
     <div class="user-info">

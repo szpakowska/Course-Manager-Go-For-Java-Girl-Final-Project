@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -59,18 +60,32 @@ public class UserController {
     public String getUserById(@PathVariable Long id, Model model) {
        User user = userService.getUserById(id);
         model.addAttribute("user",user);
+        model.addAttribute("roleList", roleJpaRepository.findAll());
         return "admin/user/UserEdition";
     }
 
+//    @PostMapping("/edit/{id}")
+//    public ResponseEntity<User> updateUser(@ModelAttribute UserDto userDto, @PathVariable Long id) {
+//        try {
+//            User updateUser = userService.updateUser(userDto, id);
+//            return ResponseEntity.ok(updateUser);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+
     @PostMapping("/edit/{id}")
-    public ResponseEntity<User> updateUser(@ModelAttribute UserDto userDto, @PathVariable Long id) {
+    public String updateUser(@ModelAttribute UserDto userDto, @PathVariable Long id, RedirectAttributes redirectAttributes) {
         try {
-            User updateUser = userService.updateUser(userDto, id);
-            return ResponseEntity.ok(updateUser);
+            userService.updateUser(userDto, id);
+            redirectAttributes.addFlashAttribute("successMessage", "Użytkownik został zaktualizowany pomyślnie.");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            redirectAttributes.addFlashAttribute("errorMessage", "Wystąpił błąd podczas aktualizacji użytkownika.");
         }
+
+        return "redirect:/user/management";
     }
+
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
