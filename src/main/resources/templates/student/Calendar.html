@@ -8,7 +8,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
+                initialView: 'dayGridMonth',
+                events: {
+                    url: '/lessons/manage/{lessonId}',
+                    method: 'GET',
+                    failure: function () {
+                        alert('Nie udało się pobrać zdarzeń.');
+                    }
+                }
             });
             calendar.render();
         });
