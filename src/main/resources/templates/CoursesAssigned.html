@@ -4,65 +4,122 @@
     <title>Kursy użytkownika - Course Manager Application</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Styl dla akordeonu */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .course-title {
+            background-color: #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .course-content {
+            display: none;
+            padding-left: 20px;
+        }
+        .block-title {
+            background-color: #f9f9f9;
+            padding: 5px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .block-content {
+            display: none;
+            padding-left: 20px;
+        }
+        .lesson-content {
+            padding-left: 20px;
+        }
+
+        /* Styl dla daty i czasu lekcji */
+        .lesson-date {
+            font-style: italic;
+            color: #555;
+            margin-left: 10px;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
 <nav>
-    <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzaj blokiem</span>
-    <br>
-    <br>
-    <a href="/home" class="move-right">Strona główna </a>
-    <a href="/courses" class="move-right">Moje kursy</a>
-    <a href="/lesson/notification" class="move-right">Moje powiadomienia</a>
-    <a href="/calendar" class="move-right">Kalendarz</a>
-
-
+    <div class="container">
+        <span style="font-size: 24px;">🐿️ Course Manager Application | Zarządzaj blokiem</span>
+        <br><br>
+        <a href="/home" class="move-right">Strona główna</a>
+        <a href="/courses" class="move-right">Moje kursy</a>
+        <a href="/lesson/notification" class="move-right">Moje powiadomienia</a>
+        <a href="/calendar" class="move-right">Kalendarz</a>
+    </div>
 </nav>
-
 <div class="header-title">
-    <p>Kursy użytkownika</p>
+    <p>Moje kursy</p>
 </div>
-<br>
-<div class="courses-list">
-    <table>
-        <thead>
-        <tr>
-            <th>Nazwa kursu</th>
-            <th>Studenci</th>
-            <th>Bloki</th>
-        </tr>
-        </thead>
-        <tbody>
+<div class="container">
+
+    <br>
+    <div class="courses-list">
         <!-- Iteracja po liście kursów i wyświetlenie ich -->
-        <tr th:each="course : ${coursesList}">
-            <td th:text="${course.name}"></td>
-            <td>
-                <ul>
-                    <!-- Iteracja po liście studentów kursu i wyświetlenie ich -->
-                    <li th:each="student : ${course.students}" th:text="${student.name}"></li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <!-- Iteracja po liście bloków i wyświetlenie ich -->
-                    <li th:each="block : ${course.blocks}" th:text="${block.name}"></li>
-                </ul>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <div th:each="course : ${coursesList}">
+            <div class="course-title">
+                <p class="course-name" th:text="${course.name}"></p>
+            </div>
+            <div class="course-content">
+                <!-- Iteracja po liście bloków i wyświetlenie ich -->
+                <div th:each="block : ${course.blocks}">
+                    <div class="block-title">
+                        <span class="block-name" th:text="${block.name}"></span>
+                    </div>
+                    <div class="block-content">
+                        <!-- Iteracja po liście lekcji i wyświetlenie ich -->
+                        <ul class="lesson-content">
+                            <li th:each="lesson : ${block.lessons}">
+                                <span th:text="${lesson.subject}"></span>
+                                <span class="lesson-date" th:text="${lesson.localDateTime}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <footer>
-
-    <form th:action="@{/logout}" method="post">
-        <button class="logout-button">
-            <i class="fas fa-sign-out-alt"></i> Wyloguj
-        </button>
-    </form>
-    <br>
-    <p>Made by Wiewiórki</p>
+    <div class="container">
+        <form th:action="@{/logout}" method="post">
+            <button class="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Wyloguj
+            </button>
+        </form>
+        <br>
+        <p>Made by Wiewiórki</p>
+    </div>
 </footer>
+
+<script>
+    // Obsługa kliknięć dla rozwijania sekcji po kliknięciu na tytuł kursu lub bloku
+    $(document).ready(function() {
+        $('.course-title').click(function() {
+            $(this).next('.course-content').slideToggle();
+        });
+        $('.block-title').click(function() {
+            $(this).next('.block-content').slideToggle();
+        });
+    });
+</script>
 
 </body>
 </html>
