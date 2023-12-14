@@ -35,13 +35,14 @@
 </head>
 
 <body>
-<header>
+<header class="d-flex justify-content-center">
     <img src="logo.png" alt="Logo">
 </header>
 
-<div class="container">
-    <h1 class="welcome-text">Witaj, <span th:text="${username}"></span>!</h1>
+<div class="container text-center py-4">
+    <h1 class="welcome-text display-4 font-weight-bold mb-4">Witaj, <span th:text="${username}"></span>!</h1>
 </div>
+
 
 <div class="button-container">
     <!-- Przyciski Administratora -->
