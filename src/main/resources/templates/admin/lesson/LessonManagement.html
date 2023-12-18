@@ -104,28 +104,7 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <script>
-    // Animacja po załadowaniu strony
-    $(window).on("load", function () {
-        $("body").fadeIn("slow");
-    });
 
-    // Wyświetlanie interaktywnych podpowiedzi
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    // Dodatkowy efekt hover na przyciskach
-    $("button").hover(function () {
-        $(this).css({
-            "background-color": "#0056b3",
-            "transform": "scale(1.05)"
-        });
-    }, function () {
-        $(this).css({
-            "background-color": "#007bff",
-            "transform": "scale(1)"
-        });
-    });
     $(document).ready(function () {
         $('#courseTable').DataTable({
             "language": {
