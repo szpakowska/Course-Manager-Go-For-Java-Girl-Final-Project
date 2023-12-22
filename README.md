@@ -5,7 +5,7 @@ A comprehensive Java-based web application designed for efficient management of 
 ## Key Features
 
 ### Course/Block/Lesson Management
-Spearheaded by Anna Szpakowska (https://github.com/szpakowska), this module covers the full backend and frontend implementation of course, block, and lesson management using Spring Boot and Thymeleaf. This includes leadership in Spring Security integration for robust authentication and authorization mechanisms.
+Spearheaded by Anna Szpakowska (https://github.com/szpakowska), this module covers the full backend and frontend implementation of course, block, and lesson management using Spring Boot and Thymeleaf. This includes leadership in Spring Security integration for robust authentication and authorization mechanisms. Following the course's completion, Anna independently leads the transformation into a RESTful model integrated with Angular, leveraging her expertise to drive its development. Follow the ongoing evolution of this project at this link: https://github.com/szpakowska/edu-hub-app
 
 ### User Management
 Led by Monika Mieleszko, the user management module ensures seamless user authentication, and role-based access control.
@@ -22,12 +22,6 @@ Alicja Franczak has contributed significantly to the frontend development, enric
 - Lombok for streamlined Java code
 - Maven for project management
 
-## Future Improvements
-
-- Enhance testing suite to include unit, integration, and end-to-end tests for better code coverage.
-- Revamp the frontend for a more responsive and visually appealing user interface.
-- Extend functionalities to cater not only to administrators but also instructors and students.
-- Documentation enhancement: Ensure comprehensive code commenting and create detailed project documentation to facilitate team collaboration and future development.
 
 ## Acknowledgements
 
